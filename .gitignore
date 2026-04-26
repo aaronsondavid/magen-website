@@ -1,0 +1,4 @@
+*.docx
+images/
+*.pdf
+.DS_Store
