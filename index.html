@@ -426,167 +426,95 @@
 
     /* ── TWO PATHS SECTION ── */
     .two-paths {
-      padding: 90px 60px;
+      padding: 100px 60px;
       background: #fff;
+    }
+
+    .two-paths-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .two-paths-header {
       text-align: center;
+      margin-bottom: 72px;
     }
 
     .two-paths-eyebrow {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 700;
-      font-size: 0.8rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 14px;
-    }
-
-    .two-paths h2 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900;
-      font-size: 2.6rem;
-      text-transform: uppercase;
-      color: var(--dark);
-      margin-bottom: 16px;
-      line-height: 1.1;
-    }
-
-    .two-paths-intro {
-      font-size: 1rem;
-      color: var(--gray);
-      max-width: 580px;
-      margin: 0 auto 60px;
-      line-height: 1.7;
-    }
-    .two-paths-bridge {
-      text-align: center;
-      margin-top: 40px;
-      font-size: 0.95rem;
-      color: #555;
-    }
-    .two-paths-bridge a {
-      color: var(--teal);
-      font-weight: 600;
-      text-decoration: none;
-    }
-    .two-paths-bridge a:hover { text-decoration: underline; }
-
-    .paths-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-
-    .path-card {
-      text-align: left;
-      border-radius: 4px;
-      overflow: hidden;
-      border: 1px solid #eee;
-      display: flex;
-      flex-direction: column;
-      transition: box-shadow 0.25s, transform 0.25s;
-    }
-    .path-card:hover {
-      box-shadow: 0 12px 40px rgba(0,0,0,0.1);
-      transform: translateY(-3px);
-    }
-
-    .path-card-header {
-      padding: 36px 36px 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .path-card--safety .path-card-header { background: var(--dark); }
-    .path-card--healing .path-card-header { background: var(--teal); }
-
-    .path-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3rem;
-    }
-    .path-card--safety .path-icon   { background: rgba(255,255,255,0.12); }
-    .path-card--healing .path-icon  { background: rgba(255,255,255,0.2); }
-
-    .path-label {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 0.72rem;
+      font-size: 0.78rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
+      color: var(--teal);
+      margin-bottom: 16px;
     }
 
-    .path-card-header h3 {
+    .two-paths-header h2 {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 900;
-      font-size: 2rem;
+      font-size: 2.8rem;
       text-transform: uppercase;
-      color: #fff;
-      line-height: 1.05;
+      color: var(--dark);
+      line-height: 1.1;
+      margin-bottom: 20px;
     }
 
-    .path-card-header p {
-      font-size: 0.95rem;
-      color: rgba(255,255,255,0.82);
-      line-height: 1.65;
-    }
-
-    .path-card-body {
-      padding: 28px 36px 36px;
-      background: var(--light);
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .path-features {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .path-features li {
-      font-size: 0.88rem;
+    .two-paths-header p {
+      font-size: 1.05rem;
       color: var(--gray);
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.75;
     }
-    .path-features li::before {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .path-card--safety  .path-features li::before { background: var(--dark); }
-    .path-card--healing .path-features li::before { background: var(--teal); }
 
-    .btn-path {
-      display: inline-block;
-      padding: 13px 28px;
-      border-radius: 3px;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-      align-self: flex-start;
-      transition: opacity 0.2s, transform 0.2s;
-      margin-top: auto;
+    .stages-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-top: 2px solid var(--dark);
     }
-    .btn-path:hover { opacity: 0.88; transform: translateX(3px); }
-    .path-card--safety  .btn-path { background: var(--dark);  color: #fff; }
-    .path-card--healing .btn-path { background: var(--teal);  color: #fff; }
+
+    .stage {
+      padding: 52px 52px 52px 0;
+    }
+
+    .stage:last-child {
+      padding: 52px 0 52px 52px;
+      border-left: 1px solid #e0e0e0;
+    }
+
+    .stage-number {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 5rem;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .stage:first-child .stage-number { color: var(--dark); }
+    .stage:last-child  .stage-number { color: var(--teal); }
+
+    .stage h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.7rem;
+      text-transform: uppercase;
+      color: var(--dark);
+      line-height: 1.15;
+      margin-bottom: 20px;
+      letter-spacing: 0.02em;
+    }
+
+    .stage p {
+      font-size: 1rem;
+      color: var(--gray);
+      line-height: 1.8;
+    }
+
+    .stage p + p {
+      margin-top: 14px;
+    }
 
     /* ── PROGRAMS GRID ── */
     .programs {
@@ -620,7 +548,7 @@
 
     .programs-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 24px;
       max-width: 1100px;
       margin: 0 auto;
@@ -753,7 +681,7 @@
     }
     .voices-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 24px;
       max-width: 1100px;
       margin: 0 auto 64px;
@@ -1032,45 +960,59 @@
     .team-link:hover { opacity: 0.7; }
 
     /* ── TRIPLE CTA ── */
-    .triple-cta {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-    }
-    .cta-panel {
-      padding: 80px 56px;
+    .book-cta {
+      background: var(--dark);
+      padding: 80px 60px;
       display: flex;
-      flex-direction: column;
-      gap: 20px;
+      align-items: center;
+      justify-content: center;
+      gap: 80px;
     }
-    .cta-panel--help    { background: var(--dark); }
-    .cta-panel--involve { background: var(--purple); }
-    .cta-panel--donate  { background: var(--teal); }
-    .cta-panel-icon { font-size: 2rem; }
-    .cta-panel-label {
+    .book-cta-text { max-width: 480px; }
+    .book-cta-eyebrow {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.72rem;
       font-weight: 700;
-      letter-spacing: 0.2em;
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.55);
+      color: var(--teal);
+      margin-bottom: 16px;
     }
-    .cta-panel h3 {
+    .book-cta h3 {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 900;
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       text-transform: uppercase;
       color: #fff;
-      line-height: 1.05;
+      line-height: 1.1;
+      margin-bottom: 18px;
     }
-    .cta-panel p {
-      font-size: 0.92rem;
+    .book-cta p {
+      font-size: 1rem;
       color: rgba(255,255,255,0.75);
       line-height: 1.7;
-      flex: 1;
+      margin-bottom: 32px;
     }
-    .btn-cta {
+    .book-cta-cover {
+      width: 160px;
+      flex-shrink: 0;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 4px;
+      aspect-ratio: 2/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+      text-align: center;
+      padding: 12px;
+    }
+    .btn-book {
       display: inline-block;
-      padding: 14px 32px;
+      padding: 14px 36px;
+      background: var(--teal);
+      color: #fff;
       border-radius: 3px;
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 700;
@@ -1078,13 +1020,9 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       text-decoration: none;
-      align-self: flex-start;
       transition: opacity 0.2s, transform 0.2s;
-      background: rgba(255,255,255,0.15);
-      color: #fff;
-      border: 2px solid rgba(255,255,255,0.4);
     }
-    .btn-cta:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
+    .btn-book:hover { opacity: 0.88; transform: translateY(-2px); }
 
     /* ── FAQ (SEO / AI Search) ── */
     .faq {
@@ -1487,63 +1425,33 @@
 
   <!-- TWO PATHS SECTION -->
   <section class="two-paths">
-    <p class="two-paths-eyebrow">Safety &amp; Healing with Magen</p>
-    <h2>Where are you right now?</h2>
-    <p class="two-paths-intro">
-      Magen is here to make sure you are safe — physically, emotionally, and psychologically.
-      And once you're safe, to give you the support and space to work through what happened,
-      and find your way back to yourself.
-    </p>
+    <div class="two-paths-inner">
 
-    <div class="paths-grid">
-
-      <!-- SAFETY CARD -->
-      <div class="path-card path-card--safety">
-        <div class="path-card-header">
-          <div class="path-icon">🛡️</div>
-          <span class="path-label">Safety First</span>
-          <h3>I need to get safe</h3>
-          <p>
-            Whether you're in immediate danger or just not sure where you stand,
-            the first step is getting safe — physically, and emotionally too.
-            We'll help you understand your situation and figure out what comes next.
-          </p>
-        </div>
-        <div class="path-card-body">
-          <ul class="path-features">
-            <li>Crisis hotline available 24/6</li>
-            <li>Someone experienced to talk it through with</li>
-            <li>Help understanding your options and next steps</li>
-          </ul>
-          <a href="#crisis" class="btn-path">Get safe now →</a>
-        </div>
+      <div class="two-paths-header">
+        <p class="two-paths-eyebrow">Safety &amp; Healing with Magen</p>
+        <h2>How Magen helps</h2>
+        <p>There are two things Magen is here to do. They go in order — and we're with you through both.</p>
       </div>
 
-      <!-- HEALING CARD -->
-      <div class="path-card path-card--healing">
-        <div class="path-card-header">
-          <div class="path-icon">🌱</div>
-          <span class="path-label">Healing &amp; Shikum</span>
-          <h3>I'm working through what happened</h3>
-          <p>
-            Once you're safe — or on your way — the next step is processing what you've been through.
-            That takes time, and the right support. Your case manager at Magen stays with you,
-            coordinating therapy, support groups, and whatever else you need.
-            You don't have to figure it out on your own.
-          </p>
-        </div>
-        <div class="path-card-body">
-          <ul class="path-features">
-            <li>A dedicated case manager who stays with you</li>
-            <li>Therapy referrals matched to you</li>
-            <li>Peer support and ongoing accompaniment</li>
-          </ul>
-          <a href="#healing" class="btn-path">Get support →</a>
-        </div>
-      </div>
+      <div class="stages-grid">
 
+        <div class="stage">
+          <div class="stage-number">01</div>
+          <h3>Making sure you're safe</h3>
+          <p>The first thing — before anything else — is safety. That means physical safety, but it also means emotional and psychological safety.</p>
+          <p>Sometimes you're in immediate danger. Sometimes you're not sure where you stand. Either way, getting safe is a process, and that process is where everything begins.</p>
+        </div>
+
+        <div class="stage">
+          <div class="stage-number">02</div>
+          <h3>Working through your experience</h3>
+          <p>Once you're safe — or in the process of getting there — you have the opportunity to work through what happened to you. To process it, understand it, and move through it.</p>
+          <p>A dedicated case manager at Magen stays with you through this — coordinating therapy, support, and anything else you need, so you're not managing it alone.</p>
+          <p>You're not trapped by your experience. With the right support, this becomes part of your story — not the whole of it.</p>
+        </div>
+
+      </div>
     </div>
-    <p class="two-paths-bridge">These are just the starting points. <a href="#programs">See all of Magen's programs →</a></p>
   </section>
 
   <!-- PROGRAMS GRID -->
@@ -1564,14 +1472,6 @@
         <a href="#" class="btn-program">Call now →</a>
       </div>
 
-      <!-- 2. Case Management -->
-      <div class="program-card">
-        <div class="program-icon">🤝</div>
-        <span class="program-tag">Case Management</span>
-        <h3>Someone in your corner</h3>
-        <p>Get coordinated, ongoing support from someone experienced who understands your situation — helping you navigate complexity and make informed decisions at every step.</p>
-        <a href="#" class="btn-program">Get support →</a>
-      </div>
 
       <!-- 3. Therapy Referrals -->
       <div class="program-card" id="healing">
@@ -1591,14 +1491,6 @@
         <a href="#" class="btn-program">Join a group →</a>
       </div>
 
-      <!-- 5. Parent Workshops -->
-      <div class="program-card">
-        <div class="program-icon">🏫</div>
-        <span class="program-tag">Community Workshops</span>
-        <h3>Protect the children in your life</h3>
-        <p>When we talk openly with our children, look out for one another, and stay alert to warning signs, we build communities that are safer and more resilient for everyone. Practical, evidence-based workshops for parents, educators, and community leaders.</p>
-        <a href="#" class="btn-program">Host a workshop →</a>
-      </div>
 
       <!-- 6. Government Assistance — Coming Soon -->
       <div class="program-card program-card--soon">
@@ -1616,9 +1508,9 @@
   <!-- VOICES / SOCIAL PROOF -->
   <section class="voices">
     <div class="voices-header">
-      <p class="voices-eyebrow">Across the Spectrum</p>
-      <h2>What People Say About Magen</h2>
-      <p>From survivors to law enforcement, from rabbis to community leaders — Magen has earned the trust of those who matter most.</p>
+      <p class="voices-eyebrow">People Love Magen</p>
+      <h2>People Love Magen</h2>
+      <p>From survivors to social workers, from law enforcement to parents — Magen has earned deep trust from the people it serves and the professionals who work alongside it.</p>
     </div>
 
     <div class="voices-grid">
@@ -1637,24 +1529,24 @@
 
       <div class="voice-card voice-card--purple">
         <div class="voice-quote">"</div>
-        <p class="voice-text">When victims have professional support, they are better prepared for what's ahead, and more likely to be successful. You make our jobs as detectives 100 times easier.</p>
+        <p class="voice-text">[Quote from senior Revacha official — placeholder. To be provided by Magen.]</p>
         <div class="voice-attribution">
-          <div class="voice-avatar voice-avatar--purple">S</div>
+          <div class="voice-avatar voice-avatar--purple">R</div>
           <div>
-            <span class="voice-name">Lt. Shlomi S.</span>
-            <span class="voice-role">Jerusalem Police</span>
+            <span class="voice-name">[Name]</span>
+            <span class="voice-role">Senior Official, Revacha</span>
           </div>
         </div>
       </div>
 
       <div class="voice-card voice-card--pink">
         <div class="voice-quote">"</div>
-        <p class="voice-text">Placeholder — community leader, rabbi, or family member quote goes here. Magen's work is trusted across the Orthodox community spectrum, from survivors to those who support them.</p>
+        <p class="voice-text">[Quote from parents of a victim — placeholder. To be provided by Magen.]</p>
         <div class="voice-attribution">
-          <div class="voice-avatar voice-avatar--pink">R</div>
+          <div class="voice-avatar voice-avatar--pink">P</div>
           <div>
-            <span class="voice-name">Community Leader</span>
-            <span class="voice-role">Placeholder</span>
+            <span class="voice-name">[Name]</span>
+            <span class="voice-role">Parents of a survivor</span>
           </div>
         </div>
       </div>
@@ -1757,30 +1649,17 @@
       </a>
     </div>
     <a href="#" class="team-link">Meet the full team →</a>
+    <!-- NOTE: Team members to be updated with those from the relevant division — confirm with Magen -->
   </section>
 
-  <!-- TRIPLE CTA -->
-  <section class="triple-cta">
-    <div class="cta-panel cta-panel--help">
-      <div class="cta-panel-icon">🛡️</div>
-      <span class="cta-panel-label">For Survivors</span>
-      <h3>Need Help Right Now?</h3>
-      <p>You don't have to figure this out alone. Magen's team is here — day or night — to listen, guide, and stand with you.</p>
-      <a href="tel:023724073" class="btn-cta">Get Help →</a>
-    </div>
-    <div class="cta-panel cta-panel--involve">
-      <div class="cta-panel-icon">🤝</div>
-      <span class="cta-panel-label">For the Community</span>
-      <h3>Get Involved</h3>
-      <p>Whether you're a professional, educator, or community leader — your involvement makes Jewish communities safer for everyone.</p>
-      <a href="#" class="btn-cta">Get Involved →</a>
-    </div>
-    <div class="cta-panel cta-panel--donate">
-      <div class="cta-panel-icon">💛</div>
-      <span class="cta-panel-label">Support the Work</span>
-      <h3>Make This Possible</h3>
-      <p>Magen's work depends on people who believe survivors deserve support and communities deserve safety. Your donation makes it happen.</p>
-      <a href="#" class="btn-cta">Donate →</a>
+  <!-- BOOK CTA -->
+  <section class="book-cta">
+    <div class="book-cta-cover">[Book cover image — to be provided]</div>
+    <div class="book-cta-text">
+      <p class="book-cta-eyebrow">New from Magen</p>
+      <h3>[Helise's Book Title]</h3>
+      <p>[A sentence or two about the book — what it is, who it's for, what it gives the reader. To be provided by Magen.]</p>
+      <a href="#" class="btn-book">Get the book →</a>
     </div>
   </section>
 
