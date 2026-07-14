@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <title>In an Emergency · Magen for Jewish Communities</title>
+  <meta name="referrer" content="no-referrer-when-downgrade" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --teal:    #00AEAC;
+      --teal-dk: #008F8D;
+      --purple:  #6B4FA1;
+      --pink:    #E879A0;
+      --dark:    #1A1A2E;
+      --gray:    #555;
+      --light:   #F7F7F7;
+      --amber:   #F59E0B;
+      --amber-bg:#FEF3C7;
+    }
+    body { font-family: 'Open Sans', sans-serif; color: var(--dark); background: #fff; line-height: 1.55; }
+
+    /* Draft banner */
+    .draft-banner {
+      background: var(--amber-bg); color: #78350F; text-align: center;
+      padding: 10px 24px; font-size: 0.85rem; border-bottom: 2px solid var(--amber);
+      font-weight: 600; letter-spacing: 0.02em;
+    }
+
+    /* Crisis bar */
+    .crisis-bar { background: var(--dark); color: #fff; text-align: center; padding: 10px 60px;
+      font-size: 0.82rem; letter-spacing: 0.03em; display: flex; align-items: center;
+      justify-content: center; gap: 16px; }
+    .crisis-bar strong { color: var(--teal); font-weight: 700; }
+    .crisis-bar a { color: #fff; font-weight: 700; letter-spacing: 0.05em; text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.3); transition: border-color 0.2s; }
+    .crisis-bar a:hover { border-color: var(--teal); color: var(--teal); }
+    .crisis-dot { width: 7px; height: 7px; background: var(--teal); border-radius: 50%;
+      display: inline-block; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+    /* Nav (matches pillar pages) */
+    .nav-wrap { position: sticky; top: 0; z-index: 200; background: #fff;
+      border-bottom: 3px solid var(--teal); box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+    nav { display: flex; justify-content: space-between; align-items: center;
+      padding: 0 60px; height: 72px; background: #fff; max-width: 1400px; margin: 0 auto; }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1; }
+    .nav-logo-text .brand { font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+      font-size: 1.5rem; color: var(--teal); letter-spacing: 0.08em; }
+    .nav-logo-text .sub { font-size: 0.62rem; color: var(--gray); letter-spacing: 0.06em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; height: 72px; }
+    .nav-links > li { position: relative; height: 100%; display: flex; align-items: center; }
+    .nav-links > li > a { text-decoration: none; color: var(--dark); font-size: 0.82rem;
+      font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 0 16px;
+      height: 100%; display: flex; align-items: center; gap: 5px; transition: color 0.2s;
+      white-space: nowrap; border-bottom: 3px solid transparent; margin-bottom: -3px; }
+    .nav-links > li > a .chevron { font-size: 0.6rem; transition: transform 0.2s; opacity: 0.5; }
+    .nav-links > li:hover > a { color: var(--teal); border-bottom-color: var(--teal); }
+    .nav-links > li:hover > a .chevron { transform: rotate(180deg); opacity: 1; }
+    .mega-menu { display: none; position: absolute; top: 100%; left: 0; background: #fff;
+      min-width: 320px; padding: 20px; border: 1px solid #eee; box-shadow: 0 8px 24px rgba(0,0,0,0.08); border-radius: 4px; }
+    .nav-links > li:last-child .mega-menu, .nav-links > li:nth-last-child(2) .mega-menu { left: auto; right: 0; }
+    .nav-links > li:hover .mega-menu { display: flex; gap: 40px; }
+    .mega-col { display: flex; flex-direction: column; gap: 10px; min-width: 220px; }
+    .mega-col-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem;
+      color: var(--purple); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; font-weight: 700; }
+    .mega-item { text-decoration: none; padding: 8px 4px; border-radius: 4px;
+      transition: background 0.15s; display: flex; flex-direction: column; }
+    .mega-item:hover { background: var(--light); }
+    .mega-item-title { color: var(--dark); font-weight: 700; font-size: 0.9rem; }
+    .mega-item-desc { color: var(--gray); font-size: 0.75rem; margin-top: 2px; }
+    .btn-donate { background: var(--teal); color: #fff !important; padding: 10px 22px !important;
+      border-radius: 4px; margin-left: 12px; }
+    .btn-donate:hover { background: var(--teal-dk) !important; border-bottom-color: transparent !important; }
+
+    /* Hero: dark, urgent */
+    .hero {
+      background: linear-gradient(135deg, var(--dark) 0%, #232449 100%);
+      color: #fff; padding: 80px 60px 100px; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 6px;
+      background: linear-gradient(90deg, var(--teal), var(--purple), var(--pink));
+    }
+    .hero-inner { max-width: 1200px; margin: 0 auto; display: grid;
+      grid-template-columns: 1fr auto; gap: 60px; align-items: center; }
+    .hero-eyebrow { font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--teal); font-weight: 700; font-size: 0.95rem;
+      margin-bottom: 20px; display: inline-flex; align-items: center; gap: 12px; }
+    .hero-eyebrow::before {
+      content: ''; width: 40px; height: 2px; background: var(--teal);
+    }
+    .hero h1 {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 4.4rem;
+      line-height: 1.02; margin-bottom: 24px; letter-spacing: -0.015em;
+    }
+    .hero h1 em { font-style: normal; color: var(--teal); }
+    .hero p.lead { font-size: 1.2rem; color: #C1C1D0; max-width: 640px; line-height: 1.55; }
+    .hero-symbol {
+      width: 200px; height: 200px; flex-shrink: 0; background: rgba(0,174,172,0.12);
+      border: 2px solid var(--teal); border-radius: 50%; display: flex;
+      align-items: center; justify-content: center; position: relative;
+    }
+    .hero-symbol svg { width: 100px; height: 100px; }
+
+    /* Prominent "what is Hadar Arba" panel */
+    .explain {
+      background: var(--teal); color: #fff; padding: 60px 60px;
+    }
+    .explain-inner { max-width: 1000px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 2fr; gap: 60px; align-items: start; }
+    .explain h2 {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 2.4rem; font-weight: 800;
+      line-height: 1.05; letter-spacing: -0.01em;
+    }
+    .explain h2 span { display: block; color: rgba(255,255,255,0.85); font-size: 1.1rem;
+      font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+    .explain-list { list-style: none; }
+    .explain-list li {
+      padding: 12px 0 12px 32px; position: relative; font-size: 1.05rem;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+    .explain-list li:last-child { border-bottom: none; }
+    .explain-list li::before {
+      content: '✓'; position: absolute; left: 0; top: 12px; color: #fff;
+      background: rgba(255,255,255,0.2); width: 22px; height: 22px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700;
+    }
+
+    /* Section container */
+    section.step-section { padding: 90px 60px; max-width: 1200px; margin: 0 auto; }
+    .step-header { display: flex; align-items: baseline; gap: 20px; margin-bottom: 40px; }
+    .step-num {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 4rem; font-weight: 800;
+      color: var(--teal); line-height: 1; letter-spacing: -0.02em;
+    }
+    .step-title {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 2.5rem; font-weight: 800;
+      color: var(--dark); line-height: 1.1; letter-spacing: -0.01em;
+    }
+    .step-sub { font-size: 1.1rem; color: var(--gray); margin-top: -30px; margin-bottom: 40px; margin-left: 90px; max-width: 700px; }
+
+    /* Step 1: fact grid */
+    .fact-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .fact-card {
+      background: var(--light); border-left: 4px solid var(--teal); padding: 28px 24px;
+      border-radius: 4px; position: relative; transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .fact-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+    .fact-card:nth-child(2) { border-left-color: var(--purple); }
+    .fact-card:nth-child(3) { border-left-color: var(--pink); }
+    .fact-card:nth-child(4) { border-left-color: var(--teal-dk); }
+    .fact-title {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 1.3rem; font-weight: 700;
+      color: var(--dark); margin-bottom: 10px; line-height: 1.15;
+    }
+    .fact-body { color: var(--gray); font-size: 0.95rem; }
+
+    /* Step 2: coordinate CTA */
+    .coordinate {
+      background: #fff; border: 3px solid var(--teal); border-radius: 8px;
+      padding: 40px 44px; display: grid; grid-template-columns: 1fr auto; gap: 40px;
+      align-items: center;
+    }
+    .coordinate p {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 600;
+      color: var(--dark); line-height: 1.3;
+    }
+    .coordinate .btn-primary {
+      background: var(--teal); color: #fff; padding: 14px 28px; text-decoration: none;
+      border-radius: 4px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+      font-size: 0.9rem; white-space: nowrap; transition: background 0.2s;
+    }
+    .coordinate .btn-primary:hover { background: var(--teal-dk); }
+
+    /* Step 3: hospitals grouped by region */
+    .region-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .region { background: #fff; border: 1px solid #E5E7EB; border-radius: 8px; overflow: hidden; }
+    .region-head {
+      background: var(--dark); color: #fff; padding: 16px 24px;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 700;
+      letter-spacing: 0.05em; text-transform: uppercase; display: flex; justify-content: space-between; align-items: baseline;
+    }
+    .region-head .count { font-size: 0.75rem; color: var(--teal); letter-spacing: 0.15em; }
+    .region ul { list-style: none; padding: 0; }
+    .region li {
+      padding: 16px 24px; border-bottom: 1px solid #F0F0F0;
+      display: grid; grid-template-columns: 1fr auto; column-gap: 12px; align-items: center;
+    }
+    .region li:last-child { border-bottom: none; }
+    .region li .room {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      color: var(--teal-dk); font-size: 1.05rem; letter-spacing: 0.02em;
+      grid-column: 1;
+    }
+    .region li .hospital { font-size: 0.9rem; color: var(--dark); grid-column: 1; }
+    .region li .city { font-size: 0.8rem; color: var(--gray); grid-column: 1; }
+    .waze-link {
+      grid-column: 2; grid-row: 1 / span 3; align-self: center;
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 44px; height: 44px; background: var(--teal); color: #fff;
+      border-radius: 50%; text-decoration: none; transition: background 0.2s, transform 0.15s;
+      flex-shrink: 0;
+    }
+    .waze-link:hover { background: var(--teal-dk); transform: scale(1.06); }
+    .waze-link svg { width: 22px; height: 22px; }
+    .waze-link .sr { position: absolute; left: -9999px; }
+
+    /* Bottom CTA */
+    .bottom-cta {
+      background: linear-gradient(135deg, var(--purple) 0%, #4E3583 100%);
+      color: #fff; padding: 70px 60px; text-align: center;
+    }
+    .bottom-cta h2 {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 2.6rem; font-weight: 800;
+      max-width: 700px; margin: 0 auto 16px; line-height: 1.1;
+    }
+    .bottom-cta p { font-size: 1.05rem; max-width: 620px; margin: 0 auto 32px; color: rgba(255,255,255,0.85); }
+    .bottom-cta .ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .bottom-cta .btn { padding: 14px 28px; text-decoration: none; border-radius: 4px;
+      font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 0.9rem; transition: all 0.2s; }
+    .bottom-cta .btn-primary { background: var(--teal); color: #fff; }
+    .bottom-cta .btn-primary:hover { background: var(--teal-dk); }
+    .bottom-cta .btn-ghost { background: transparent; color: #fff; border: 2px solid #fff; padding: 12px 26px; }
+    .bottom-cta .btn-ghost:hover { background: #fff; color: var(--purple); }
+
+    /* Footer */
+    footer { background: var(--dark); color: #fff; padding: 60px 60px 30px; }
+    .footer-motto { text-align: center; font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.3rem; color: var(--teal); letter-spacing: 0.05em; margin-bottom: 40px; }
+    .footer-motto em { font-style: normal; color: var(--pink); font-weight: 700; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
+      max-width: 1400px; margin: 0 auto; }
+    .footer-brand p { color: #C1C1D0; font-size: 0.88rem; line-height: 1.6; margin-top: 16px; }
+    .footer-contact { display: flex; flex-direction: column; gap: 6px; margin-top: 16px; }
+    .footer-contact a { color: #fff; text-decoration: none; font-size: 0.85rem; }
+    .footer-contact a:hover { color: var(--teal); }
+    .footer-col h4 { font-family: 'Barlow Condensed', sans-serif; font-size: 1rem;
+      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; color: var(--teal); }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: #C1C1D0; text-decoration: none; font-size: 0.85rem; }
+    .footer-col a:hover { color: #fff; }
+    .footer-bottom { max-width: 1400px; margin: 40px auto 0; padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between;
+      font-size: 0.78rem; color: #8888A0; }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .fact-grid { grid-template-columns: repeat(2, 1fr); }
+      .region-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 3.4rem; }
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-symbol { width: 140px; height: 140px; }
+      .hero-symbol svg { width: 70px; height: 70px; }
+    }
+    @media (max-width: 700px) {
+      nav { padding: 0 20px; }
+      .nav-links > li:not(:last-child) { display: none; }
+      .hero { padding: 60px 24px 70px; }
+      .hero h1 { font-size: 2.5rem; }
+      .explain, section.step-section, .bottom-cta { padding: 60px 24px; }
+      .explain-inner { grid-template-columns: 1fr; gap: 24px; }
+      .fact-grid { grid-template-columns: 1fr; }
+      .coordinate { grid-template-columns: 1fr; padding: 28px; }
+      .step-header { flex-direction: column; gap: 4px; align-items: flex-start; }
+      .step-num { font-size: 3rem; }
+      .step-title { font-size: 1.9rem; }
+      .step-sub { margin-left: 0; margin-top: 0; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="draft-banner">DRAFT PREVIEW &middot; based on the "In an emergency" doc &middot; content still under review</div>
+
+  <div class="crisis-bar">
+    <span class="crisis-dot"></span>
+    If you or someone is in immediate danger, call emergency services now:
+    <a href="tel:100">Israel: 100</a> &nbsp;|&nbsp;
+    <a href="tel:911">US: 911</a> &nbsp;|&nbsp;
+    <a href="tel:999">UK: 999</a>
+    &nbsp;&nbsp;&middot;&nbsp;&nbsp;
+    <strong>Magen hotline:</strong>
+    <a href="tel:023724073">02-372-4073</a>
+    &nbsp;&middot;&nbsp; 24/6
+  </div>
+
+  <div class="nav-wrap">
+    <nav>
+      <a href="/" class="nav-logo">
+        <div class="nav-logo-text">
+          <span class="brand">MAGEN</span>
+          <span class="sub">for Jewish Communities</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="safety-and-healing.html">Safety &amp; Healing <span class="chevron">▼</span></a></li>
+        <li><a href="advocacy-and-investigations.html">Advocacy &amp; Investigations <span class="chevron">▼</span></a></li>
+        <li><a href="education-and-community.html">Education &amp; Community <span class="chevron">▼</span></a></li>
+        <li><a href="resources.html">Resources <span class="chevron">▼</span></a></li>
+        <li>
+          <a href="#">Magen <span class="chevron">▼</span></a>
+          <div class="mega-menu">
+            <div class="mega-col">
+              <div class="mega-col-label">Who We Are</div>
+              <a href="about.html" class="mega-item"><span class="mega-item-title">About Magen</span><span class="mega-item-desc">Our mission, values, and approach</span></a>
+              <a href="staff.html" class="mega-item"><span class="mega-item-title">Our Team</span><span class="mega-item-desc">The people behind the work</span></a>
+              <a href="financial-transparency.html" class="mega-item"><span class="mega-item-title">Financial Transparency</span><span class="mega-item-desc">How we manage what you entrust to us</span></a>
+            </div>
+            <div class="mega-col">
+              <div class="mega-col-label">Voices</div>
+              <a href="what-people-say.html" class="mega-item"><span class="mega-item-title">What People Say</span><span class="mega-item-desc">Survivors, rabbis, detectives, families</span></a>
+              <a href="lo-tishtok.html" class="mega-item"><span class="mega-item-title">Lo Tishtok</span><span class="mega-item-desc">Do not stay silent</span></a>
+            </div>
+          </div>
+        </li>
+        <li><a href="donate.html" class="btn-donate">Donate →</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow">In an Emergency</div>
+        <h1>Should the worst happen,<br><em>Go to&nbsp;Heder&nbsp;4.</em></h1>
+        <p class="lead">Heder Arba (חדר 4) is Israel's special emergency unit for survivors of sexual assault. This page walks you through what to do, in three steps. You do not have to do any of it alone.</p>
+      </div>
+      <div class="hero-symbol" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#00AEAC" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M50 15 v70 M15 50 h70"/>
+          <circle cx="50" cy="50" r="42" stroke-width="3"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- What is Hadar Arba? -->
+  <section class="explain">
+    <div class="explain-inner">
+      <h2><span>What is Heder&nbsp;4?</span>An emergency-room division designed specifically for you.</h2>
+      <ul class="explain-list">
+        <li>Immediate medical and psychological support</li>
+        <li>Collection of forensic evidence, at your pace</li>
+        <li>Pregnancy and STI prevention</li>
+        <li>Date-rape drug testing</li>
+        <li>Referrals to longer-term support services</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- STEP 1 -->
+  <section class="step-section">
+    <div class="step-header">
+      <span class="step-num">01</span>
+      <span class="step-title">Before you go</span>
+    </div>
+    <p class="step-sub">Four things worth knowing on the way. None of them require you to have made a decision yet.</p>
+    <div class="fact-grid">
+      <div class="fact-card">
+        <div class="fact-title">Try not to shower first</div>
+        <div class="fact-body">Bring the clothes you were wearing during the incident, if possible. Evidence can be preserved best before washing.</div>
+      </div>
+      <div class="fact-card">
+        <div class="fact-title">Hospitals notify police</div>
+        <div class="fact-body">But you keep the right to decline filing a formal complaint. Notification is not the same as prosecution.</div>
+      </div>
+      <div class="fact-card">
+        <div class="fact-title">No immediate decisions needed</div>
+        <div class="fact-body">Samples are preserved for up to 50 years. You can decide later whether and when to move forward.</div>
+      </div>
+      <div class="fact-card">
+        <div class="fact-title">Try to arrive within 72 hours</div>
+        <div class="fact-body">Services are available up to a week after, but the sooner you go, the more options remain open to you.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 2 -->
+  <section class="step-section" style="padding-top:0;">
+    <div class="step-header">
+      <span class="step-num">02</span>
+      <span class="step-title">Bring someone with you</span>
+    </div>
+    <p class="step-sub">You should never have to walk into this alone. Reach out to Magen or your local rape crisis center to arrange a trained volunteer to accompany you through the examination.</p>
+    <div class="coordinate">
+      <p>Talk to a Magen coordinator, and we'll match you with an accompaniment volunteer, day or night.</p>
+      <a href="tel:023724073" class="btn-primary">Call 02-372-4073</a>
+    </div>
+  </section>
+
+  <!-- STEP 3 -->
+  <section class="step-section" style="padding-top:0;">
+    <div class="step-header">
+      <span class="step-num">03</span>
+      <span class="step-title">Find the closest Heder&nbsp;4</span>
+    </div>
+    <p class="step-sub">Eleven hospitals across Israel operate a Heder 4 unit. Tap the pin next to any of them to open turn-by-turn directions in Waze.</p>
+    <div class="region-grid">
+      <div class="region">
+        <div class="region-head">North <span class="count">4 units</span></div>
+        <ul>
+          <li><span class="room">Lotem Center</span><span class="hospital">Galilee Medical Center</span><span class="city">Nahariya</span><a class="waze-link" href="https://waze.com/ul?q=Galilee%20Medical%20Center%20Nahariya&navigate=yes" target="_blank" rel="noopener" aria-label="Open Galilee Medical Center in Waze"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a></li>
+          <li><span class="room">Tene Center</span><span class="hospital">Poriya Medical Center</span><span class="city">Tiberias</span><a class="waze-link" href="https://waze.com/ul?q=Poriya%20Medical%20Center%20Tiberias&navigate=yes" target="_blank" rel="noopener" aria-label="Open Poriya Medical Center in Waze"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a></li>
+          <li><span class="room">Room 10</span><span class="hospital">Bnai Zion Medical Center</span><span class="city">Haifa</span><a class="waze-link" href="https://waze.com/ul?q=Bnai%20Zion%20Medical%20Center%20Haifa&navigate=yes" target="_blank" rel="noopener" aria-label="Open Bnai Zion Medical Center in Waze"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a></li>
+          <li><span class="room">Acute Room</span><span class="hospital">English Hospital</span><span class="city">Nazareth</span><a class="waze-link" href="https://waze.com/ul?q=English%20Hospital%20Nazareth&navigate=yes" target="_blank" rel="noopener" aria-label="Open English Hospital Nazareth in Waze"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a></li>
+        </ul>
+      </div>
+      <div class="region">
+        <div class="region-head">Center <span class="count">5 units</span></div>
+        <ul>
+          <li><span class="room">Helena Center</span><span class="hospital">Hillel Yaffe Medical Center</span><span class="city">Hadera</span><a class="waze-link" href="https://waze.com/ul?q=Hillel%20Yaffe%20Medical%20Center%20Hadera&navigate=yes" target="_blank" rel="noopener" aria-label="Open Hillel Yaffe Medical Center in Waze"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a></li>
+          <li><span class="room">Room 4</span><span class="hospital">Wolfson Medical Center</span><span class="city">Holon</span><a class="waze-link" href="https://waze.com/ul?q=Wolfson%20Medical%20Center%20Holon&navigate=yes" target="_blank" rel="noopener" aria-label="Open Wolfson Medical Center in Waze"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a></li>
+          <li><span class="room">Neta</span><span class="hospital">Ichilov Medical Center</span><span class="city">Tel Aviv</span><a class="waze-link" href="https://waze.com/ul?q=Ichilov%20Medical%20Center%20Tel%20Aviv&navigate=yes" target="_blank" rel="noopener" aria-label="Open Ichilov Medical Center in Waze"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a></li>
+          <li><span class="room">Bat Ami</span><span class="hospital">Hadassah Ein Kerem Medical Center</span><span class="city">Jerusalem</span><a class="waze-link" href="https://waze.com/ul?q=Hadassah%20Ein%20Kerem%20Jerusalem&navigate=yes" target="_blank" rel="noopener" aria-label="Open Hadassah Ein Kerem in Waze"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a></li>
+          <li><span class="room">Lotus Center</span><span class="hospital">Kaplan Medical Center</span><span class="city">Rehovot</span><a class="waze-link" href="https://waze.com/ul?q=Kaplan%20Medical%20Center%20Rehovot&navigate=yes" target="_blank" rel="noopener" aria-label="Open Kaplan Medical Center in Waze"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a></li>
+        </ul>
+      </div>
+      <div class="region">
+        <div class="region-head">South <span class="count">2 units</span></div>
+        <ul>
+          <li><span class="room">Acute Room</span><span class="hospital">Soroka Medical Center</span><span class="city">Beer Sheva</span><a class="waze-link" href="https://waze.com/ul?q=Soroka%20Medical%20Center%20Beer%20Sheva&navigate=yes" target="_blank" rel="noopener" aria-label="Open Soroka Medical Center in Waze"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a></li>
+          <li><span class="room">Acute Room</span><span class="hospital">Yoseftal Medical Center</span><span class="city">Eilat</span><a class="waze-link" href="https://waze.com/ul?q=Yoseftal%20Medical%20Center%20Eilat&navigate=yes" target="_blank" rel="noopener" aria-label="Open Yoseftal Medical Center in Waze"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="bottom-cta">
+    <h2>You are not alone in this.</h2>
+    <p>If you're not sure what to do next, or you just want to talk it through with someone who's done this before, Magen is here.</p>
+    <div class="ctas">
+      <a href="tel:023724073" class="btn btn-primary">Call our hotline</a>
+      <a href="contact.html" class="btn btn-ghost">Send a message</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-motto"><em>Here.</em> Until sexual abuse isn't.</div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo">
+          <div class="nav-logo-text">
+            <span class="brand">MAGEN</span>
+            <span class="sub">for Jewish Communities</span>
+          </div>
+        </a>
+        <p>Breaking the silence and stigma of sexual abuse. Pursuing justice and healing for survivors across Jewish communities in Israel and beyond.</p>
+        <div class="footer-contact">
+          <a href="tel:023724073">02-372-4073</a>
+          <a href="mailto:support@magen-israel.org">support@magen-israel.org</a>
+          <a href="https://www.magen-israel.org">www.magen-israel.org</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Get Help</h4>
+        <ul>
+          <li><a href="safety-and-healing.html">Safety &amp; Healing</a></li>
+          <li><a href="in-an-emergency.html">In an Emergency</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="advocacy-and-investigations.html">Advocacy &amp; Investigations</a></li>
+          <li><a href="education-and-community.html">Education &amp; Community</a></li>
+          <li><a href="lo-tishtok.html">Lo Tishtok</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Magen</h4>
+        <ul>
+          <li><a href="about.html">About Magen</a></li>
+          <li><a href="staff.html">Our Team</a></li>
+          <li><a href="what-people-say.html">What People Say</a></li>
+          <li><a href="financial-transparency.html">Financial Transparency</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="donate.html">Donate</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Magen for Jewish Communities. Registered nonprofit. All rights reserved.</span>
+      <span><a href="#">Privacy Policy</a> &middot; <a href="#">Terms of Use</a></span>
+    </div>
+  </footer>
+
+</body>
+</html>

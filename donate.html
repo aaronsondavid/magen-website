@@ -4,123 +4,198 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex,nofollow,noarchive" />
-  <title>Support Magen — Magen for Jewish Communities</title>
+  <title>Support Magen · Magen for Jewish Communities</title>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --teal:    #00AEAC;
-      --teal-dk: #008F8D;
-      --purple:  #6B4FA1;
-      --pink:    #E879A0;
-      --dark:    #1A1A2E;
-      --gray:    #555;
-      --light:   #F7F7F7;
-      --amber:   #F59E0B;
-      --amber-bg:#FEF3C7;
-    }
-    body { font-family: 'Open Sans', sans-serif; color: var(--dark); background: #fff; }
+    :root { --teal:#00AEAC; --teal-dk:#008F8D; --purple:#6B4FA1; --pink:#E879A0;
+      --dark:#1A1A2E; --gray:#555; --light:#F7F7F7; --amber:#F59E0B; --amber-bg:#FEF3C7; }
+    body { font-family:'Open Sans',sans-serif; color:var(--dark); background:#fff; line-height:1.55; }
 
-    /* Draft banner */
-    .draft-banner {
-      background: var(--amber-bg);
-      color: #78350F;
-      text-align: center;
-      padding: 10px 24px;
-      font-size: 0.85rem;
-      border-bottom: 2px solid var(--amber);
-      font-weight: 600;
-      letter-spacing: 0.02em;
-    }
+    .draft-banner { background:var(--amber-bg); color:#78350F; text-align:center; padding:10px 24px;
+      font-size:0.85rem; border-bottom:2px solid var(--amber); font-weight:600; letter-spacing:0.02em; }
+    .crisis-bar { background:var(--dark); color:#fff; text-align:center; padding:10px 60px;
+      font-size:0.82rem; letter-spacing:0.03em; display:flex; align-items:center; justify-content:center; gap:16px; }
+    .crisis-bar strong { color:var(--teal); font-weight:700; }
+    .crisis-bar a { color:#fff; font-weight:700; letter-spacing:0.05em; text-decoration:none;
+      border-bottom:1px solid rgba(255,255,255,0.3); transition:border-color 0.2s; }
+    .crisis-bar a:hover { border-color:var(--teal); color:var(--teal); }
+    .crisis-dot { width:7px; height:7px; background:var(--teal); border-radius:50%; display:inline-block;
+      animation:pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
 
-    /* Crisis bar */
-    .crisis-bar {
-      background: var(--dark); color: #fff; text-align: center;
-      padding: 10px 60px; font-size: 0.82rem; letter-spacing: 0.03em;
-      display: flex; align-items: center; justify-content: center; gap: 16px;
-    }
-    .crisis-bar strong { color: var(--teal); font-weight: 700; }
-    .crisis-bar a { color: #fff; font-weight: 700; letter-spacing: 0.05em; text-decoration: none;
-      border-bottom: 1px solid rgba(255,255,255,0.3); transition: border-color 0.2s; }
-    .crisis-bar a:hover { border-color: var(--teal); color: var(--teal); }
-    .crisis-dot { width: 7px; height: 7px; background: var(--teal); border-radius: 50%;
-      display: inline-block; animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
-
-    /* Nav */
-    .nav-wrap { position: sticky; top: 0; z-index: 200; background: #fff;
-      border-bottom: 3px solid var(--teal); box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
-    nav { display: flex; justify-content: space-between; align-items: center;
-      padding: 0 60px; height: 72px; background: #fff; max-width: 1400px; margin: 0 auto; }
-    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; }
-    .nav-logo-text { display: flex; flex-direction: column; line-height: 1; }
-    .nav-logo-text .brand { font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
-      font-size: 1.5rem; color: var(--teal); letter-spacing: 0.08em; }
-    .nav-logo-text .sub { font-size: 0.62rem; color: var(--gray); letter-spacing: 0.06em; text-transform: uppercase; }
-    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
-    .nav-links a { text-decoration: none; color: var(--dark); font-size: 0.82rem; font-weight: 700;
-      letter-spacing: 0.05em; text-transform: uppercase; padding: 8px 14px; transition: color 0.2s;
-      white-space: nowrap; border-bottom: 3px solid transparent; }
-    .nav-links a:hover { color: var(--teal); border-bottom-color: var(--teal); }
-    .btn-donate { background: var(--teal); color: #fff !important; padding: 10px 22px !important;
-      border-radius: 4px; border: none !important; }
-    .btn-donate:hover { background: var(--teal-dk) !important; }
+    .nav-wrap { position:sticky; top:0; z-index:200; background:#fff;
+      border-bottom:3px solid var(--teal); box-shadow:0 2px 12px rgba(0,0,0,0.07); }
+    nav { display:flex; justify-content:space-between; align-items:center;
+      padding:0 60px; height:72px; background:#fff; max-width:1400px; margin:0 auto; }
+    .nav-logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
+    .nav-logo-text { display:flex; flex-direction:column; line-height:1; }
+    .nav-logo-text .brand { font-family:'Barlow Condensed',sans-serif; font-weight:800;
+      font-size:1.5rem; color:var(--teal); letter-spacing:0.08em; }
+    .nav-logo-text .sub { font-size:0.62rem; color:var(--gray); letter-spacing:0.06em; text-transform:uppercase; }
+    .nav-links { display:flex; align-items:center; gap:4px; list-style:none; height:72px; }
+    .nav-links > li { position:relative; height:100%; display:flex; align-items:center; }
+    .nav-links > li > a { text-decoration:none; color:var(--dark); font-size:0.82rem; font-weight:700;
+      letter-spacing:0.05em; text-transform:uppercase; padding:0 16px; height:100%; display:flex;
+      align-items:center; gap:5px; transition:color 0.2s; white-space:nowrap;
+      border-bottom:3px solid transparent; margin-bottom:-3px; }
+    .nav-links > li:hover > a { color:var(--teal); border-bottom-color:var(--teal); }
+    .btn-donate { background:var(--teal); color:#fff !important; padding:10px 22px !important;
+      border-radius:4px; margin-left:12px; }
 
     /* Hero */
-    .hero { padding: 100px 60px 80px; max-width: 1000px; margin: 0 auto; text-align: center; }
-    .hero .eyebrow { font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.15em;
-      text-transform: uppercase; color: var(--purple); font-weight: 700; font-size: 0.9rem; margin-bottom: 16px; }
-    .hero h1 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 3.6rem;
-      line-height: 1.05; color: var(--dark); margin-bottom: 24px; letter-spacing: -0.01em; }
-    .hero p { font-size: 1.15rem; color: var(--gray); max-width: 620px; margin: 0 auto; line-height: 1.6; }
+    .hero {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dk) 100%);
+      color:#fff; padding:90px 60px 100px; text-align:center; position:relative;
+    }
+    .hero::before { content:''; position:absolute; top:0; left:0; right:0; height:6px;
+      background: linear-gradient(90deg, var(--pink), var(--purple), var(--teal-dk)); }
+    .hero .eyebrow { font-family:'Barlow Condensed',sans-serif; letter-spacing:0.25em;
+      text-transform:uppercase; font-weight:700; font-size:0.95rem; margin-bottom:22px; opacity:0.9; }
+    .hero h1 { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:4.2rem;
+      line-height:1.02; letter-spacing:-0.015em; max-width:900px; margin:0 auto 22px; }
+    .hero h1 span { display:block; }
+    .hero h1 .pt-2 { color:#FEE9F0; }
+    .hero h1 .pt-3 { color:#D5E9E9; }
+    .hero .lead { font-size:1.25rem; max-width:720px; margin:0 auto 12px; line-height:1.5; }
+    .hero .sub { max-width:640px; margin:0 auto; opacity:0.9; font-size:1rem; line-height:1.55; }
 
-    /* Placeholder block */
-    .placeholder { max-width: 900px; margin: 40px auto 100px; padding: 0 60px; }
-    .placeholder-card { border: 2px dashed #D1D5DB; border-radius: 10px; padding: 40px;
-      background: var(--light); text-align: center; color: var(--gray); }
-    .placeholder-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
-      font-size: 1.4rem; color: var(--dark); margin-bottom: 12px; letter-spacing: 0.02em; }
-    .placeholder-card p { font-size: 0.95rem; line-height: 1.6; }
-    .placeholder-card a { color: var(--teal); font-weight: 600; text-decoration: none; }
-    .placeholder-card a:hover { text-decoration: underline; }
+    /* Three pillars */
+    .pillars { padding:90px 60px; max-width:1200px; margin:0 auto; }
+    .pillars h2 { text-align:center; font-family:'Barlow Condensed',sans-serif; font-weight:800;
+      font-size:2.6rem; color:var(--dark); margin-bottom:14px; letter-spacing:-0.01em; }
+    .pillars .intro { text-align:center; color:var(--gray); font-size:1.1rem; max-width:720px;
+      margin:0 auto 60px; line-height:1.65; }
+    .pillar-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:24px; }
+    .pillar { background:#fff; border:1px solid #E5E7EB; border-radius:8px; padding:38px 32px;
+      position:relative; transition:transform 0.2s, box-shadow 0.2s; }
+    .pillar:hover { transform:translateY(-3px); box-shadow:0 10px 30px rgba(0,0,0,0.08); }
+    .pillar::before { content:''; position:absolute; top:0; left:32px; right:32px; height:4px;
+      background:var(--teal); border-radius:0 0 4px 4px; }
+    .pillar:nth-child(2)::before { background:var(--purple); }
+    .pillar:nth-child(3)::before { background:var(--pink); }
+    .pillar .num { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:0.95rem;
+      color:var(--teal); letter-spacing:0.2em; text-transform:uppercase; margin-bottom:10px; }
+    .pillar:nth-child(2) .num { color:var(--purple); }
+    .pillar:nth-child(3) .num { color:var(--pink); }
+    .pillar h3 { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.7rem;
+      color:var(--dark); margin-bottom:14px; line-height:1.15; }
+    .pillar p { color:var(--gray); font-size:1rem; line-height:1.6; }
 
-    /* Footer */
-    footer { background: var(--dark); color: #fff; padding: 60px 60px 30px; }
-    .footer-motto { text-align: center; font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.3rem; color: var(--teal); letter-spacing: 0.05em; margin-bottom: 40px; }
-    .footer-motto em { font-style: normal; color: var(--pink); font-weight: 700; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
-      max-width: 1400px; margin: 0 auto; }
-    .footer-brand p { color: #C1C1D0; font-size: 0.88rem; line-height: 1.6; margin-top: 16px; }
-    .footer-contact { display: flex; flex-direction: column; gap: 6px; margin-top: 16px; }
-    .footer-contact a { color: #fff; text-decoration: none; font-size: 0.85rem; }
-    .footer-contact a:hover { color: var(--teal); }
-    .footer-col h4 { font-family: 'Barlow Condensed', sans-serif; font-size: 1rem;
-      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; color: var(--teal); }
-    .footer-col ul { list-style: none; }
-    .footer-col li { margin-bottom: 8px; }
-    .footer-col a { color: #C1C1D0; text-decoration: none; font-size: 0.85rem; }
-    .footer-col a:hover { color: #fff; }
-    .footer-bottom { max-width: 1400px; margin: 40px auto 0; padding-top: 20px;
-      border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between;
-      font-size: 0.78rem; color: #8888A0; }
-    .footer-bottom a { color: #C1C1D0; text-decoration: none; }
-    .footer-bottom a:hover { color: #fff; }
+    /* Donation form */
+    .give { background:var(--light); padding:90px 60px; }
+    .give-inner { max-width:920px; margin:0 auto; }
+    .give-heading { text-align:center; margin-bottom:44px; }
+    .give-heading h2 { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:2.6rem;
+      color:var(--dark); margin-bottom:10px; letter-spacing:-0.01em; }
+    .give-heading p { color:var(--gray); font-size:1.1rem; max-width:640px; margin:0 auto; }
+    .give-card { background:#fff; border-radius:12px; padding:44px 44px; border:1px solid #E5E7EB;
+      box-shadow:0 4px 24px rgba(0,0,0,0.04); }
 
-    @media (max-width: 900px) {
-      nav { padding: 0 20px; }
-      .nav-links { display: none; }
-      .hero { padding: 60px 24px 40px; }
-      .hero h1 { font-size: 2.4rem; }
-      .placeholder { padding: 0 20px; }
-      .footer-grid { grid-template-columns: 1fr; }
-      .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+    .freq-toggle { display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:32px;
+      background:var(--light); border-radius:6px; padding:5px; }
+    .freq-toggle label { text-align:center; padding:12px 14px; font-family:'Barlow Condensed',sans-serif;
+      font-weight:700; font-size:1rem; letter-spacing:0.06em; text-transform:uppercase;
+      color:var(--gray); border-radius:4px; cursor:pointer; transition:all 0.15s; }
+    .freq-toggle input { display:none; }
+    .freq-toggle input:checked + label { background:var(--dark); color:#fff; }
+    .freq-toggle label span { font-size:0.7rem; letter-spacing:0.1em; opacity:0.7; display:block; margin-top:2px; font-weight:600; }
+
+    .amount-label { font-family:'Barlow Condensed',sans-serif; font-size:0.85rem; font-weight:700;
+      letter-spacing:0.1em; text-transform:uppercase; color:var(--gray); margin-bottom:12px; display:block; }
+    .amount-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin-bottom:16px; }
+    .amount-btn { padding:18px 12px; border:2px solid #E5E7EB; background:#fff; border-radius:6px;
+      font-family:'Barlow Condensed',sans-serif; font-size:1.4rem; font-weight:700; color:var(--dark);
+      cursor:pointer; transition:all 0.15s; text-align:center; }
+    .amount-btn:hover { border-color:var(--teal); color:var(--teal); }
+    .amount-btn.selected { background:var(--teal); border-color:var(--teal); color:#fff; }
+    .amount-btn .impact { font-family:'Open Sans',sans-serif; font-size:0.72rem; color:var(--gray);
+      display:block; margin-top:4px; font-weight:400; text-transform:none; letter-spacing:0; }
+    .amount-btn.selected .impact { color:rgba(255,255,255,0.85); }
+    .amount-other { width:100%; padding:18px 20px; border:2px solid #E5E7EB; border-radius:6px;
+      font-size:1.05rem; margin-bottom:28px; font-family:'Open Sans',sans-serif; }
+    .amount-other:focus { outline:none; border-color:var(--teal); }
+
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+    .form-row.full { grid-template-columns:1fr; }
+    .form-row label { display:flex; flex-direction:column; gap:6px; }
+    .form-row label span { font-size:0.85rem; color:var(--gray); font-weight:600; }
+    .form-row input, .form-row select {
+      padding:14px 16px; border:2px solid #E5E7EB; border-radius:6px; font-size:1rem;
+      font-family:'Open Sans',sans-serif; background:#fff; transition:border-color 0.15s;
+    }
+    .form-row input:focus, .form-row select:focus { outline:none; border-color:var(--teal); }
+    .give-submit { width:100%; padding:18px 24px; background:var(--teal); color:#fff;
+      border:none; border-radius:6px; font-family:'Barlow Condensed',sans-serif; font-weight:800;
+      font-size:1.2rem; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer;
+      margin-top:8px; transition:background 0.15s; }
+    .give-submit:hover { background:var(--teal-dk); }
+
+    .trust-row { display:flex; justify-content:center; gap:24px; margin-top:28px; flex-wrap:wrap;
+      color:var(--gray); font-size:0.85rem; }
+    .trust-row span { display:inline-flex; align-items:center; gap:6px; }
+    .trust-row span::before { content:'✓'; color:var(--teal); font-weight:700; }
+
+    /* Other ways to give */
+    .other-ways { padding:80px 60px; max-width:1100px; margin:0 auto; }
+    .other-ways h2 { text-align:center; font-family:'Barlow Condensed',sans-serif; font-weight:800;
+      font-size:2.2rem; color:var(--dark); margin-bottom:14px; letter-spacing:-0.01em; }
+    .other-ways .sub { text-align:center; color:var(--gray); margin-bottom:48px; }
+    .ways-grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:20px; }
+    .way { background:#fff; border:1px solid #E5E7EB; border-radius:8px; padding:26px 22px;
+      text-align:left; }
+    .way h4 { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.15rem;
+      color:var(--dark); margin-bottom:8px; }
+    .way p { color:var(--gray); font-size:0.88rem; line-height:1.55; }
+    .way a { color:var(--teal); font-weight:700; text-decoration:none; }
+    .way a:hover { text-decoration:underline; }
+
+    /* Bottom */
+    .close { background: linear-gradient(135deg, var(--dark) 0%, #232449 100%); color:#fff;
+      padding:70px 60px; text-align:center; }
+    .close h2 { font-family:'Barlow Condensed',sans-serif; font-size:2.2rem; font-weight:800;
+      max-width:800px; margin:0 auto 12px; line-height:1.15; }
+    .close p { max-width:640px; margin:0 auto; color:rgba(255,255,255,0.85); font-size:1rem; }
+
+    footer { background:var(--dark); color:#fff; padding:60px 60px 30px; border-top:1px solid rgba(255,255,255,0.1); }
+    .footer-motto { text-align:center; font-family:'Barlow Condensed',sans-serif;
+      font-size:1.3rem; color:var(--teal); letter-spacing:0.05em; margin-bottom:40px; }
+    .footer-motto em { font-style:normal; color:var(--pink); font-weight:700; }
+    .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px;
+      max-width:1400px; margin:0 auto; }
+    .footer-brand p { color:#C1C1D0; font-size:0.88rem; line-height:1.6; margin-top:16px; }
+    .footer-contact { display:flex; flex-direction:column; gap:6px; margin-top:16px; }
+    .footer-contact a { color:#fff; text-decoration:none; font-size:0.85rem; }
+    .footer-col h4 { font-family:'Barlow Condensed',sans-serif; font-size:1rem;
+      letter-spacing:0.08em; text-transform:uppercase; margin-bottom:14px; color:var(--teal); }
+    .footer-col ul { list-style:none; }
+    .footer-col li { margin-bottom:8px; }
+    .footer-col a { color:#C1C1D0; text-decoration:none; font-size:0.85rem; }
+    .footer-bottom { max-width:1400px; margin:40px auto 0; padding-top:20px;
+      border-top:1px solid rgba(255,255,255,0.1); display:flex; justify-content:space-between;
+      font-size:0.78rem; color:#8888A0; }
+
+    @media (max-width:1024px) {
+      .pillar-grid { grid-template-columns:1fr; }
+      .ways-grid { grid-template-columns:repeat(2, 1fr); }
+      .hero h1 { font-size:3.2rem; }
+    }
+    @media (max-width:700px) {
+      nav { padding:0 20px; } .nav-links > li:not(:last-child) { display:none; }
+      .hero { padding:70px 24px 80px; } .hero h1 { font-size:2.3rem; }
+      .pillars, .give, .other-ways, .close { padding:60px 24px; }
+      .give-card { padding:32px 24px; }
+      .form-row { grid-template-columns:1fr; }
+      .amount-grid { grid-template-columns:repeat(2, 1fr); }
+      .ways-grid { grid-template-columns:1fr; }
+      .footer-grid { grid-template-columns:1fr; }
+      .footer-bottom { flex-direction:column; gap:10px; text-align:center; }
     }
   </style>
 </head>
 <body>
 
-  <div class="draft-banner">DRAFT — content pending. This page is a skeleton for review.</div>
+  <div class="draft-banner">DRAFT PREVIEW &middot; based on the "Donate" doc &middot; amounts and copy still under review</div>
 
   <div class="crisis-bar">
     <span class="crisis-dot"></span>
@@ -128,19 +203,16 @@
     <a href="tel:100">Israel: 100</a> &nbsp;|&nbsp;
     <a href="tel:911">US: 911</a> &nbsp;|&nbsp;
     <a href="tel:999">UK: 999</a>
-    &nbsp;&nbsp;·&nbsp;&nbsp;
+    &nbsp;&middot;&nbsp;
     <strong>Magen hotline:</strong>
-    <a href="tel:STARNUM">[★ CEO to provide]</a>
-    &nbsp;·&nbsp; 24/6
+    <a href="tel:023724073">02-372-4073</a>
+    &nbsp;&middot;&nbsp; 24/6
   </div>
 
   <div class="nav-wrap">
     <nav>
       <a href="/" class="nav-logo">
-        <div class="nav-logo-text">
-          <span class="brand">MAGEN</span>
-          <span class="sub">for Jewish Communities</span>
-        </div>
+        <div class="nav-logo-text"><span class="brand">MAGEN</span><span class="sub">for Jewish Communities</span></div>
       </a>
       <ul class="nav-links">
         <li><a href="safety-and-healing.html">Safety &amp; Healing</a></li>
@@ -154,16 +226,112 @@
   </div>
 
   <section class="hero">
-    <div class="eyebrow">Magen</div>
-    <h1>Support Magen</h1>
-    <p>Give once, give monthly, or fund a specific program.</p>
+    <div class="eyebrow">Support Magen</div>
+    <h1>
+      <span>Community.</span>
+      <span class="pt-2">Accountability.</span>
+      <span class="pt-3">Our shared responsibility.</span>
+    </h1>
+    <p class="lead">Support survivors, and strengthen the communities we share.</p>
+    <p class="sub">Sexual abuse affects all communities. Equally. The responsibility to prevent it, address it, and respond to it is ours.</p>
   </section>
 
-  <section class="placeholder">
-    <div class="placeholder-card">
-      <h3>Content in progress</h3>
-      <p>This skeleton exists so the page is reachable on the preview subdomain and tracked on Monday. The real content will replace this block. Return to the <a href="/">preview hub</a>.</p>
+  <section class="pillars">
+    <h2>What your gift builds.</h2>
+    <p class="intro">Three commitments Magen makes to every survivor, every family, and every community we work with. Your gift powers all three.</p>
+    <div class="pillar-grid">
+      <div class="pillar">
+        <div class="num">01 · Active</div>
+        <h3>An active community, where adults take responsibility for children's safety.</h3>
+        <p>Workshops, kallah-teacher training, and educator programs that give parents and community leaders the tools to prevent, recognize, and respond.</p>
+      </div>
+      <div class="pillar">
+        <div class="num">02 · Empowered</div>
+        <h3>An empowered community that supports survivors with informed advocacy.</h3>
+        <p>Case management, hotline coverage, legal accompaniment, and therapy referrals so no survivor walks into police stations, courtrooms, or hospitals alone.</p>
+      </div>
+      <div class="pillar">
+        <div class="num">03 · Aware</div>
+        <h3>An aware community that understands the process and enables change.</h3>
+        <p>Journalism partnerships, Knesset lobbying, and international coordination so perpetrators can't outrun accountability by crossing a border.</p>
+      </div>
     </div>
+  </section>
+
+  <section class="give">
+    <div class="give-inner">
+      <div class="give-heading">
+        <h2>Yes. I want in.</h2>
+        <p>Choose an amount and frequency. Your gift is tax-deductible in Israel and the US.</p>
+      </div>
+      <form class="give-card" onsubmit="event.preventDefault(); alert('This is a preview. Live checkout will be wired to our payment processor.');">
+        <div class="freq-toggle">
+          <input type="radio" id="freq-once" name="freq" value="once" checked>
+          <label for="freq-once">One-time <span>gift</span></label>
+          <input type="radio" id="freq-monthly" name="freq" value="monthly">
+          <label for="freq-monthly">Monthly <span>compound impact</span></label>
+        </div>
+
+        <span class="amount-label">Choose amount (USD)</span>
+        <div class="amount-grid">
+          <button type="button" class="amount-btn" data-amount="36">$36 <span class="impact">Chai · one hotline call</span></button>
+          <button type="button" class="amount-btn" data-amount="100">$100 <span class="impact">Two hours of accompaniment</span></button>
+          <button type="button" class="amount-btn selected" data-amount="180">$180 <span class="impact">Chai x10 · one case file</span></button>
+          <button type="button" class="amount-btn" data-amount="360">$360 <span class="impact">One community workshop</span></button>
+          <button type="button" class="amount-btn" data-amount="1000">$1,000 <span class="impact">Sustained casework, one month</span></button>
+          <button type="button" class="amount-btn" data-amount="5000">$5,000 <span class="impact">Founding-donor circle</span></button>
+        </div>
+        <input class="amount-other" type="number" placeholder="Or enter another amount" min="1">
+
+        <span class="amount-label">Your information</span>
+        <div class="form-row">
+          <label><span>First name</span><input type="text" required></label>
+          <label><span>Last name</span><input type="text" required></label>
+        </div>
+        <div class="form-row full">
+          <label><span>Email</span><input type="email" required></label>
+        </div>
+        <div class="form-row">
+          <label><span>Country</span>
+            <select required>
+              <option value="">Select</option>
+              <option>United States</option>
+              <option>Israel</option>
+              <option>United Kingdom</option>
+              <option>Canada</option>
+              <option>Australia</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label><span>How did you hear about us? (optional)</span><input type="text"></label>
+        </div>
+
+        <button type="submit" class="give-submit">Donate securely →</button>
+
+        <div class="trust-row">
+          <span>Tax-deductible (US 501(c)(3) via PEF)</span>
+          <span>Israeli receipt (46A)</span>
+          <span>Board-audited</span>
+          <span>SSL secured</span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="other-ways">
+    <h2>Other ways to give</h2>
+    <p class="sub">If a monthly credit-card gift isn't the right fit, we can accept your support in several other ways.</p>
+    <div class="ways-grid">
+      <div class="way"><h4>Wire transfer</h4><p>US or Israeli bank wire, no processing fees. Best for gifts of $5,000+. <a href="mailto:support@magen-israel.org?subject=Wire%20transfer">Request instructions →</a></p></div>
+      <div class="way"><h4>Donor-advised fund</h4><p>Recommend a grant through Fidelity Charitable, Schwab, Vanguard, JCF, or your DAF sponsor. Use tax ID via PEF. <a href="mailto:support@magen-israel.org?subject=DAF%20grant">Ask for our EIN →</a></p></div>
+      <div class="way"><h4>Stock or crypto</h4><p>Appreciated securities and crypto can be gifted with additional tax advantages. <a href="mailto:support@magen-israel.org?subject=Stock%20gift">Arrange a transfer →</a></p></div>
+      <div class="way"><h4>Check by mail</h4><p>Make checks payable to <em>P.E.F. Israel Endowment Funds</em> with "For Magen" on the memo. <a href="mailto:support@magen-israel.org?subject=Mail-in%20check">Get the address →</a></p></div>
+    </div>
+  </section>
+
+  <section class="close">
+    <h2>Every gift, no matter the size, is a vote for a safer community.</h2>
+    <p>Thank you for standing with survivors, and with us.</p>
   </section>
 
   <footer>
@@ -171,10 +339,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="/" class="nav-logo">
-          <div class="nav-logo-text">
-            <span class="brand">MAGEN</span>
-            <span class="sub">for Jewish Communities</span>
-          </div>
+          <div class="nav-logo-text"><span class="brand">MAGEN</span><span class="sub">for Jewish Communities</span></div>
         </a>
         <p>Breaking the silence and stigma of sexual abuse. Pursuing justice and healing for survivors across Jewish communities in Israel and beyond.</p>
         <div class="footer-contact">
@@ -183,39 +348,44 @@
           <a href="https://www.magen-israel.org">www.magen-israel.org</a>
         </div>
       </div>
-      <div class="footer-col">
-        <h4>Get Help</h4>
-        <ul>
-          <li><a href="safety-and-healing.html">Safety &amp; Healing</a></li>
-          <li><a href="emergency.html">Emergency</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Programs</h4>
-        <ul>
-          <li><a href="advocacy-and-investigations.html">Advocacy &amp; Investigations</a></li>
-          <li><a href="education-and-community.html">Education &amp; Community</a></li>
-          <li><a href="lo-tishtok.html">Lo Tishtok</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Magen</h4>
-        <ul>
-          <li><a href="about.html">About Magen</a></li>
-          <li><a href="staff.html">Our Team</a></li>
-          <li><a href="what-people-say.html">What People Say</a></li>
-          <li><a href="financial-transparency.html">Financial Transparency</a></li>
-          <li><a href="resources.html">Resources</a></li>
-          <li><a href="donate.html">Donate</a></li>
-        </ul>
-      </div>
+      <div class="footer-col"><h4>Get Help</h4><ul>
+        <li><a href="safety-and-healing.html">Safety &amp; Healing</a></li>
+        <li><a href="in-an-emergency.html">In an Emergency</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Programs</h4><ul>
+        <li><a href="advocacy-and-investigations.html">Advocacy &amp; Investigations</a></li>
+        <li><a href="education-and-community.html">Education &amp; Community</a></li>
+        <li><a href="lo-tishtok.html">Lo Tishtok</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Magen</h4><ul>
+        <li><a href="about.html">About Magen</a></li>
+        <li><a href="staff.html">Our Team</a></li>
+        <li><a href="what-people-say.html">What People Say</a></li>
+        <li><a href="financial-transparency.html">Financial Transparency</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="donate.html">Donate</a></li>
+      </ul></div>
     </div>
     <div class="footer-bottom">
       <span>&copy; 2026 Magen for Jewish Communities. Registered nonprofit. All rights reserved.</span>
-      <span><a href="#">Privacy Policy</a> · <a href="#">Terms of Use</a></span>
+      <span><a href="#">Privacy Policy</a> &middot; <a href="#">Terms of Use</a></span>
     </div>
   </footer>
+
+  <script>
+    // simple amount-button selection UX for preview
+    document.querySelectorAll('.amount-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        document.querySelector('.amount-other').value = '';
+      });
+    });
+    document.querySelector('.amount-other').addEventListener('input', () => {
+      document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+    });
+  </script>
 
 </body>
 </html>
