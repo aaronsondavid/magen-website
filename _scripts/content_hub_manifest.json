@@ -1,0 +1,22 @@
+{
+  "board_id": 5100306689,
+  "columns": {
+    "Content Status": "color_mm58bv06",
+    "Owner": "multiple_person_mm585rhb",
+    "Approver": "multiple_person_mm58jktw",
+    "Draft doc": "link_mm58twy3",
+    "Working folder": "link_mm58rdzy",
+    "Preview URL": "link_mm58m84p",
+    "Related campaign": "dropdown_mm583v8e",
+    "Distribution channels": "tag_mm58xa96",
+    "Draft due": "date_mm582hvz",
+    "Publish/schedule date": "date_mm58vy71",
+    "Priority": "color_mm58pjh5",
+    "Assets": "file_mm58pwk4",
+    "Blockers / Notes": "long_text_mm58cxp8",
+    "Language target": "dropdown_mm58dmg1",
+    "Persona": "dropdown_mm582ph",
+    "Word/duration target": "numeric_mm58j1k4",
+    "Series / thread": "text_mm58s9z8"
+  }
+}

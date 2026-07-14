@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex,nofollow,noarchive" />
-  <title>Magen for Jewish Communities</title>
+  <title>Education &amp; Community, Magen for Jewish Communities</title>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1198,101 +1198,42 @@
       font-family: 'Barlow Condensed', sans-serif;
     }
   
-    /* ── HOMEPAGE ── */
-    .hero-ctas{display:flex;gap:16px;flex-wrap:wrap;align-items:center;}
-    .btn-secondary{display:inline-block;background:transparent;color:#fff;border:2px solid rgba(255,255,255,.5);padding:13px 34px;border-radius:3px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:border-color .2s,color .2s;}
-    .btn-secondary:hover{border-color:var(--teal);color:var(--teal);}
-    .carousel-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--purple),var(--teal));color:rgba(255,255,255,.6);font-family:'Barlow Condensed',sans-serif;font-size:.95rem;letter-spacing:.12em;text-transform:uppercase;text-align:center;padding:24px;}
+    /* ── PROGRAM-PAGE DRAFT ADDITIONS ── */
+    .carousel-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(135deg,var(--purple),var(--teal));color:rgba(255,255,255,.65);
+      font-family:'Barlow Condensed',sans-serif;font-size:.95rem;letter-spacing:.12em;text-transform:uppercase;text-align:center;padding:24px;}
     .carousel-slide:nth-child(2) .carousel-placeholder{background:linear-gradient(135deg,var(--teal-dk),var(--dark));}
     .carousel-slide:nth-child(3) .carousel-placeholder{background:linear-gradient(135deg,var(--dark),var(--purple));}
     .carousel-slide:nth-child(4) .carousel-placeholder{background:linear-gradient(135deg,var(--purple),var(--pink));}
-    /* quick exit */
-    .quick-exit{position:fixed;top:12px;right:14px;z-index:100000;background:#1A1A2E;color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:4px;padding:8px 14px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.3);}
-    .quick-exit:hover{background:var(--pink);border-color:var(--pink);}
-    /* reality band */
-    .reality{background:var(--dark);color:#fff;padding:90px 60px;}
-    .reality-inner{max-width:820px;margin:0 auto;text-align:center;}
-    .reality-eyebrow{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:22px;}
-    .reality-inner h2{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:2.1rem;line-height:1.25;margin-bottom:22px;}
-    .reality-inner h2 em{font-style:normal;color:var(--teal);}
-    .reality-inner p{font-size:1.05rem;line-height:1.8;color:rgba(255,255,255,.75);margin-bottom:24px;}
-    .reality-link{font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);text-decoration:none;border-bottom:2px solid var(--teal);padding-bottom:2px;}
-    /* mission */
-    .mission{background:#fff;padding:90px 60px;text-align:center;}
-    .mission-inner{max-width:760px;margin:0 auto;}
-    .mission-eyebrow{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:14px;}
-    .mission h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2.6rem;text-transform:uppercase;color:var(--dark);line-height:1.1;margin-bottom:24px;}
-    .mission p{font-size:1.1rem;line-height:1.8;color:var(--gray);margin-bottom:36px;}
-    .beliefs{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;}
-    .belief{flex:1;min-width:200px;border-top:3px solid var(--teal);padding-top:18px;}
-    .belief:nth-child(2){border-top-color:var(--purple);}
-    .belief:nth-child(3){border-top-color:var(--pink);}
-    .belief b{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.15rem;text-transform:uppercase;color:var(--dark);display:block;margin-bottom:6px;}
-    .belief span{font-size:.92rem;color:var(--gray);line-height:1.6;}
-    /* program router accents + link cards */
-    .program-card--link{cursor:pointer;}
-    .program-card.p-purple::before{background:var(--purple);}
-    .program-card.p-pink::before{background:var(--pink);}
-    .program-card.p-purple .program-tag{color:var(--purple);}
-    .program-card.p-pink .program-tag{color:var(--pink);}
-    .router-foot{text-align:center;margin-top:40px;font-size:1rem;color:var(--gray);}
-    .router-foot a{color:var(--teal);font-weight:700;text-decoration:none;}
-    /* in-action */
-    .in-action{background:#fff;padding:90px 60px;}
+    .programs-grid--six{grid-template-columns:repeat(3,1fr);}
+    @media (max-width:900px){.programs-grid--six{grid-template-columns:1fr;}}
+    .in-action{background:var(--light);padding:90px 60px;}
     .in-action-inner{max-width:820px;margin:0 auto;text-align:center;}
     .in-action-eyebrow{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:16px;}
     .in-action h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2rem;line-height:1.2;text-transform:uppercase;color:var(--dark);max-width:720px;margin:0 auto 40px;}
-    .in-action-card{background:var(--light);border-left:4px solid var(--purple);border-radius:4px;padding:44px 48px;text-align:left;}
+    .in-action-card{background:#fff;border-left:4px solid var(--teal);border-radius:4px;padding:44px 48px;text-align:left;box-shadow:0 12px 40px rgba(0,0,0,.06);}
+    .in-action-tag{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);background:rgba(0,174,172,.1);padding:5px 12px;border-radius:2px;margin-bottom:24px;}
     .in-action-story p{font-size:1.02rem;line-height:1.85;color:#444;margin-bottom:18px;}
     .in-action-story p.lead{font-size:1.18rem;line-height:1.7;color:var(--dark);font-weight:600;}
-    .in-action-kicker{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.2rem;text-transform:uppercase;color:var(--dark);margin-top:8px;}
-    .in-action-note{margin-top:20px;font-size:.8rem;font-style:italic;color:#999;}
-    /* impact */
-    .impact{background:var(--light);padding:80px 60px;text-align:center;}
-    .impact h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2.2rem;text-transform:uppercase;color:var(--dark);margin-bottom:48px;}
-    .impact-grid{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;max-width:1000px;margin:0 auto;}
-    .impact-tile{flex:1;min-width:180px;}
-    .impact-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:3.4rem;line-height:1;color:var(--teal);}
-    .impact-tile:nth-child(2) .impact-num{color:var(--purple);}
-    .impact-tile:nth-child(3) .impact-num{color:var(--pink);}
-    .impact-tile:nth-child(4) .impact-num{color:var(--dark);}
-    .impact-label{font-size:.9rem;color:var(--gray);margin-top:10px;line-height:1.5;}
-    /* timeline */
-    .timeline{background:#fff;padding:80px 60px;}
-    .timeline-inner{max-width:900px;margin:0 auto;}
-    .timeline h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2.2rem;text-transform:uppercase;color:var(--dark);text-align:center;margin-bottom:48px;}
-    .milestone{display:flex;gap:24px;padding:18px 0;border-bottom:1px solid #eee;align-items:baseline;}
-    .milestone .yr{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.4rem;color:var(--teal);flex:0 0 90px;}
-    .milestone .txt{font-size:1rem;color:var(--gray);line-height:1.6;}
-    /* involve */
-    .involve{background:var(--light);padding:80px 60px;}
-    .involve-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1000px;margin:0 auto;}
-    @media(max-width:760px){.involve-grid{grid-template-columns:1fr;}}
-    .involve-card{background:#fff;border-radius:6px;padding:40px 36px;border-top:4px solid var(--teal);}
-    .involve-card:last-child{border-top-color:var(--purple);}
-    .involve-card h3{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.6rem;text-transform:uppercase;color:var(--dark);margin-bottom:12px;}
-    .involve-card p{font-size:.98rem;color:var(--gray);line-height:1.7;margin-bottom:22px;}
-    /* newsletter */
-    .newsletter{background:var(--dark);color:#fff;padding:70px 60px;text-align:center;}
-    .newsletter h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2rem;text-transform:uppercase;margin-bottom:10px;}
-    .newsletter p{color:rgba(255,255,255,.7);margin-bottom:26px;}
-    .nl-form{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;max-width:560px;margin:0 auto 20px;}
-    .nl-form input{padding:13px 16px;border-radius:3px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:#fff;font-size:.95rem;min-width:180px;flex:1;}
-    .nl-form input::placeholder{color:rgba(255,255,255,.5);}
-    .nl-links{margin-top:8px;font-size:.85rem;letter-spacing:.06em;}
-    .nl-links a{color:var(--teal);text-decoration:none;margin:0 10px;text-transform:uppercase;font-family:'Barlow Condensed',sans-serif;font-weight:700;}
-    .closing{background:var(--teal);color:#fff;padding:80px 60px;text-align:center;}
-    .closing h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2.6rem;text-transform:uppercase;line-height:1.1;margin-bottom:14px;}
-    .closing p{font-size:1.1rem;margin-bottom:32px;opacity:.95;}
-    .btn-white{display:inline-block;background:#fff;color:var(--teal-dk);padding:15px 40px;border-radius:3px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.15rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;}
+    .in-action-note{margin-top:24px;font-size:.8rem;font-style:italic;color:#999;}
 
-      .footer-motto{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.9rem;text-transform:uppercase;color:#fff;text-align:center;padding-bottom:40px;margin-bottom:44px;border-bottom:1px solid rgba(255,255,255,.1);letter-spacing:.02em;}
-    .footer-motto em{font-style:normal;color:var(--teal);}
+  
+    /* ── A/B: DUAL HERO CTA ── */
+    .hero-ctas{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:4px;}
+    .btn-secondary{display:inline-block;background:transparent;color:#fff;border:2px solid rgba(255,255,255,.5);
+      padding:13px 34px;border-radius:3px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1rem;
+      letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:border-color .2s,color .2s;}
+    .btn-secondary:hover{border-color:var(--teal);color:var(--teal);}
+
+      /* ── ACTIVE NAV (you-are-here) ── */
+    .nav-links > li > a.na-teal{color:var(--teal);border-bottom-color:var(--teal);background:rgba(0,174,172,.09);}
+    .nav-links > li > a.na-purple{color:var(--purple);border-bottom-color:var(--purple);background:rgba(107,79,161,.09);}
+    .nav-links > li > a.na-pink{color:var(--pink);border-bottom-color:var(--pink);background:rgba(232,121,160,.09);}
   </style>
 </head>
 <body>
   <!-- UNDER CONSTRUCTION BANNER -->
-  <div style="position:sticky;top:0;z-index:99999;background:#FFC107;color:#1A1A2E;text-align:center;padding:9px 16px;font-family:'Open Sans',sans-serif;font-size:0.85rem;font-weight:700;letter-spacing:0.02em;box-shadow:0 1px 5px rgba(0,0,0,.25);">🚧 This site is under construction, preview only. Content is a work in progress.</div>
+  <div style="position:sticky;top:0;z-index:99999;background:#FFC107;color:#1A1A2E;text-align:center;padding:9px 16px;font-family:'Open Sans',sans-serif;font-size:0.85rem;font-weight:700;letter-spacing:0.02em;box-shadow:0 1px 5px rgba(0,0,0,.25);">🚧 This site is under construction, preview only. Content is a work in progress., VARIANT B (copy test)</div>
 
 
   <!-- CRISIS BAR -->
@@ -1376,7 +1317,7 @@
 
         <!-- COMMUNITY -->
         <li>
-          <a href="#">Education &amp; Community <span class="chevron">▼</span></a>
+          <a href="#" class="na-pink">Education &amp; Community <span class="chevron">▼</span></a>
           <div class="mega-menu">
             <div class="mega-col">
               <a href="#" class="mega-item">
@@ -1458,28 +1399,27 @@
     </nav>
   </div>
 
-    <!-- QUICK EXIT -->
-  <button class="quick-exit" onclick="location.replace('https://www.google.com/');">Quick exit ✕</button>
-
-  <!-- HERO -->
+    <!-- HERO -->
   <section class="hero">
     <div class="hero-text">
-      <p class="hero-eyebrow">Where silence finds its voice</p>
-      <h1>No survivor should ever<br>have to stand <em>alone</em>.</h1>
-      <p class="hero-sub">Magen stands with survivors of sexual abuse across Jewish communities, in Israel and around the world, so no one navigates safety, healing, or justice by themselves.</p>
+      <p class="hero-eyebrow">Education &amp; Community</p>
+      <h1>From passive observers<br>to <em>active protectors</em>.</h1>
+      <p class="hero-sub">Every safe community starts with people who know what to look for. We turn awareness into protection, through education, resources, and lasting change.</p>
       <div class="hero-ctas">
-        <a href="safety-and-healing.html" class="btn-primary">Get help</a>
+        <a href="tel:STARNUM" class="btn-primary">Book an event</a>
         <a href="#donate" class="btn-secondary">Support our work</a>
       </div>
       <div class="hero-reassurance">
-        <span>Confidential</span><span>Free</span><span>Multilingual</span><span>24/6</span>
+        <span>Evidence-based</span>
+        <span>Torah-aligned</span>
+        <span>Across the spectrum</span>
       </div>
     </div>
     <div class="hero-carousel">
-      <div class="carousel-slide active"><div class="carousel-placeholder">Standing with survivors</div></div>
-      <div class="carousel-slide"><div class="carousel-placeholder">Communities becoming protectors</div></div>
-      <div class="carousel-slide"><div class="carousel-placeholder">Justice across borders</div></div>
-      <div class="carousel-slide"><div class="carousel-placeholder">Healing at your own pace</div></div>
+      <div class="carousel-slide active"><div class="carousel-placeholder">Workshops for parents &amp; educators</div></div>
+      <div class="carousel-slide"><div class="carousel-placeholder">Resources that meet people where they are</div></div>
+      <div class="carousel-slide"><div class="carousel-placeholder">The Shdula: coalition for change</div></div>
+      <div class="carousel-slide"><div class="carousel-placeholder">Training trusted community figures</div></div>
       <div class="carousel-fade-left"></div>
       <div class="carousel-teal"></div>
       <div class="carousel-dots">
@@ -1492,121 +1432,133 @@
     <div class="hero-stripe"></div>
   </section>
 
-  <!-- REALITY -->
-  <section class="reality">
-    <div class="reality-inner">
-      <p class="reality-eyebrow">The reality</p>
-      <h2>By the age of 18, <em>1 in 5</em> children will experience sexual abuse. In nearly <em>90%</em> of cases, the abuser is someone they know.</h2>
-      <p>And the numbers are no different, even in our most insular communities. For years, perpetrators groomed and evaded justice. But that is changing: survivors are finding their voices, and a safer future is within reach for all of us.</p>
-      <a class="reality-link" href="https://blogs.timesofisrael.com/the-survivors-spoke-the-tears-flowed-a-dam-has-broken/" target="_blank" rel="noopener">Read Shana's account →</a>
-    </div>
-  </section>
-
-  <!-- MISSION -->
-  <section class="mission">
-    <div class="mission-inner">
-      <p class="mission-eyebrow">Who we are</p>
-      <h2>Safer communities, built from within</h2>
-      <p>Magen for Jewish Communities builds programs that prioritize survivors, hold perpetrators accountable, and dismantle the stigma around sexual abuse. We prove daily that tradition and child safety aren't competing values, they're inseparable obligations.</p>
-      <div class="beliefs">
-        <div class="belief"><b>Closure</b><span>begins with empowerment.</span></div>
-        <div class="belief"><b>Healing</b><span>begins with empathy.</span></div>
-        <div class="belief"><b>Safety</b><span>begins with shared responsibility.</span></div>
+  <!-- TWO PARTS: CHINUCH & KEHILLA -->
+  <section class="two-paths">
+    <div class="two-paths-inner">
+      <div class="two-paths-header">
+        <p class="two-paths-eyebrow" lang="he" dir="rtl">חינוך וקהילה</p>
+        <h2>Education &amp; Community</h2>
+        <p>Abuse thrives in myth, misinformation, and misunderstanding. Our community-wide approach dismantles taboos and empowers bystanders to recognize red flags and respond.</p>
+      </div>
+      <div class="stages-grid">
+        <div class="stage">
+          <div class="stage-number">01</div>
+          <p class="stage-kicker">Chinuch</p>
+          <h3>Turning knowledge into protection</h3>
+          <p>We lead workshops, create resources, and train trusted community figures, parents, educators, mikveh attendants, and kallah teachers.</p>
+          <p>Informed communities and leadership become powerful forces for prevention, healing, and accountability.</p>
+        </div>
+        <div class="stage">
+          <div class="stage-number">02</div>
+          <p class="stage-kicker stage-kicker--teal">Kehilla</p>
+          <h3>Systemic change, community-wide</h3>
+          <p>We co-founded Israel's first Knesset lobby and coalition (Shdula) against child sexual abuse.</p>
+          <p>Lasting change happens when entire communities understand their responsibility: to protect children, support survivors, and create a culture where abuse is neither stigmatized nor silenced.</p>
+        </div>
+      </div>
+      <div class="stages-footer">
+        <p>All of our staff are involved in education, resource creation, and legislative advocacy.</p>
+        <a href="tel:STARNUM" class="btn-primary btn-primary--teal">Book an event</a>
       </div>
     </div>
   </section>
 
-  <!-- PROGRAM ROUTER -->
+  <!-- SERVICES GRID -->
   <section class="programs" id="programs">
     <div class="programs-header">
-      <p class="programs-eyebrow">Our programs</p>
-      <h2>Where would you like to begin?</h2>
+      <p class="programs-eyebrow">Chinuch &amp; Kehilla Programs</p>
+      <h2>How can we help?</h2>
     </div>
-    <div class="programs-grid">
-      <a href="safety-and-healing.html" class="program-card program-card--link">
-        <div class="program-icon">🕊️</div>
-        <span class="program-tag">For survivors &amp; families · מוגנות ושיקום</span>
-        <h3>Safety &amp; Healing</h3>
-        <p>Immediate support, long-term healing, and help navigating the mental-health system, at your pace, and never alone.</p>
-        <span class="btn-program">Explore →</span>
-      </a>
-      <a href="advocacy-and-investigations.html" class="program-card program-card--link p-purple">
+    <div class="programs-grid programs-grid--six">
+      <div class="program-card">
+        <div class="program-icon">🎓</div>
+        <span class="program-tag">Prevention Education</span>
+        <h3>Community Workshops</h3>
+        <p>Interactive, evidence-based workshops for parents, educators, and leaders, recognizing grooming behaviors, creating safe environments, responding to disclosures, and healing community dynamics.</p>
+        <a href="tel:STARNUM" class="btn-program">Arrange a workshop →</a>
+      </div>
+      <div class="program-card">
+        <div class="program-icon">📚</div>
+        <span class="program-tag">Awareness</span>
+        <h3>Resource Creation</h3>
+        <p>Age-appropriate coloring books for children and in-depth halachic guides for communities, plus awareness through Orthodox news sites, podcasts, and social media, meeting people where they are.</p>
+        <a href="tel:STARNUM" class="btn-program">Browse resources →</a>
+      </div>
+      <div class="program-card">
         <div class="program-icon">⚖️</div>
-        <span class="program-tag">Pursuing justice · ליווי וחקירות</span>
-        <h3>Advocacy &amp; Investigations</h3>
-        <p>Your options explained without pressure, and a trained advocate beside you from the first police interview to the courtroom.</p>
-        <span class="btn-program">Explore →</span>
-      </a>
-      <a href="education-and-community.html" class="program-card program-card--link p-pink">
+        <span class="program-tag">Systemic Change</span>
+        <h3>Legislative Advocacy (Shdula)</h3>
+        <p>We co-founded Israel's first Shdula (coalition) and Knesset lobby against child sexual abuse, driving reforms so survivors no longer face relocation when abusers are released, assault against men carries the same felony charge as rape, and child witnesses are better protected.</p>
+        <a href="tel:STARNUM" class="btn-program">Learn more →</a>
+      </div>
+      <div class="program-card">
         <div class="program-icon">🤝</div>
-        <span class="program-tag">Prevention &amp; change · חינוך וקהילה</span>
-        <h3>Education &amp; Community</h3>
-        <p>Workshops, resources, and Knesset-level advocacy that turn communities from bystanders into active protectors.</p>
-        <span class="btn-program">Explore →</span>
-      </a>
-    </div>
-    <p class="router-foot">Not sure where to start? <a href="safety-and-healing.html">Talk to us</a>, we'll help you find the right path.</p>
-  </section>
-
-  <!-- OVERSTORY -->
-  <section class="in-action">
-    <div class="in-action-inner">
-      <p class="in-action-eyebrow">When systems fail, someone must refuse to look away</p>
-      <h2>One survivor's courage. Years of advocacy. Finally, accountability.</h2>
-      <div class="in-action-card">
-        <div class="in-action-story">
-          <p class="lead">When a young man reached out to Magen, he carried a burden he'd held since he was 15: abuse by his Rosh Yeshiva.</p>
-          <p>He had watched other victims press criminal charges, only to see their abuser walk away with a lenient plea deal. The message was clear, the system had failed them. But he refused to stay silent.</p>
-          <p>He came to us seeking a different path: a civil suit. We connected him with legal representation and began building his case. Then we made a disturbing discovery, despite a prior conviction, his abuser had returned to running the very same yeshiva, with access to countless vulnerable students.</p>
-          <p>We reported him to the police. We reported him to the Ministry of Education. Again and again. Nothing happened. So we made a different choice: we brought the case to the media. Within weeks, police finally took action, questioning the abuser for violating the laws that bar convicted sex offenders from working with children.</p>
-        </div>
-        <p class="in-action-kicker">One survivor's courage. Years of persistent advocacy. And finally, accountability.</p>
-        <p class="in-action-note">Identifying details have been changed to protect privacy.</p>
+        <span class="program-tag">Trusted Figures</span>
+        <h3>Paraprofessional Development</h3>
+        <p>In partnership with the Eden Center, we train mikveh attendants and kallah teachers, trusted figures in the lives of young women, in trauma sensitivity and appropriate response protocols.</p>
+        <a href="tel:STARNUM" class="btn-program">Arrange a workshop →</a>
+      </div>
+      <div class="program-card">
+        <div class="program-icon">👔</div>
+        <span class="program-tag">Training the System</span>
+        <h3>Professional Development</h3>
+        <p>We train social workers, prosecutors, and Israel Police units, Internal Affairs, sex crimes, and domestic violence, to better support Haredi and Dati victims, including trauma-informed interviewing across cultural and language barriers.</p>
+        <a href="tel:STARNUM" class="btn-program">Find out more →</a>
       </div>
     </div>
   </section>
 
-  <!-- IMPACT -->
-  <section class="impact">
-    <h2>Our combined impact</h2>
-    <div class="impact-grid">
-      <div class="impact-tile"><div class="impact-num">3,600</div><div class="impact-label">adult survivors supported</div></div>
-      <div class="impact-tile"><div class="impact-num">527</div><div class="impact-label">background checks run</div></div>
-      <div class="impact-tile"><div class="impact-num">121</div><div class="impact-label">educational events delivered</div></div>
-      <div class="impact-tile"><div class="impact-num">[#]</div><div class="impact-label">calls &amp; emails answered <em>(figure to confirm)</em></div></div>
-    </div>
-  </section>
-
-  <!-- JOURNEY -->
-  <section class="timeline">
-    <div class="timeline-inner">
-      <h2>Our journey</h2>
-      <div class="milestone"><div class="yr">2010</div><div class="txt">Magen founded in Beit Shemesh to address abuse in Haredi and Dati communities.</div></div>
-      <div class="milestone"><div class="yr">2015–16</div><div class="txt">Expanded nationally and internationally; partnered with Lo Tishtok to erase the stigma around abuse.</div></div>
-      <div class="milestone"><div class="yr">2020</div><div class="txt">Became an independent organization.</div></div>
-      <div class="milestone"><div class="yr">2021</div><div class="txt">A watershed moment: Malka Leifer extradited after a years-long fight for accountability.</div></div>
-      <div class="milestone"><div class="yr">2022</div><div class="txt">A 420-person women's awareness event, 80 disclosures followed within days.</div></div>
-      <div class="milestone"><div class="yr">Today</div><div class="txt">Expanding digital resources, international partnerships, and systemic advocacy.</div></div>
+  <!-- IN ACTION: CASE STORY -->
+  <section class="in-action">
+    <div class="in-action-inner">
+      <p class="in-action-eyebrow">Chinuch &amp; Kehilla in Action</p>
+      <h2>Talking matters, sometimes it's the conversation that saves a life.</h2>
+      <div class="in-action-card">
+        <span class="in-action-tag">Community Workshops</span>
+        <div class="in-action-story">
+          <p class="lead">Yaakov attended one of our educational workshops and called the next day to ask for advice. He had five children and had never talked to them about personal safety.</p>
+          <p>He just didn't know where to start, what words to use, how to bring it up without scaring them. So we spent an hour on the phone walking him through it.</p>
+          <p>Two hours later, his name flashed on the screen again. This time, he was hysterical. After hanging up, he'd sat down with his 14-year-old son. Before Yaakov could even finish his opening sentence, his son broke down. For two years, their neighbor had been molesting him, two years of silence and fear, until his father's tentative words brought forth a flood.</p>
+          <p>Yaakov kept repeating the same words through his tears: "You saved my son's life. You saved my son's life."</p>
+          <p>We didn't save his son. Yaakov did, by showing up, by making that first call, by having the courage to start a conversation he'd been avoiding for years.</p>
+        </div>
+        <p class="in-action-note">Name changed to protect privacy.</p>
+      </div>
+      <a href="tel:STARNUM" class="btn-primary btn-primary--teal">Book an event</a>
     </div>
   </section>
 
   <!-- VOICES -->
   <section class="voices">
     <div class="voices-header">
-      <p class="voices-eyebrow">People Love Magen</p>
-      <h2>You are believed</h2>
-      <p>From survivors to social workers, from law enforcement to parents, Magen has earned deep trust from the people it serves and the professionals who work alongside it.</p>
+      <p class="voices-eyebrow">Communities Are Changing</p>
+      <h2>People Trust Magen</h2>
+      <p>From rabbis to educators to parents, communities across the religious spectrum turn to Magen to move from silence to protection.</p>
     </div>
     <div class="voices-grid">
       <div class="voice-card">
         <div class="voice-quote">"</div>
-        <p class="voice-text">Magen has literally saved many lives. Including my own. Shana was like my own personal cheerleading squad. Continue your avodas hakodesh, Shana and the Magen team. Continue saving lives.</p>
-        <div class="voice-attribution"><div class="voice-avatar">A</div><div><span class="voice-name">Anonymous Survivor</span><span class="voice-role">Donation message</span></div></div>
+        <p class="voice-text">[Quote from a community rav or religious leader, placeholder. To be provided by Magen.]</p>
+        <div class="voice-attribution">
+          <div class="voice-avatar">R</div>
+          <div><span class="voice-name">[Name]</span><span class="voice-role">Community Rav</span></div>
+        </div>
       </div>
       <div class="voice-card voice-card--purple">
         <div class="voice-quote">"</div>
-        <p class="voice-text">[Quote from a community rav or professional partner, placeholder. To be provided by Magen.]</p>
-        <div class="voice-attribution"><div class="voice-avatar voice-avatar--purple">R</div><div><span class="voice-name">[Name]</span><span class="voice-role">Community Rav</span></div></div>
+        <p class="voice-text">[Quote from a school principal or educator, placeholder. To be provided by Magen.]</p>
+        <div class="voice-attribution">
+          <div class="voice-avatar voice-avatar--purple">E</div>
+          <div><span class="voice-name">[Name]</span><span class="voice-role">School Principal</span></div>
+        </div>
+      </div>
+      <div class="voice-card voice-card--pink">
+        <div class="voice-quote">"</div>
+        <p class="voice-text">[Quote from a parent or workshop participant, placeholder. To be provided by Magen.]</p>
+        <div class="voice-attribution">
+          <div class="voice-avatar voice-avatar--pink">P</div>
+          <div><span class="voice-name">[Name]</span><span class="voice-role">Workshop participant</span></div>
+        </div>
       </div>
     </div>
     <div class="donor-strip">
@@ -1621,50 +1573,123 @@
     </div>
   </section>
 
-  <!-- GET INVOLVED -->
-  <section class="involve" id="donate">
-    <div class="programs-header">
-      <p class="programs-eyebrow">Get involved</p>
-      <h2>Protecting the vulnerable is everyone's mitzvah</h2>
-    </div>
-    <div class="involve-grid">
-      <div class="involve-card">
-        <h3>Volunteer</h3>
-        <p>Volunteers staff our hotline and accompany survivors at police stations and courthouses when they need someone beside them.</p>
-        <a href="#" class="btn-program">Volunteer with us →</a>
-      </div>
-      <div class="involve-card">
-        <h3>Donate</h3>
-        <p>Your gift makes safer communities possible, funding trauma-informed support, survivor advocacy, and community education.</p>
-        <a href="#" class="btn-program">Support Magen →</a>
-      </div>
+  <!-- BOOK CTA -->
+  <section class="book-cta">
+    <div class="book-cta-cover">[Book cover image, to be provided]</div>
+    <div class="book-cta-text">
+      <p class="book-cta-eyebrow">New from Magen</p>
+      <h3>[Helise's Book Title]</h3>
+      <p>[A sentence or two about the book, what it is, who it's for, what it gives the reader. To be provided by Magen.]</p>
+      <a href="#" class="btn-book">Get the book →</a>
     </div>
   </section>
 
-  <!-- NEWSLETTER -->
-  <section class="newsletter">
-    <h2>Stay in the conversation</h2>
-    <p>Quarterly updates on our work, survivor stories, and the fight for change.</p>
-    <form class="nl-form" action="#" onsubmit="return false;">
-      <input type="text" placeholder="Name" aria-label="Name">
-      <input type="email" placeholder="Email" aria-label="Email">
-      <button class="btn-primary btn-primary--teal" type="submit">Subscribe</button>
-    </form>
-    <div class="nl-links">
-      <a href="#">Podcasts</a><a href="#">Articles</a><a href="#">Shdula updates</a><a href="#">Lo Tishtok</a>
+  <!-- TEAM STRIP -->
+  <section class="team-strip">
+    <div class="team-strip-header">
+      <p class="team-eyebrow">The People Behind the Work</p>
+      <h2>You're Not Alone</h2>
+      <p>Magen's educators and advocates work across communities and in the Knesset to turn awareness into lasting protection.</p>
     </div>
+    <div class="team-faces">
+      <a href="#" class="team-member">
+        <div class="team-photo"><div class="team-photo-placeholder team-photo-placeholder--purple">ED</div></div>
+        <span class="team-member-name">[Name]</span>
+        <span class="team-member-role">Director of Education</span>
+      </a>
+      <a href="#" class="team-member">
+        <div class="team-photo"><div class="team-photo-placeholder ">WF</div></div>
+        <span class="team-member-name">[Name]</span>
+        <span class="team-member-role">Workshop Facilitator</span>
+      </a>
+      <a href="#" class="team-member">
+        <div class="team-photo"><div class="team-photo-placeholder ">LL</div></div>
+        <span class="team-member-name">[Name]</span>
+        <span class="team-member-role">Legislative Liaison (Shdula)</span>
+      </a>
+      <a href="#" class="team-member">
+        <div class="team-photo"><div class="team-photo-placeholder ">RD</div></div>
+        <span class="team-member-name">[Name]</span>
+        <span class="team-member-role">Resource Developer</span>
+      </a>
+      <a href="#" class="team-member">
+        <div class="team-photo"><div class="team-photo-placeholder ">PT</div></div>
+        <span class="team-member-name">[Name]</span>
+        <span class="team-member-role">Professional Training Lead</span>
+      </a>
+    </div>
+    <a href="#" class="team-link">Meet the full team →</a>
+    <!-- NOTE: Education/Community division team to be confirmed with Magen -->
   </section>
 
-  <!-- CLOSING -->
-  <section class="closing">
-    <h2>Join us in creating a safer, more just future</h2>
-    <p>Together, we protect, empower, and heal. #LoTishtok</p>
-    <a href="#donate" class="btn-white">Support Magen today</a>
+  <!-- FAQ -->
+  <section class="faq" itemscope itemtype="https://schema.org/FAQPage">
+    <div class="faq-header">
+      <p class="faq-eyebrow">Common Questions</p>
+      <h2>FAQ</h2>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span itemprop="name">What topics do your workshops cover?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <p itemprop="text">Our workshops cover age-appropriate body safety, recognizing warning signs, responding to disclosures, creating safe environments, and healing community dynamics.</p>
+      </div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span itemprop="name">How do your educational programs align with Torah values?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <p itemprop="text">We emphasize that safeguarding children and supporting survivors are not just compatible with Torah values, they are mandated by them. We prove daily that tradition and child safety aren't competing values; they're inseparable obligations that, when properly aligned, create stronger, safer, and holier communities.</p>
+      </div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span itemprop="name">How do you address sensitive topics without causing fear?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <p itemprop="text">Our approach emphasizes that education creates protection through awareness, not fear. We focus on empowerment rather than frightening statistics, equipping communities with practical tools and understanding. Our educators are trained to discuss difficult topics respectfully, using appropriate language and examples. The goal is a culture of protection and open communication, not anxiety or suspicion.</p>
+      </div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span itemprop="name">Do you offer separate programs for men and women?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <p itemprop="text">Yes. We provide gender-separated programs when appropriate. We've successfully delivered workshops in communities across the religious spectrum, from Modern Orthodox to Hasidic communities.</p>
+      </div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span itemprop="name">Are there any costs involved?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <p itemprop="text">Workshops and resources are free to the end user.</p>
+      </div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span itemprop="name">How can my community request a workshop?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <p itemprop="text">Reach out by email with your request and someone will get back to you to arrange it.</p>
+      </div>
+    </div>
+    <div class="faq-cta">
+      <p class="faq-cta-text">Want to bring Magen's education to your community, school, or shul? Reach out by phone, WhatsApp, or email, we'll help you arrange it.</p>
+      <a href="tel:STARNUM" class="btn-faq-cta">Book an event →</a>
+    </div>
   </section>
 
 <!-- FOOTER -->
   <footer>
-    <div class="footer-motto"><em>Here.</em> Until sexual abuse isn't.</div>
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="#" class="nav-logo">

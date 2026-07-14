@@ -1,0 +1,22 @@
+{
+  "board_id": "5100306689",
+  "columns": {
+    "URL": "link_mm588qg8",
+    "Publication date": "date_mm58vcdf",
+    "Platform": "text_mm58jhvx",
+    "Language": "dropdown_mm585a36",
+    "Media Type": "dropdown_mm587d9q",
+    "Audience": "dropdown_mm581eyy",
+    "Topic Tags": "tag_mm58m9jx",
+    "Excerpt": "long_text_mm585pez"
+  },
+  "groups": {
+    "News article": "topics",
+    "TV / Video": "group_mm58n4hh",
+    "Podcast": "group_mm58tmcw",
+    "Print": "group_mm58dpnb",
+    "Social / Blog": "group_mm58pmyw",
+    "Op-ed": "group_mm58ynme",
+    "Other": "group_mm58gfg7"
+  }
+}
