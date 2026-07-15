@@ -424,12 +424,20 @@
         (label ? `&query=${encodeURIComponent(label)}` : '');
       const wazeLink = (lat, lng) => `https://waze.com/ul?ll=${lat},${lng}&navigate=yes`;
 
-      // Station address block
+      // Station address, phone, hours
+      const telHref = v => `<a href="tel:${String(v).replace(/[^0-9*+]/g,'')}">${v}</a>`;
+      const contactRows = [
+        svc.phone && ['Phone', telHref(svc.phone)],
+        svc.hours && ['Hours', svc.hours],
+      ].filter(Boolean);
       const addressBlock = svc.address ? `
         <div class="addr-line" dir="rtl">${svc.address}</div>
         ${(svc.lat && svc.lng) ? `<div class="addr-actions">
           <a class="addr-btn" href="${gmapsLink(svc.lat, svc.lng, svc.address)}" target="_blank" rel="noopener">Google Maps →</a>
           <a class="addr-btn" href="${wazeLink(svc.lat, svc.lng)}" target="_blank" rel="noopener">Waze →</a>
+        </div>` : ''}
+        ${contactRows.length ? `<div class="contact-rows" style="margin-top:14px;">
+          ${contactRows.map(([k,v]) => `<div class="row"><strong>${k}</strong><span>${v}</span></div>`).join('')}
         </div>` : ''}
       ` : `<p class="placeholder">Station address is being sourced.</p>`;
 
@@ -472,9 +480,8 @@
         </div>
         <div class="panel-body">
           <div class="panel-section">
-            <h4>Station address</h4>
+            <h4>Station contact</h4>
             ${addressBlock}
-            <p class="placeholder" style="margin-top:10px;">Phone and reception hours aren't published in the government's open-data feed — we're gathering them by hand. For now, call *9781 and Magen will confirm hours and route you.</p>
           </div>
           ${notesBlock}
           ${subBlock}

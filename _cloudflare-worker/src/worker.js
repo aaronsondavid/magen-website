@@ -154,10 +154,29 @@ export default {
     if (request.method !== "POST") {
       return new Response("POST only", { status: 405 });
     }
-    const secret = request.headers.get("X-Magen-Secret");
+
+    // Read body once (v2); Monday sends {"challenge": "..."} for handshake and
+    // for actual events sends {"event": {...}, "challenge": undefined}.
+    let bodyText = "";
+    try { bodyText = await request.text(); } catch { bodyText = ""; }
+    let bodyJson = {};
+    try { bodyJson = bodyText ? JSON.parse(bodyText) : {}; } catch { bodyJson = {}; }
+
+    // Monday webhook verification handshake — echo challenge back, no auth check
+    if (bodyJson && typeof bodyJson.challenge === "string" && !bodyJson.event) {
+      return new Response(JSON.stringify({ challenge: bodyJson.challenge }),
+        { status: 200, headers: { "Content-Type": "application/json" } });
+    }
+
+    // For real triggers, require the shared secret — either as X-Magen-Secret
+    // header (preferred) or as ?s=<secret> query string (fallback for automation
+    // UIs that don't let you set custom headers).
+    const url = new URL(request.url);
+    const secret = request.headers.get("X-Magen-Secret") || url.searchParams.get("s");
     if (secret !== env.PUBLISH_SHARED_SECRET) {
       return new Response("Unauthorised", { status: 401 });
     }
+
     try {
       const payload = await composeJson(env);
       const body = JSON.stringify(payload, null, 2);

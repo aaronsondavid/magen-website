@@ -1,0 +1,161 @@
+{
+  "layer": "police",
+  "meta": {
+    "source_boundaries": "data.gov.il / israel-police / police_boundaries (PoliceStationBoundaries)",
+    "source_addresses":  "data.gov.il / israel-police / police_receptions (publicpoliceunits) via CKAN datastore_search",
+    "source_phone_hours": "Scraped from serviced.co.il and daf zahav (dpei zahav) directory listings, 2026-07-15. Should be verified with each station periodically — police numbers rotate.",
+    "updated": "2026-07-15"
+  },
+  "stations": {
+    "beit-shemesh": {
+      "address": "בסמוך לצומת הכניסה לנחם (מפגש הכבישים 38 ו3856), בית שמש",
+      "lat": 31.76163,
+      "lng": 34.99441,
+      "phone": "02-990-2222",
+      "hours": "Open 24 hours, all week",
+      "magen_coordinator": null,
+      "notes": null,
+      "sub_points": []
+    },
+    "merhav-david": {
+      "address": "רחוב הפטריארכיה הארמנית (כיכר עומר בן אלח'טאב), העיר העתיקה, ירושלים",
+      "lat": 31.77558,
+      "lng": 35.2285,
+      "phone": "02-622-6222",
+      "hours": "Open 24 hours, all week",
+      "magen_coordinator": null,
+      "notes": "Covers the Old City, downtown Jerusalem, and central-city addresses. Serves as the Jerusalem sub-district investigative HQ.",
+      "sub_points": [
+        {
+          "name": "נקודת קבר דוד",
+          "address": "הר ציון, ירושלים",
+          "lat": 31.77175,
+          "lng": 35.22925
+        }
+      ]
+    },
+    "harel": {
+      "address": "הצור 3 מבשרת ציון",
+      "lat": 31.79009,
+      "lng": 35.13941,
+      "phone": "02-533-9200",
+      "hours": "Open 24 hours, all week",
+      "magen_coordinator": null,
+      "notes": null,
+      "sub_points": [
+        {
+          "name": "נקודת רמות",
+          "address": "מתחם מכבי האש בצפון היישוב (סמוך לצומת הרחובות הזית והתאנה), גבעת זאב",
+          "lat": 31.86594,
+          "lng": 35.16666
+        }
+      ]
+    },
+    "lev-habira": {
+      "address": "כיכר מוסקבה (שניאור חשין 1), מגרש הרוסים, ירושלים",
+      "lat": 31.782,
+      "lng": 35.22172,
+      "phone": "02-539-1777",
+      "hours": "Open 24 hours, all week",
+      "magen_coordinator": null,
+      "notes": null,
+      "sub_points": [
+        {
+          "name": "נקודת התחנה המרכזית",
+          "address": "יפו 224, ירושלים",
+          "lat": 31.78877,
+          "lng": 35.20331
+        },
+        {
+          "name": "נקודת מחנה יהודה",
+          "address": "מחנה יהודה 6, ירושלים",
+          "lat": 31.7854,
+          "lng": 35.2122
+        },
+        {
+          "name": "נקודת קריית הלאום",
+          "address": "שדרות יצחק רבין פינת רחוב יוסף בורג (בסמוך למכבי האש), ירושלים",
+          "lat": 31.78249,
+          "lng": 35.20456
+        }
+      ]
+    },
+    "moriah": {
+      "address": "הסדנא 14, ירושלים",
+      "lat": 31.75065,
+      "lng": 35.21369,
+      "phone": "02-568-3200",
+      "hours": "Open 24 hours, all week",
+      "magen_coordinator": null,
+      "notes": null,
+      "sub_points": []
+    },
+    "mateh-yehuda": {
+      "address": "בסמוך לצומת הכניסה לנחם (מפגש הכבישים 38 ו3856), בית שמש",
+      "lat": 31.7613,
+      "lng": 34.99402,
+      "phone": "02-990-2210",
+      "hours": "Open 24 hours, all week",
+      "magen_coordinator": null,
+      "notes": "Shares a building with the Beit Shemesh station near Junction Nacham.",
+      "sub_points": [
+        {
+          "name": "נקודת רמת בית שמש",
+          "address": "במתנ\"ס רמת בית שמש (גוונים), רחוב הדולב 16, בית שמש",
+          "lat": 31.71519,
+          "lng": 34.99629
+        }
+      ]
+    },
+    "oz": {
+      "address": "רחוב על\"ר פינת רחוב מוחמד חמדאן רבאיעה, ירושלים",
+      "lat": 31.75235,
+      "lng": 35.24169,
+      "phone": "02-568-5444",
+      "hours": "Open 24 hours, all week",
+      "magen_coordinator": null,
+      "notes": null,
+      "sub_points": [
+        {
+          "name": "נקודת הר חומה",
+          "address": "שדרות שמואל מאיר פינת כביש 398, ירושלים",
+          "lat": 31.73075,
+          "lng": 35.22041
+        }
+      ]
+    },
+    "shalem": {
+      "address": "רחוב סאלח אלדין פינת רחוב אבן סינא, ירושלים",
+      "lat": 31.78357,
+      "lng": 35.23375,
+      "phone": "02-620-7459",
+      "hours": "Open 24 hours, all week",
+      "magen_coordinator": null,
+      "notes": null,
+      "sub_points": [
+        {
+          "name": "נקודת הגבעה הצרפתית",
+          "address": "מעונות אידלסון (ברונפמן) רחוב מעונות ברונפמן 44, ירושלים",
+          "lat": 31.79978,
+          "lng": 35.23685
+        },
+        {
+          "name": "נקודת הר הזיתים",
+          "address": "בית הקברות היהודי, הר הזיתים ירושלים",
+          "lat": 31.77555,
+          "lng": 35.24245
+        }
+      ]
+    },
+    "shafat": {
+      "address": "גולדברג לאה 1, ירושלים",
+      "lat": 31.84211,
+      "lng": 35.24059,
+      "phone": "02-584-8222",
+      "hours": "Sun–Thu 08:00–17:00 · emergencies 24/7",
+      "magen_coordinator": null,
+      "notes": "Serves Pisgat Ze'ev, Neve Yaakov, Ramat Shlomo, Ramot, Givat Ze'ev, Beit Hanina, Shuafat, and Atarot.",
+      "sub_points": []
+    }
+  }
+}
