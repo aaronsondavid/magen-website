@@ -1,0 +1,65 @@
+{
+  "_meta": {
+    "description": "Per-district service directory for Jerusalem community administrations. Placeholder content — real data will be sourced from Salesforce -> Monday -> this JSON.",
+    "last_updated": "2026-07-15",
+    "source_status": "placeholder"
+  },
+  "districts": {
+    "lev-hair": {
+      "welfare_office": {"name": "Lev HaIr Welfare Office (Lishkat Revacha)", "address": "10 Rehov Shivtei Yisrael, Jerusalem", "phone": "02-629-XXXX", "hours": "Sun-Thu 08:00-15:00", "notes": "Serves the city-centre area including Machane Yehuda, Nachlaot, Zichron Moshe."},
+      "police_station": {"name": "Machane Yehuda Police Station", "address": "Rehov Yaffo, Jerusalem", "phone": "02-539-XXXX", "emergency": "100", "sexual_crimes_unit": "Sex crimes desk available Sun-Thu"},
+      "community_centre": {"name": "Lev HaIr Community Administration (Minhelet Lev HaIr)", "address": "Rehov Betzalel", "phone": "02-623-XXXX", "website": "https://levhair.co.il"},
+      "crisis_reference": {"nearest_heder_4": "Neta (Ichilov Medical Center, Tel Aviv) or Bat Ami (Hadassah Ein Kerem)", "national_sacc": "1202 (women), 1203 (men)"},
+      "magen_coordinator": {"name": "Magen Central Team", "phone": "*9781", "email": "support@magen-israel.org"}
+    },
+    "ginot-hair": {
+      "welfare_office": {"name": "Ginot HaIr Welfare Office", "address": "Rehov HaRav Herzog", "phone": "02-561-XXXX", "hours": "Sun-Thu 08:00-15:00", "notes": "Serves Rehavia, German Colony, Katamon, Talbieh."},
+      "police_station": {"name": "Moriah Police Station (Rehavia)", "address": "Rehov Alfasi", "phone": "02-539-XXXX", "emergency": "100"},
+      "community_centre": {"name": "Ginot HaIr Community Administration", "address": "Rehov Emek Refaim", "phone": "02-566-XXXX", "website": "https://ginothair.org.il"},
+      "crisis_reference": {"nearest_heder_4": "Bat Ami (Hadassah Ein Kerem)", "national_sacc": "1202 / 1203"},
+      "magen_coordinator": {"name": "Magen Central Team", "phone": "*9781", "email": "support@magen-israel.org"}
+    },
+    "baka-talpiot": {
+      "welfare_office": {"name": "Baka-Talpiot Welfare Office", "address": "Talpiot Industrial Area", "phone": "02-673-XXXX", "hours": "Sun-Thu 08:00-15:00", "notes": "Serves Baka, Talpiot (old & new), Arnona, Mekor Chaim."},
+      "police_station": {"name": "Talpiot Police Station", "address": "Rehov Hebron", "phone": "02-539-XXXX", "emergency": "100"},
+      "community_centre": {"name": "Baka Community Administration", "address": "Rehov Yehuda", "phone": "02-673-XXXX"},
+      "crisis_reference": {"nearest_heder_4": "Bat Ami (Hadassah Ein Kerem)", "national_sacc": "1202 / 1203"},
+      "magen_coordinator": {"name": "Magen Central Team", "phone": "*9781", "email": "support@magen-israel.org"}
+    },
+    "ramat-eshkol": {
+      "welfare_office": {"name": "Ramat Eshkol Welfare Office", "address": "Ma'alot Dafna", "phone": "02-582-XXXX", "hours": "Sun-Thu 08:00-15:00", "notes": "Serves Ramat Eshkol, Ma'alot Dafna, Sanhedria, French Hill."},
+      "police_station": {"name": "Har Hotzvim / French Hill Police Station", "address": "Rehov Levi Eshkol", "phone": "02-539-XXXX", "emergency": "100"},
+      "community_centre": {"name": "Ramat Eshkol Community Administration", "address": "Rehov Paran", "phone": "02-582-XXXX"},
+      "crisis_reference": {"nearest_heder_4": "Bat Ami (Hadassah Ein Kerem)", "national_sacc": "1202 / 1203"},
+      "magen_coordinator": {"name": "Magen Central Team", "phone": "*9781", "email": "support@magen-israel.org"}
+    },
+    "kiryat-hayovel": {
+      "welfare_office": {"name": "Kiryat HaYovel Welfare Office", "address": "Rehov Stern", "phone": "02-643-XXXX", "hours": "Sun-Thu 08:00-15:00", "notes": "Serves Kiryat HaYovel, Ir Ganim, Kiryat Menachem, Beit HaKerem."},
+      "police_station": {"name": "Kiryat HaYovel Police Station", "address": "Rehov Uruguay", "phone": "02-539-XXXX", "emergency": "100"},
+      "community_centre": {"name": "Kiryat HaYovel Community Administration", "address": "Rehov Guatemala", "phone": "02-643-XXXX"},
+      "crisis_reference": {"nearest_heder_4": "Bat Ami (Hadassah Ein Kerem)", "national_sacc": "1202 / 1203"},
+      "magen_coordinator": {"name": "Magen Central Team", "phone": "*9781", "email": "support@magen-israel.org"}
+    },
+    "ramot": {
+      "welfare_office": {"name": "Ramot Welfare Office", "address": "Rehov Ramot", "phone": "02-586-XXXX", "hours": "Sun-Thu 08:00-15:00", "notes": "Serves all Ramot neighbourhoods (Alef, Bet, Gimmel, Dalet, Polin)."},
+      "police_station": {"name": "Ramot Police Station", "address": "Rehov Golda Meir", "phone": "02-539-XXXX", "emergency": "100"},
+      "community_centre": {"name": "Ramot Community Administration", "address": "Merkaz Ramot", "phone": "02-586-XXXX"},
+      "crisis_reference": {"nearest_heder_4": "Bat Ami (Hadassah Ein Kerem)", "national_sacc": "1202 / 1203"},
+      "magen_coordinator": {"name": "Magen Central Team", "phone": "*9781", "email": "support@magen-israel.org"}
+    },
+    "gilo-har-homa": {
+      "welfare_office": {"name": "Gilo / Har Homa Welfare Office", "address": "Rehov Gilo", "phone": "02-679-XXXX", "hours": "Sun-Thu 08:00-15:00", "notes": "Serves Gilo, Har Homa, Beit Safafa."},
+      "police_station": {"name": "Gilo Police Station", "address": "Rehov Hairusim", "phone": "02-539-XXXX", "emergency": "100"},
+      "community_centre": {"name": "Gilo Community Administration", "address": "Merkaz Gilo", "phone": "02-679-XXXX"},
+      "crisis_reference": {"nearest_heder_4": "Lotus Center (Kaplan Medical Center, Rehovot) or Bat Ami (Hadassah Ein Kerem)", "national_sacc": "1202 / 1203"},
+      "magen_coordinator": {"name": "Magen Central Team", "phone": "*9781", "email": "support@magen-israel.org"}
+    },
+    "pisgat-neve": {
+      "welfare_office": {"name": "Pisgat Ze'ev / Neve Ya'akov Welfare Office", "address": "Rehov Pisgat Ze'ev", "phone": "02-585-XXXX", "hours": "Sun-Thu 08:00-15:00", "notes": "Serves Pisgat Ze'ev (all sectors) and Neve Ya'akov."},
+      "police_station": {"name": "Neve Ya'akov Police Station", "address": "Neve Ya'akov Junction", "phone": "02-539-XXXX", "emergency": "100"},
+      "community_centre": {"name": "Pisgat Ze'ev Community Administration", "address": "Rehov Moshe Dayan", "phone": "02-585-XXXX"},
+      "crisis_reference": {"nearest_heder_4": "Bat Ami (Hadassah Ein Kerem)", "national_sacc": "1202 / 1203"},
+      "magen_coordinator": {"name": "Magen Central Team", "phone": "*9781", "email": "support@magen-israel.org"}
+    }
+  }
+}

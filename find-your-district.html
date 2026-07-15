@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <title>Find Your District · Magen for Jewish Communities</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --teal:#00AEAC; --teal-dk:#008F8D; --teal-lt:#4FC7C5;
+      --purple:#6B4FA1; --purple-dk:#4E3583; --purple-lt:#8E75C0;
+      --pink:#E879A0; --pink-dk:#C15A80;
+      --dark:#1A1A2E; --gray:#555; --light:#F7F7F7; --amber:#F59E0B; --amber-bg:#FEF3C7;
+    }
+    body { font-family:'Open Sans',sans-serif; color:var(--dark); background:#fff; line-height:1.55; }
+
+    .draft-banner { background:var(--amber-bg); color:#78350F; text-align:center; padding:10px 24px;
+      font-size:0.85rem; border-bottom:2px solid var(--amber); font-weight:600; letter-spacing:0.02em; }
+    .crisis-bar { background:var(--dark); color:#fff; text-align:center; padding:10px 60px;
+      font-size:0.82rem; letter-spacing:0.03em; display:flex; align-items:center; justify-content:center; gap:16px; }
+    .crisis-bar strong { color:var(--teal); font-weight:700; }
+    .crisis-bar a { color:#fff; font-weight:700; text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.3); }
+    .crisis-dot { width:7px; height:7px; background:var(--teal); border-radius:50%; display:inline-block; animation:pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+    .nav-wrap { background:#fff; border-bottom:3px solid var(--teal); box-shadow:0 2px 12px rgba(0,0,0,0.07); }
+    nav { display:flex; justify-content:space-between; align-items:center; padding:0 60px; height:72px; background:#fff; max-width:1400px; margin:0 auto; }
+    .nav-logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
+    .nav-logo-text { display:flex; flex-direction:column; line-height:1; }
+    .nav-logo-text .brand { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.5rem; color:var(--teal); letter-spacing:0.08em; }
+    .nav-logo-text .sub { font-size:0.62rem; color:var(--gray); letter-spacing:0.06em; text-transform:uppercase; }
+    .nav-links { display:flex; align-items:center; gap:4px; list-style:none; height:72px; }
+    .nav-links > li > a { text-decoration:none; color:var(--dark); font-size:0.82rem; font-weight:700;
+      letter-spacing:0.05em; text-transform:uppercase; padding:0 16px; height:100%; display:flex; align-items:center; }
+    .nav-links > li > a:hover { color:var(--teal); }
+    .btn-donate { background:var(--teal); color:#fff !important; padding:10px 22px !important; border-radius:4px; margin-left:12px; }
+
+    /* Page hero */
+    .page-hero {
+      background: linear-gradient(135deg, var(--dark) 0%, #232449 100%);
+      color:#fff; padding:56px 60px 48px; position:relative;
+    }
+    .page-hero::before { content:''; position:absolute; top:0; left:0; right:0; height:6px;
+      background: linear-gradient(90deg, var(--teal), var(--purple), var(--pink)); }
+    .page-hero-inner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr auto; gap:40px; align-items:end; }
+    .page-hero .eyebrow { font-family:'Barlow Condensed',sans-serif; letter-spacing:0.25em;
+      text-transform:uppercase; color:var(--teal); font-weight:700; font-size:0.9rem; margin-bottom:14px; }
+    .page-hero h1 { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:2.8rem;
+      line-height:1.05; letter-spacing:-0.01em; margin-bottom:10px; }
+    .page-hero p { color:#C1C1D0; font-size:1.05rem; max-width:680px; line-height:1.5; }
+    .search-widget { display:flex; gap:8px; }
+    .search-widget input { padding:12px 16px; border:none; border-radius:6px; font-size:0.95rem;
+      font-family:'Open Sans',sans-serif; min-width:280px; background:rgba(255,255,255,0.95); }
+    .search-widget input:focus { outline:2px solid var(--teal); }
+    .search-widget button { padding:12px 20px; background:var(--teal); color:#fff; border:none;
+      border-radius:6px; font-family:'Barlow Condensed',sans-serif; font-weight:800; letter-spacing:0.08em;
+      text-transform:uppercase; font-size:0.85rem; cursor:pointer; transition:background 0.15s; }
+    .search-widget button:hover { background:var(--teal-dk); }
+
+    /* Map layout */
+    .map-shell { display:grid; grid-template-columns:1fr 380px; height:min(76vh, 720px); position:relative; }
+    #map { width:100%; height:100%; background:#e8ecef; }
+    .leaflet-container { font-family:'Open Sans',sans-serif; }
+
+    /* Panel */
+    .panel { background:#fff; border-left:1px solid #E5E7EB; overflow-y:auto; position:relative;
+      display:flex; flex-direction:column; }
+    .panel-empty { padding:40px 32px; text-align:center; color:var(--gray); }
+    .panel-empty .icon { font-size:2.4rem; margin-bottom:16px; opacity:0.55; }
+    .panel-empty h3 { font-family:'Barlow Condensed',sans-serif; font-weight:800; color:var(--dark);
+      font-size:1.4rem; margin-bottom:12px; line-height:1.15; }
+    .panel-empty p { font-size:0.95rem; line-height:1.6; }
+    .panel-empty ul { list-style:none; margin-top:20px; padding:0; text-align:left; display:inline-block; }
+    .panel-empty li { padding:8px 0 8px 22px; position:relative; color:var(--gray); font-size:0.9rem; }
+    .panel-empty li::before { content:''; position:absolute; left:0; top:16px; width:12px; height:2px; background:var(--teal); }
+
+    .panel-detail { display:none; }
+    .panel-detail.open { display:flex; flex-direction:column; }
+    .panel-head { padding:26px 30px 22px; border-bottom:1px solid #E5E7EB; position:sticky; top:0; background:#fff; z-index:5; }
+    .panel-head .close { position:absolute; top:18px; right:20px; background:none; border:none;
+      font-size:1.6rem; color:var(--gray); cursor:pointer; padding:4px 10px; border-radius:4px; line-height:1; }
+    .panel-head .close:hover { background:var(--light); color:var(--dark); }
+    .panel-head .district-tag { display:inline-block; padding:4px 12px; border-radius:14px;
+      font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase;
+      font-weight:700; margin-bottom:10px; background:var(--teal); color:#fff; }
+    .panel-head h2 { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.7rem;
+      color:var(--dark); line-height:1.15; }
+    .panel-head .name-he { display:block; font-size:0.95rem; color:var(--gray); font-weight:600; margin-top:4px; }
+    .panel-body { padding:20px 30px 30px; flex:1; overflow-y:auto; }
+    .svc { padding:18px 0; border-bottom:1px solid #F0F0F0; }
+    .svc:last-child { border-bottom:none; }
+    .svc-label { font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; letter-spacing:0.15em;
+      text-transform:uppercase; color:var(--purple); font-weight:700; margin-bottom:6px; }
+    .svc h4 { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.05rem;
+      color:var(--dark); margin-bottom:6px; line-height:1.2; }
+    .svc .row { display:flex; gap:8px; align-items:baseline; font-size:0.88rem; color:var(--gray); margin-bottom:3px; }
+    .svc .row strong { min-width:64px; color:var(--dark); font-weight:600; }
+    .svc .notes { font-size:0.85rem; color:var(--gray); margin-top:8px; font-style:italic; }
+    .svc .actions { margin-top:10px; display:flex; gap:8px; flex-wrap:wrap; }
+    .svc .action { padding:6px 12px; background:var(--light); color:var(--teal-dk); text-decoration:none;
+      border-radius:4px; font-size:0.8rem; font-weight:700; letter-spacing:0.02em; }
+    .svc .action:hover { background:var(--teal); color:#fff; }
+
+    .panel-cta { padding:24px 30px; background:var(--light); border-top:1px solid #E5E7EB; }
+    .panel-cta p { font-size:0.88rem; color:var(--gray); margin-bottom:12px; line-height:1.5; }
+    .panel-cta a { display:block; padding:12px 18px; background:var(--teal); color:#fff; text-align:center;
+      text-decoration:none; border-radius:4px; font-family:'Barlow Condensed',sans-serif; font-weight:800;
+      letter-spacing:0.08em; text-transform:uppercase; font-size:0.9rem; margin-bottom:8px; }
+    .panel-cta a:hover { background:var(--teal-dk); }
+    .panel-cta a.ghost { background:transparent; color:var(--purple); border:2px solid var(--purple); }
+    .panel-cta a.ghost:hover { background:var(--purple); color:#fff; }
+
+    /* Below-map: card row */
+    .below-map { padding:60px 60px; max-width:1400px; margin:0 auto; }
+    .below-map h3 { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.7rem;
+      color:var(--dark); margin-bottom:8px; letter-spacing:-0.005em; }
+    .below-map .sub { color:var(--gray); margin-bottom:32px; font-size:0.98rem; }
+    .district-row { display:grid; grid-template-columns:repeat(4, 1fr); gap:14px; }
+    .district-tile { background:#fff; border:1px solid #E5E7EB; border-radius:8px; padding:20px 20px;
+      cursor:pointer; transition:all 0.15s; text-align:left; font-family:inherit; font-size:inherit;
+      color:inherit; }
+    .district-tile:hover { border-color:var(--teal); transform:translateY(-2px); }
+    .district-tile .swatch { width:14px; height:14px; border-radius:3px; display:inline-block; margin-right:8px; vertical-align:middle; }
+    .district-tile .en { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.1rem; color:var(--dark); display:inline-block; vertical-align:middle; }
+    .district-tile .he { display:block; font-size:0.82rem; color:var(--gray); margin-top:4px; margin-right:22px; }
+
+    /* Info bar under map */
+    .info-strip { background:var(--dark); color:#fff; padding:18px 60px; font-size:0.85rem;
+      display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; }
+    .info-strip .left { color:rgba(255,255,255,0.75); }
+    .info-strip .left strong { color:var(--teal); }
+    .info-strip a { color:var(--teal); text-decoration:none; font-weight:700; }
+
+    footer { background:var(--dark); color:#fff; padding:50px 60px 30px; border-top:1px solid rgba(255,255,255,0.1); margin-top:60px; }
+    .footer-motto { text-align:center; font-family:'Barlow Condensed',sans-serif; font-size:1.2rem; color:var(--teal); letter-spacing:0.05em; margin-bottom:34px; }
+    .footer-motto em { font-style:normal; color:var(--pink); font-weight:700; }
+    .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px; max-width:1400px; margin:0 auto; }
+    .footer-brand p { color:#C1C1D0; font-size:0.85rem; line-height:1.55; margin-top:14px; }
+    .footer-contact { display:flex; flex-direction:column; gap:5px; margin-top:14px; }
+    .footer-contact a { color:#fff; text-decoration:none; font-size:0.83rem; }
+    .footer-col h4 { font-family:'Barlow Condensed',sans-serif; font-size:0.95rem; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:12px; color:var(--teal); }
+    .footer-col ul { list-style:none; }
+    .footer-col li { margin-bottom:6px; }
+    .footer-col a { color:#C1C1D0; text-decoration:none; font-size:0.83rem; }
+    .footer-bottom { max-width:1400px; margin:32px auto 0; padding-top:18px; border-top:1px solid rgba(255,255,255,0.1); display:flex; justify-content:space-between; font-size:0.75rem; color:#8888A0; }
+
+    @media (max-width:1024px) {
+      .map-shell { grid-template-columns:1fr; height:auto; }
+      #map { height:60vh; }
+      .panel { max-height:400px; border-left:none; border-top:1px solid #E5E7EB; }
+      .page-hero-inner { grid-template-columns:1fr; }
+      .search-widget input { min-width:200px; }
+      .district-row { grid-template-columns:repeat(2, 1fr); }
+    }
+    @media (max-width:700px) {
+      nav { padding:0 20px; } .nav-links > li:not(:last-child) { display:none; }
+      .page-hero { padding:40px 24px 40px; } .page-hero h1 { font-size:2rem; }
+      .below-map { padding:40px 24px; }
+      .district-row { grid-template-columns:1fr; }
+      .info-strip { padding:14px 24px; }
+      .footer-grid { grid-template-columns:1fr; }
+      .footer-bottom { flex-direction:column; gap:8px; text-align:center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="draft-banner">DRAFT PREVIEW &middot; district boundaries approximate, service listings placeholder (Salesforce → Monday sync pending)</div>
+
+  <div class="crisis-bar">
+    <span class="crisis-dot"></span>
+    If you or someone is in immediate danger, call emergency services now:
+    <a href="tel:100">Israel: 100</a> &nbsp;|&nbsp;
+    <a href="tel:911">US: 911</a> &nbsp;|&nbsp;
+    <a href="tel:999">UK: 999</a>
+    &nbsp;&middot;&nbsp;
+    <strong>Magen hotline:</strong>
+    <a href="tel:*9781">*9781</a>
+    &nbsp;&middot;&nbsp; 24/6
+  </div>
+
+  <div class="nav-wrap">
+    <nav>
+      <a href="/" class="nav-logo">
+        <div class="nav-logo-text"><span class="brand">MAGEN</span><span class="sub">for Jewish Communities</span></div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="safety-and-healing.html">Safety &amp; Healing</a></li>
+        <li><a href="advocacy-and-investigations.html">Advocacy &amp; Investigations</a></li>
+        <li><a href="education-and-community.html">Education &amp; Community</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="about.html">Magen</a></li>
+        <li><a href="donate.html" class="btn-donate">Donate →</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Page hero -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div>
+        <div class="eyebrow">Find your district</div>
+        <h1>Jerusalem services, by community.</h1>
+        <p>Click any coloured region to see the welfare office, police station, community centre, and crisis references that serve that part of Jerusalem. Or type in an address to jump straight to your neighbourhood.</p>
+      </div>
+      <form class="search-widget" onsubmit="event.preventDefault(); searchAddress(this.q.value);">
+        <input name="q" type="text" placeholder="Address in Jerusalem (e.g. Emek Refaim 6)" autocomplete="off">
+        <button type="submit">Find</button>
+      </form>
+    </div>
+  </section>
+
+  <div class="map-shell">
+    <div id="map"></div>
+    <aside class="panel">
+      <div class="panel-empty" id="panel-empty">
+        <div class="icon">📍</div>
+        <h3>Pick a district to see its services.</h3>
+        <p>Click any colored region on the map, or search an address above.</p>
+        <ul>
+          <li>Welfare office (lishkat revacha) contact and hours</li>
+          <li>Local police station and non-emergency line</li>
+          <li>Community centre (matnas / minhelet)</li>
+          <li>Nearest Heder 4 for emergency care</li>
+          <li>Magen coordinator for that area</li>
+        </ul>
+      </div>
+      <div class="panel-detail" id="panel-detail"></div>
+    </aside>
+  </div>
+
+  <div class="info-strip">
+    <div class="left"><strong>Not sure which one you're in?</strong> Use the address search above, or tap the coloured region closest to where you live.</div>
+    <a href="tel:*9781">Or call *9781 for immediate help →</a>
+  </div>
+
+  <section class="below-map">
+    <h3>Jump to a district</h3>
+    <p class="sub">Prefer to scan the list? Tap any district to bring it up on the map and load its services.</p>
+    <div class="district-row" id="district-row"></div>
+  </section>
+
+  <footer>
+    <div class="footer-motto"><em>Here.</em> Until sexual abuse isn't.</div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo">
+          <div class="nav-logo-text"><span class="brand">MAGEN</span><span class="sub">for Jewish Communities</span></div>
+        </a>
+        <p>Breaking the silence and stigma of sexual abuse. Pursuing justice and healing for survivors across Jewish communities in Israel and beyond.</p>
+        <div class="footer-contact">
+          <a href="tel:023724073">02-372-4073</a>
+          <a href="mailto:support@magen-israel.org">support@magen-israel.org</a>
+          <a href="https://www.magen-israel.org">www.magen-israel.org</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Get Help</h4><ul>
+        <li><a href="safety-and-healing.html">Safety &amp; Healing</a></li>
+        <li><a href="in-an-emergency.html">In an Emergency</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Programs</h4><ul>
+        <li><a href="advocacy-and-investigations.html">Advocacy &amp; Investigations</a></li>
+        <li><a href="education-and-community.html">Education &amp; Community</a></li>
+        <li><a href="lo-tishtok.html">Lo Tishtok</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Magen</h4><ul>
+        <li><a href="about.html">About Magen</a></li>
+        <li><a href="staff.html">Our Team</a></li>
+        <li><a href="what-people-say.html">What People Say</a></li>
+        <li><a href="donate.html">Donate</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Magen for Jewish Communities. Registered nonprofit. All rights reserved.</span>
+      <span><a href="#" style="color:#C1C1D0;">Privacy Policy</a> &middot; <a href="#" style="color:#C1C1D0;">Terms of Use</a></span>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    // Palette lookup for district colours
+    const PALETTE = {
+      "teal":       "#00AEAC",
+      "teal-dk":    "#008F8D",
+      "teal-lt":    "#4FC7C5",
+      "purple":     "#6B4FA1",
+      "purple-dk":  "#4E3583",
+      "purple-lt":  "#8E75C0",
+      "pink":       "#E879A0",
+      "pink-dk":    "#C15A80",
+    };
+
+    // Init map — centre on Jerusalem
+    const map = L.map('map', { zoomControl: true, scrollWheelZoom: false }).setView([31.780, 35.213], 12);
+    map.on('click focus', () => map.scrollWheelZoom.enable());
+    map.on('mouseout', () => map.scrollWheelZoom.disable());
+
+    // OSM base layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '© <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    let districtLayer = null;
+    let districtData  = {}; // slug -> feature layer
+    let servicesData  = null;
+    let activeSlug    = null;
+
+    function styleFor(feature, isActive=false, isHover=false) {
+      const c = PALETTE[feature.properties.palette] || PALETTE["teal"];
+      return {
+        color: c,
+        weight: isActive ? 3 : 2,
+        opacity: 0.85,
+        fillColor: c,
+        fillOpacity: isActive ? 0.55 : (isHover ? 0.35 : 0.18),
+      };
+    }
+
+    function openPanel(slug) {
+      activeSlug = slug;
+      const feat = districtLayer.getLayers().find(l => l.feature.properties.slug === slug);
+      if (feat) {
+        // reset all styles first
+        districtLayer.eachLayer(l => l.setStyle(styleFor(l.feature)));
+        feat.setStyle(styleFor(feat.feature, true));
+        try { map.fitBounds(feat.getBounds(), { padding:[30,30], maxZoom:14 }); } catch(e){}
+      }
+      const props = feat.feature.properties;
+      const svc = servicesData.districts[slug] || {};
+      const html = renderPanelDetail(props, svc);
+      document.getElementById('panel-empty').style.display = 'none';
+      const detail = document.getElementById('panel-detail');
+      detail.innerHTML = html;
+      detail.classList.add('open');
+    }
+
+    function closePanel() {
+      activeSlug = null;
+      districtLayer.eachLayer(l => l.setStyle(styleFor(l.feature)));
+      document.getElementById('panel-detail').classList.remove('open');
+      document.getElementById('panel-empty').style.display = 'block';
+    }
+
+    function renderPanelDetail(props, svc) {
+      const c = PALETTE[props.palette] || PALETTE["teal"];
+      const svcCard = (label, name, rows, extra) => `
+        <div class="svc">
+          <div class="svc-label">${label}</div>
+          <h4>${name || '—'}</h4>
+          ${rows.map(([k,v]) => v ? `<div class="row"><strong>${k}</strong><span>${v}</span></div>` : '').join('')}
+          ${extra || ''}
+        </div>`;
+      const w = svc.welfare_office || {}, p = svc.police_station || {}, m = svc.community_centre || {},
+            cr = svc.crisis_reference || {}, mc = svc.magen_coordinator || {};
+      return `
+        <div class="panel-head">
+          <button class="close" onclick="closePanel()" aria-label="Close">×</button>
+          <span class="district-tag" style="background:${c};">District</span>
+          <h2>${props.name_en}</h2>
+          <span class="name-he">${props.name_he}</span>
+        </div>
+        <div class="panel-body">
+          ${svcCard('Welfare office', w.name, [
+            ['Address', w.address],['Phone', w.phone ? `<a href="tel:${w.phone.replace(/[^0-9*+]/g,'')}">${w.phone}</a>` : ''],['Hours', w.hours],
+          ], w.notes ? `<div class="notes">${w.notes}</div>` : '')}
+          ${svcCard('Police station', p.name, [
+            ['Address', p.address],['Non-emerg.', p.phone ? `<a href="tel:${p.phone.replace(/[^0-9*+]/g,'')}">${p.phone}</a>` : ''],['Emergency', p.emergency ? `<a href="tel:${p.emergency}">${p.emergency}</a>` : ''],
+          ], p.sexual_crimes_unit ? `<div class="notes">${p.sexual_crimes_unit}</div>` : '')}
+          ${svcCard('Community centre', m.name, [
+            ['Address', m.address],['Phone', m.phone ? `<a href="tel:${m.phone.replace(/[^0-9*+]/g,'')}">${m.phone}</a>` : ''],
+          ], m.website ? `<div class="actions"><a class="action" href="${m.website}" target="_blank" rel="noopener">Visit site →</a></div>` : '')}
+          ${svcCard('Emergency / crisis', 'Nearest specialised care', [
+            ['Heder 4', cr.nearest_heder_4],['SACC', cr.national_sacc],
+          ], `<div class="actions"><a class="action" href="in-an-emergency.html">See all Heder 4 hospitals →</a></div>`)}
+          ${svcCard('Magen coordinator', mc.name, [
+            ['Phone', mc.phone ? `<a href="tel:${mc.phone.replace(/[^0-9*+]/g,'')}">${mc.phone}</a>` : ''],['Email', mc.email ? `<a href="mailto:${mc.email}">${mc.email}</a>` : ''],
+          ], '')}
+        </div>
+        <div class="panel-cta">
+          <p>Not sure whether this is the right district? Call our hotline and we'll direct you to the exact service you need.</p>
+          <a href="tel:*9781">Call Magen · *9781</a>
+          <a href="contact.html" class="ghost">Send a message instead</a>
+        </div>`;
+    }
+
+    // Load GeoJSON + services + wire the map
+    Promise.all([
+      fetch('data/districts/jerusalem-community-admins.geojson').then(r => r.json()),
+      fetch('data/districts/jerusalem-services.json').then(r => r.json()),
+    ]).then(([geo, svc]) => {
+      servicesData = svc;
+      districtLayer = L.geoJSON(geo, {
+        style: (feat) => styleFor(feat),
+        onEachFeature: (feat, layer) => {
+          layer.on('mouseover', () => { if (activeSlug !== feat.properties.slug) layer.setStyle(styleFor(feat, false, true)); });
+          layer.on('mouseout',  () => { if (activeSlug !== feat.properties.slug) layer.setStyle(styleFor(feat)); });
+          layer.on('click', () => openPanel(feat.properties.slug));
+          layer.bindTooltip(`<strong>${feat.properties.name_en}</strong><br><span dir="rtl">${feat.properties.name_he}</span>`, { sticky:true, className:'district-tooltip' });
+        }
+      }).addTo(map);
+      try { map.fitBounds(districtLayer.getBounds(), { padding:[20,20] }); } catch(e){}
+
+      // Build the district-tile list
+      const row = document.getElementById('district-row');
+      geo.features.forEach(f => {
+        const c = PALETTE[f.properties.palette];
+        const btn = document.createElement('button');
+        btn.className = 'district-tile';
+        btn.innerHTML = `<span class="swatch" style="background:${c};"></span><span class="en">${f.properties.name_en}</span><span class="he">${f.properties.name_he}</span>`;
+        btn.onclick = () => openPanel(f.properties.slug);
+        row.appendChild(btn);
+      });
+    }).catch(err => {
+      console.error(err);
+      document.getElementById('map').innerHTML = '<div style="padding:40px; text-align:center; color:#555;">Could not load district data. Refresh the page.</div>';
+    });
+
+    // Address geocode via Nominatim → find containing district
+    function pointInPolygon(pt, poly) {
+      let inside = false;
+      for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+        const xi = poly[i][0], yi = poly[i][1], xj = poly[j][0], yj = poly[j][1];
+        const intersect = ((yi > pt[1]) !== (yj > pt[1])) &&
+                          (pt[0] < (xj - xi) * (pt[1] - yi) / (yj - yi) + xi);
+        if (intersect) inside = !inside;
+      }
+      return inside;
+    }
+
+    function findDistrictAt(lng, lat) {
+      let found = null;
+      districtLayer.eachLayer(layer => {
+        const geom = layer.feature.geometry;
+        if (found) return;
+        const polys = geom.type === 'Polygon' ? [geom.coordinates] : geom.coordinates;
+        for (const poly of polys) {
+          if (pointInPolygon([lng, lat], poly[0])) { found = layer.feature.properties.slug; return; }
+        }
+      });
+      return found;
+    }
+
+    function searchAddress(query) {
+      if (!query.trim()) return;
+      const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query + ', Jerusalem, Israel')}&limit=1`;
+      fetch(url, { headers: { 'Accept-Language': 'en,he' } })
+        .then(r => r.json())
+        .then(results => {
+          if (!results.length) { alert('Address not found. Try a landmark or intersection.'); return; }
+          const lat = parseFloat(results[0].lat), lng = parseFloat(results[0].lon);
+          L.marker([lat, lng]).addTo(map).bindPopup(`<strong>${query}</strong><br><small>${results[0].display_name}</small>`).openPopup();
+          map.setView([lat, lng], 14);
+          const slug = findDistrictAt(lng, lat);
+          if (slug) setTimeout(() => openPanel(slug), 400);
+          else alert('That address is outside our current district coverage. Call *9781 and we can still help.');
+        })
+        .catch(() => alert('Search unavailable right now. Please try again or call *9781.'));
+    }
+  </script>
+
+</body>
+</html>
