@@ -4,123 +4,150 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex,nofollow,noarchive" />
-  <title>Lo Tishtok — Magen for Jewish Communities</title>
+  <title>Lo Tishtok · Magen for Jewish Communities</title>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --teal:    #00AEAC;
-      --teal-dk: #008F8D;
-      --purple:  #6B4FA1;
-      --pink:    #E879A0;
-      --dark:    #1A1A2E;
-      --gray:    #555;
-      --light:   #F7F7F7;
-      --amber:   #F59E0B;
-      --amber-bg:#FEF3C7;
+    :root { --teal:#00AEAC; --teal-dk:#008F8D; --purple:#6B4FA1; --pink:#E879A0;
+      --dark:#1A1A2E; --gray:#555; --light:#F7F7F7; --amber:#F59E0B; --amber-bg:#FEF3C7; }
+    body { font-family:'Open Sans',sans-serif; color:var(--dark); background:#fff; line-height:1.6; }
+
+    .draft-banner { background:var(--amber-bg); color:#78350F; text-align:center; padding:10px 24px;
+      font-size:0.85rem; border-bottom:2px solid var(--amber); font-weight:600; letter-spacing:0.02em; }
+    .crisis-bar { background:var(--dark); color:#fff; text-align:center; padding:10px 60px;
+      font-size:0.82rem; letter-spacing:0.03em; display:flex; align-items:center; justify-content:center; gap:16px; }
+    .crisis-bar strong { color:var(--teal); font-weight:700; }
+    .crisis-bar a { color:#fff; font-weight:700; text-decoration:none;
+      border-bottom:1px solid rgba(255,255,255,0.3); transition:border-color 0.2s; }
+    .crisis-bar a:hover { border-color:var(--teal); color:var(--teal); }
+    .crisis-dot { width:7px; height:7px; background:var(--teal); border-radius:50%; display:inline-block; animation:pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+    .nav-wrap { position:sticky; top:0; z-index:200; background:#fff;
+      border-bottom:3px solid var(--teal); box-shadow:0 2px 12px rgba(0,0,0,0.07); }
+    nav { display:flex; justify-content:space-between; align-items:center;
+      padding:0 60px; height:72px; background:#fff; max-width:1400px; margin:0 auto; }
+    .nav-logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
+    .nav-logo-text { display:flex; flex-direction:column; line-height:1; }
+    .nav-logo-text .brand { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.5rem; color:var(--teal); letter-spacing:0.08em; }
+    .nav-logo-text .sub { font-size:0.62rem; color:var(--gray); letter-spacing:0.06em; text-transform:uppercase; }
+    .nav-links { display:flex; align-items:center; gap:4px; list-style:none; height:72px; }
+    .nav-links > li > a { text-decoration:none; color:var(--dark); font-size:0.82rem; font-weight:700;
+      letter-spacing:0.05em; text-transform:uppercase; padding:0 16px; height:100%; display:flex; align-items:center;
+      transition:color 0.2s; white-space:nowrap; border-bottom:3px solid transparent; margin-bottom:-3px; }
+    .nav-links > li:hover > a { color:var(--teal); border-bottom-color:var(--teal); }
+    .btn-donate { background:var(--teal); color:#fff !important; padding:10px 22px !important; border-radius:4px; margin-left:12px; }
+
+    .hero { background: linear-gradient(135deg, var(--dark) 0%, #232449 65%, var(--purple) 130%);
+      color:#fff; padding:100px 60px 110px; text-align:center; position:relative; }
+    .hero::before { content:''; position:absolute; top:0; left:0; right:0; height:6px;
+      background: linear-gradient(90deg, var(--teal), var(--purple), var(--pink)); }
+    .hero .eyebrow { font-family:'Barlow Condensed',sans-serif; letter-spacing:0.25em; text-transform:uppercase;
+      color:var(--teal); font-weight:700; font-size:0.95rem; margin-bottom:22px; }
+    .hero h1 { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:4rem;
+      line-height:1.05; letter-spacing:-0.015em; max-width:960px; margin:0 auto 22px; }
+    .hero h1 em { font-style:normal; color:var(--teal); }
+    .hero h1 .pink { color:var(--pink); }
+    .hero .lead { font-size:1.2rem; color:#C1C1D0; max-width:720px; margin:0 auto 32px; line-height:1.6; }
+    .hero-ctas { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+
+    section.block { padding:90px 60px; max-width:1200px; margin:0 auto; }
+    .eyebrow-h { font-family:'Barlow Condensed',sans-serif; letter-spacing:0.2em; text-transform:uppercase;
+      color:var(--purple); font-weight:700; font-size:0.9rem; margin-bottom:14px; display:block; }
+    h2 { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:2.6rem;
+      color:var(--dark); letter-spacing:-0.01em; margin-bottom:18px; line-height:1.05; }
+    h2 em { font-style:normal; color:var(--teal); }
+    .lead-p { color:var(--gray); font-size:1.1rem; margin-bottom:44px; max-width:760px; line-height:1.65; }
+
+    .btn { padding:14px 28px; text-decoration:none; border-radius:4px; font-weight:700;
+      letter-spacing:0.05em; text-transform:uppercase; font-size:0.9rem; display:inline-block; transition:all 0.2s; }
+    .btn-primary { background:var(--teal); color:#fff; } .btn-primary:hover { background:var(--teal-dk); }
+    .btn-ghost { background:transparent; color:#fff; border:2px solid #fff; padding:12px 26px; }
+    .btn-ghost:hover { background:#fff; color:var(--dark); }
+
+    .close { background: linear-gradient(135deg, var(--purple) 0%, #4E3583 100%); color:#fff; padding:80px 60px; text-align:center; }
+    .close h2 { color:#fff; margin-bottom:16px; }
+    .close p { max-width:640px; margin:0 auto 28px; color:rgba(255,255,255,0.9); font-size:1.05rem; }
+    .close .btn-ghost { border-color:#fff; }
+    .close .btn-ghost:hover { background:#fff; color:var(--purple); }
+
+    footer { background:var(--dark); color:#fff; padding:60px 60px 30px; border-top:1px solid rgba(255,255,255,0.1); }
+    .footer-motto { text-align:center; font-family:'Barlow Condensed',sans-serif; font-size:1.3rem; color:var(--teal); letter-spacing:0.05em; margin-bottom:40px; }
+    .footer-motto em { font-style:normal; color:var(--pink); font-weight:700; }
+    .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px; max-width:1400px; margin:0 auto; }
+    .footer-brand p { color:#C1C1D0; font-size:0.88rem; line-height:1.6; margin-top:16px; }
+    .footer-contact { display:flex; flex-direction:column; gap:6px; margin-top:16px; }
+    .footer-contact a { color:#fff; text-decoration:none; font-size:0.85rem; }
+    .footer-col h4 { font-family:'Barlow Condensed',sans-serif; font-size:1rem; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:14px; color:var(--teal); }
+    .footer-col ul { list-style:none; }
+    .footer-col li { margin-bottom:8px; }
+    .footer-col a { color:#C1C1D0; text-decoration:none; font-size:0.85rem; }
+    .footer-bottom { max-width:1400px; margin:40px auto 0; padding-top:20px;
+      border-top:1px solid rgba(255,255,255,0.1); display:flex; justify-content:space-between; font-size:0.78rem; color:#8888A0; }
+
+    @media (max-width:1024px) { .hero h1 { font-size:2.8rem; } }
+    @media (max-width:700px) {
+      nav { padding:0 20px; } .nav-links > li:not(:last-child) { display:none; }
+      .hero { padding:70px 24px 80px; } .hero h1 { font-size:2.1rem; }
+      section.block, .close { padding:60px 24px; }
+      .footer-grid { grid-template-columns:1fr; }
+      .footer-bottom { flex-direction:column; gap:10px; text-align:center; }
     }
-    body { font-family: 'Open Sans', sans-serif; color: var(--dark); background: #fff; }
 
-    /* Draft banner */
-    .draft-banner {
-      background: var(--amber-bg);
-      color: #78350F;
-      text-align: center;
-      padding: 10px 24px;
-      font-size: 0.85rem;
-      border-bottom: 2px solid var(--amber);
-      font-weight: 600;
-      letter-spacing: 0.02em;
-    }
 
-    /* Crisis bar */
-    .crisis-bar {
-      background: var(--dark); color: #fff; text-align: center;
-      padding: 10px 60px; font-size: 0.82rem; letter-spacing: 0.03em;
-      display: flex; align-items: center; justify-content: center; gap: 16px;
-    }
-    .crisis-bar strong { color: var(--teal); font-weight: 700; }
-    .crisis-bar a { color: #fff; font-weight: 700; letter-spacing: 0.05em; text-decoration: none;
-      border-bottom: 1px solid rgba(255,255,255,0.3); transition: border-color 0.2s; }
-    .crisis-bar a:hover { border-color: var(--teal); color: var(--teal); }
-    .crisis-dot { width: 7px; height: 7px; background: var(--teal); border-radius: 50%;
-      display: inline-block; animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+    /* Lo Tishtok specific: bolder, campaign feel */
+    .hero { background: linear-gradient(135deg, #1A1A2E 0%, #4E3583 50%, var(--pink) 130%); }
+    .hero h1 { font-size:5rem; }
+    .hero h1 em { color:var(--pink); }
+    .hero .he { display:block; font-family:'Barlow Condensed',sans-serif; font-weight:700;
+      font-size:1.3rem; letter-spacing:0.3em; color:rgba(255,255,255,0.7); margin-bottom:14px; }
 
-    /* Nav */
-    .nav-wrap { position: sticky; top: 0; z-index: 200; background: #fff;
-      border-bottom: 3px solid var(--teal); box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
-    nav { display: flex; justify-content: space-between; align-items: center;
-      padding: 0 60px; height: 72px; background: #fff; max-width: 1400px; margin: 0 auto; }
-    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; }
-    .nav-logo-text { display: flex; flex-direction: column; line-height: 1; }
-    .nav-logo-text .brand { font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
-      font-size: 1.5rem; color: var(--teal); letter-spacing: 0.08em; }
-    .nav-logo-text .sub { font-size: 0.62rem; color: var(--gray); letter-spacing: 0.06em; text-transform: uppercase; }
-    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
-    .nav-links a { text-decoration: none; color: var(--dark); font-size: 0.82rem; font-weight: 700;
-      letter-spacing: 0.05em; text-transform: uppercase; padding: 8px 14px; transition: color 0.2s;
-      white-space: nowrap; border-bottom: 3px solid transparent; }
-    .nav-links a:hover { color: var(--teal); border-bottom-color: var(--teal); }
-    .btn-donate { background: var(--teal); color: #fff !important; padding: 10px 22px !important;
-      border-radius: 4px; border: none !important; }
-    .btn-donate:hover { background: var(--teal-dk) !important; }
+    .manifesto { padding:100px 60px; max-width:900px; margin:0 auto; text-align:center; }
+    .manifesto p { font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:1.9rem;
+      color:var(--dark); line-height:1.35; letter-spacing:-0.005em; margin-bottom:28px; }
+    .manifesto p em { font-style:normal; color:var(--pink); font-weight:800; }
+    .manifesto p strong { color:var(--purple); font-weight:800; }
+    .manifesto .signature { font-size:0.9rem; color:var(--gray); margin-top:40px; letter-spacing:0.05em; }
 
-    /* Hero */
-    .hero { padding: 100px 60px 80px; max-width: 1000px; margin: 0 auto; text-align: center; }
-    .hero .eyebrow { font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.15em;
-      text-transform: uppercase; color: var(--purple); font-weight: 700; font-size: 0.9rem; margin-bottom: 16px; }
-    .hero h1 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 3.6rem;
-      line-height: 1.05; color: var(--dark); margin-bottom: 24px; letter-spacing: -0.01em; }
-    .hero p { font-size: 1.15rem; color: var(--gray); max-width: 620px; margin: 0 auto; line-height: 1.6; }
+    .principle-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:26px; margin-top:48px; }
+    .principle { background:#fff; border:1px solid #E5E7EB; border-radius:10px; padding:38px 30px; position:relative; }
+    .principle::before { content:''; position:absolute; top:0; left:30px; right:30px; height:5px;
+      background:var(--pink); border-radius:0 0 4px 4px; }
+    .principle:nth-child(2)::before { background:var(--purple); }
+    .principle:nth-child(3)::before { background:var(--teal); }
+    .principle .num { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:0.85rem;
+      color:var(--pink); letter-spacing:0.2em; text-transform:uppercase; margin-bottom:12px; }
+    .principle:nth-child(2) .num { color:var(--purple); }
+    .principle:nth-child(3) .num { color:var(--teal); }
+    .principle h3 { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.7rem;
+      color:var(--dark); margin-bottom:14px; line-height:1.15; }
+    .principle p { color:var(--gray); font-size:1rem; line-height:1.65; }
 
-    /* Placeholder block */
-    .placeholder { max-width: 900px; margin: 40px auto 100px; padding: 0 60px; }
-    .placeholder-card { border: 2px dashed #D1D5DB; border-radius: 10px; padding: 40px;
-      background: var(--light); text-align: center; color: var(--gray); }
-    .placeholder-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
-      font-size: 1.4rem; color: var(--dark); margin-bottom: 12px; letter-spacing: 0.02em; }
-    .placeholder-card p { font-size: 0.95rem; line-height: 1.6; }
-    .placeholder-card a { color: var(--teal); font-weight: 600; text-decoration: none; }
-    .placeholder-card a:hover { text-decoration: underline; }
+    .action { background:var(--dark); color:#fff; padding:90px 60px; }
+    .action-inner { max-width:1100px; margin:0 auto; }
+    .action h2 { color:#fff; text-align:center; margin-bottom:14px; }
+    .action .sub { text-align:center; color:rgba(255,255,255,0.75); margin-bottom:50px; max-width:640px; margin-left:auto; margin-right:auto; }
+    .action-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    .action-card { background:rgba(255,255,255,0.05); padding:30px 26px; border-radius:8px;
+      border-left:4px solid var(--pink); text-decoration:none; color:inherit; transition:transform 0.15s; }
+    .action-card:hover { transform:translateY(-3px); background:rgba(255,255,255,0.08); }
+    .action-card:nth-child(2) { border-left-color:var(--purple); }
+    .action-card:nth-child(3) { border-left-color:var(--teal); }
+    .action-card h4 { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.4rem;
+      color:#fff; margin-bottom:12px; line-height:1.15; }
+    .action-card p { color:rgba(255,255,255,0.75); font-size:0.95rem; line-height:1.6; margin-bottom:14px; }
+    .action-card .cta { color:var(--pink); font-weight:700; font-size:0.85rem; letter-spacing:0.05em; text-transform:uppercase; }
+    .action-card:nth-child(2) .cta { color:var(--purple); }
+    .action-card:nth-child(3) .cta { color:var(--teal); }
 
-    /* Footer */
-    footer { background: var(--dark); color: #fff; padding: 60px 60px 30px; }
-    .footer-motto { text-align: center; font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.3rem; color: var(--teal); letter-spacing: 0.05em; margin-bottom: 40px; }
-    .footer-motto em { font-style: normal; color: var(--pink); font-weight: 700; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
-      max-width: 1400px; margin: 0 auto; }
-    .footer-brand p { color: #C1C1D0; font-size: 0.88rem; line-height: 1.6; margin-top: 16px; }
-    .footer-contact { display: flex; flex-direction: column; gap: 6px; margin-top: 16px; }
-    .footer-contact a { color: #fff; text-decoration: none; font-size: 0.85rem; }
-    .footer-contact a:hover { color: var(--teal); }
-    .footer-col h4 { font-family: 'Barlow Condensed', sans-serif; font-size: 1rem;
-      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; color: var(--teal); }
-    .footer-col ul { list-style: none; }
-    .footer-col li { margin-bottom: 8px; }
-    .footer-col a { color: #C1C1D0; text-decoration: none; font-size: 0.85rem; }
-    .footer-col a:hover { color: #fff; }
-    .footer-bottom { max-width: 1400px; margin: 40px auto 0; padding-top: 20px;
-      border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between;
-      font-size: 0.78rem; color: #8888A0; }
-    .footer-bottom a { color: #C1C1D0; text-decoration: none; }
-    .footer-bottom a:hover { color: #fff; }
+    @media (max-width:1024px) { .principle-grid, .action-grid { grid-template-columns:1fr; } }
+    @media (max-width:700px) { .manifesto { padding:60px 24px; } .manifesto p { font-size:1.4rem; } .action { padding:60px 24px; } }
 
-    @media (max-width: 900px) {
-      nav { padding: 0 20px; }
-      .nav-links { display: none; }
-      .hero { padding: 60px 24px 40px; }
-      .hero h1 { font-size: 2.4rem; }
-      .placeholder { padding: 0 20px; }
-      .footer-grid { grid-template-columns: 1fr; }
-      .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
-    }
   </style>
 </head>
 <body>
 
-  <div class="draft-banner">DRAFT — content pending. This page is a skeleton for review.</div>
+  <div class="draft-banner">DRAFT PREVIEW · Lo Tishtok campaign page · manifesto and principles under review</div>
 
   <div class="crisis-bar">
     <span class="crisis-dot"></span>
@@ -128,19 +155,17 @@
     <a href="tel:100">Israel: 100</a> &nbsp;|&nbsp;
     <a href="tel:911">US: 911</a> &nbsp;|&nbsp;
     <a href="tel:999">UK: 999</a>
-    &nbsp;&nbsp;·&nbsp;&nbsp;
+    &nbsp;&middot;&nbsp;
     <strong>Magen hotline:</strong>
     <a href="tel:*9781">*9781</a>
-    &nbsp;·&nbsp; 24/6
+    &nbsp;&middot;&nbsp; 24/6
   </div>
+
 
   <div class="nav-wrap">
     <nav>
       <a href="/" class="nav-logo">
-        <div class="nav-logo-text">
-          <span class="brand">MAGEN</span>
-          <span class="sub">for Jewish Communities</span>
-        </div>
+        <div class="nav-logo-text"><span class="brand">MAGEN</span><span class="sub">for Jewish Communities</span></div>
       </a>
       <ul class="nav-links">
         <li><a href="safety-and-healing.html">Safety &amp; Healing</a></li>
@@ -153,28 +178,109 @@
     </nav>
   </div>
 
-  <section class="hero">
-    <div class="eyebrow">Magen</div>
-    <h1>Lo Tishtok</h1>
-    <p>לא תשתוק — the campaign to break the silence.</p>
-  </section>
 
-  <section class="placeholder">
-    <div class="placeholder-card">
-      <h3>Content in progress</h3>
-      <p>This skeleton exists so the page is reachable on the preview subdomain and tracked on Monday. The real content will replace this block. Return to the <a href="/">preview hub</a>.</p>
+  <section class="hero">
+    <div class="eyebrow" style="color:var(--pink);">The Campaign</div>
+    <span class="he">לא תשתוק</span>
+    <h1>Lo Tishtok. <em>Do not stay silent.</em></h1>
+    <p class="lead">A movement for accountability, responsibility, and voice, built for the moment when silence is no longer the safer choice for anyone.</p>
+    <div class="hero-ctas">
+      <a href="#join" class="btn btn-primary" style="background:var(--pink);">Join the movement</a>
+      <a href="#principles" class="btn btn-ghost">Read the principles</a>
     </div>
   </section>
+
+  <section class="manifesto">
+    <p>Abuse thrives in <em>silence</em>. So does the shame that keeps survivors alone. So do the systems that let perpetrators move from community to community without consequences.</p>
+    <p>Lo Tishtok is a <strong>refusal</strong>. Not a slogan.</p>
+    <p>To refuse silence is to see the child you don't want to see. To ask the question you don't want to ask. To believe the person who was hardest to hear.</p>
+    <p>It is to accept that in Torah's own language, <em>lo ta'amod al dam re'echa</em>, do not stand idle by your neighbor's blood, was never a suggestion.</p>
+    <p>This is the movement of every rabbi, teacher, parent, neighbor, and survivor who is done pretending they don't know.</p>
+    <div class="signature">— Magen for Jewish Communities</div>
+  </section>
+
+  <section class="block" id="principles">
+    <span class="eyebrow-h" style="text-align:center; display:block;">The three principles</span>
+    <h2 style="text-align:center; margin:0 auto 44px;">What Lo Tishtok stands for.</h2>
+    <div class="principle-grid">
+      <div class="principle">
+        <div class="num">Principle 01</div>
+        <h3>Every adult is responsible for every child.</h3>
+        <p>Prevention isn't a household strategy. It's a communal one. When a whole community sees itself as accountable for its children's safety, silence becomes untenable.</p>
+      </div>
+      <div class="principle">
+        <div class="num">Principle 02</div>
+        <h3>Survivors decide. Communities support.</h3>
+        <p>Empowerment means bottom-up, evidence-based decision-making by survivors themselves. The community's job is to make sure survivors have the resources, information, and safety they need to choose.</p>
+      </div>
+      <div class="principle">
+        <div class="num">Principle 03</div>
+        <h3>Halacha demands this. It doesn't debate it.</h3>
+        <p>Torah's mandate to protect the powerless is not up for negotiation. Lo Tishtok isn't a modern departure from tradition; it's the tradition's own instruction, reclaimed.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="action" id="join">
+    <div class="action-inner">
+      <h2>How to join the movement.</h2>
+      <p class="sub">Three concrete steps for anyone who's ready to stop being a bystander. Pick one, or all three.</p>
+      <div class="action-grid">
+        <a href="education-and-community.html" class="action-card">
+          <h4>Bring a workshop to your community.</h4>
+          <p>Educate the adults around you. Magen runs workshops for shuls, schools, and community organizations tailored to your community's specific needs and language.</p>
+          <span class="cta">Book a program →</span>
+        </a>
+        <a href="donate.html" class="action-card">
+          <h4>Fund the work.</h4>
+          <p>Every hour on the hotline, every case walked through court, every workshop delivered is funded by donors who refuse to leave this to someone else.</p>
+          <span class="cta">Support Magen →</span>
+        </a>
+        <a href="contact.html" class="action-card">
+          <h4>Amplify the message.</h4>
+          <p>Share Lo Tishtok in your community. If you're a rabbi, teacher, or leader, add your voice to the growing list of endorsements.</p>
+          <span class="cta">Get involved →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <span class="eyebrow-h">Where Lo Tishtok has already changed things</span>
+    <h2>The movement, in evidence.</h2>
+    <div class="principle-grid">
+      <div class="principle">
+        <div class="num">2022</div>
+        <h3>420-seat women's event.</h3>
+        <p>A single evening. Standing room only, 100 women waitlisted. Within the following week, 80 women came forward with disclosures. Silence broken, one voice at a time.</p>
+      </div>
+      <div class="principle">
+        <div class="num">2024</div>
+        <h3>Kiryat Sefer workshop.</h3>
+        <p>Extremists protested. The workshop went ahead. Within a week, 15 more communities requested the same program, and Mishpacha magazine backed our work in print.</p>
+      </div>
+      <div class="principle">
+        <div class="num">2025</div>
+        <h3>Fifteen years of proof.</h3>
+        <p>9,061 crisis contacts. 2,007 survivors supported. 197 law-enforcement cases. Cultural change that used to be considered impossible is measurable now.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="close">
+    <h2>Refuse the silence.</h2>
+    <p>You already knew. Now you know what to do with knowing.</p>
+    <a href="donate.html" class="btn btn-primary" style="background:#fff; color:var(--purple);">Fund the movement</a>
+    <a href="tel:*9781" class="btn btn-ghost" style="margin-left:8px;">Call our hotline · *9781</a>
+  </section>
+
 
   <footer>
     <div class="footer-motto"><em>Here.</em> Until sexual abuse isn't.</div>
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="/" class="nav-logo">
-          <div class="nav-logo-text">
-            <span class="brand">MAGEN</span>
-            <span class="sub">for Jewish Communities</span>
-          </div>
+          <div class="nav-logo-text"><span class="brand">MAGEN</span><span class="sub">for Jewish Communities</span></div>
         </a>
         <p>Breaking the silence and stigma of sexual abuse. Pursuing justice and healing for survivors across Jewish communities in Israel and beyond.</p>
         <div class="footer-contact">
@@ -183,39 +289,31 @@
           <a href="https://www.magen-israel.org">www.magen-israel.org</a>
         </div>
       </div>
-      <div class="footer-col">
-        <h4>Get Help</h4>
-        <ul>
-          <li><a href="safety-and-healing.html">Safety &amp; Healing</a></li>
-          <li><a href="emergency.html">Emergency</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Programs</h4>
-        <ul>
-          <li><a href="advocacy-and-investigations.html">Advocacy &amp; Investigations</a></li>
-          <li><a href="education-and-community.html">Education &amp; Community</a></li>
-          <li><a href="lo-tishtok.html">Lo Tishtok</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Magen</h4>
-        <ul>
-          <li><a href="about.html">About Magen</a></li>
-          <li><a href="staff.html">Our Team</a></li>
-          <li><a href="what-people-say.html">What People Say</a></li>
-          <li><a href="financial-transparency.html">Financial Transparency</a></li>
-          <li><a href="resources.html">Resources</a></li>
-          <li><a href="donate.html">Donate</a></li>
-        </ul>
-      </div>
+      <div class="footer-col"><h4>Get Help</h4><ul>
+        <li><a href="safety-and-healing.html">Safety &amp; Healing</a></li>
+        <li><a href="in-an-emergency.html">In an Emergency</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Programs</h4><ul>
+        <li><a href="advocacy-and-investigations.html">Advocacy &amp; Investigations</a></li>
+        <li><a href="education-and-community.html">Education &amp; Community</a></li>
+        <li><a href="lo-tishtok.html">Lo Tishtok</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Magen</h4><ul>
+        <li><a href="about.html">About Magen</a></li>
+        <li><a href="staff.html">Our Team</a></li>
+        <li><a href="what-people-say.html">What People Say</a></li>
+        <li><a href="financial-transparency.html">Financial Transparency</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="donate.html">Donate</a></li>
+      </ul></div>
     </div>
     <div class="footer-bottom">
       <span>&copy; 2026 Magen for Jewish Communities. Registered nonprofit. All rights reserved.</span>
-      <span><a href="#">Privacy Policy</a> · <a href="#">Terms of Use</a></span>
+      <span><a href="#">Privacy Policy</a> &middot; <a href="#">Terms of Use</a></span>
     </div>
   </footer>
+
 
 </body>
 </html>
