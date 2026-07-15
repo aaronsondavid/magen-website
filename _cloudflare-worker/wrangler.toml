@@ -1,0 +1,15 @@
+name = "magen-district-publisher"
+main = "src/worker.js"
+compatibility_date = "2024-11-01"
+workers_dev = true
+
+# Set these via `wrangler secret put ...` before deploy:
+#   MONDAY_TOKEN         — Monday.com API token (read only what we need)
+#   GITHUB_TOKEN         — GitHub PAT with repo:contents:write on aaronsondavid/magen-website
+#   PUBLISH_SHARED_SECRET — X-Magen-Secret header value Monday's automation must send
+[vars]
+DISTRICTS_BOARD_ID = "5100388371"
+SERVICES_BOARD_ID  = "5100388473"
+GITHUB_REPO        = "aaronsondavid/magen-website"
+GITHUB_BRANCH      = "main"
+JSON_PATH          = "data/districts/jerusalem-services.json"

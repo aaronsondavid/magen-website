@@ -1,0 +1,22 @@
+{
+  "board_id": 5100388371,
+  "columns": {
+    "Slug (external id)": "text_mm59eynm",
+    "Name (HE)": "text_mm59rhp7",
+    "City": "dropdown_mm59km3j",
+    "Palette": "dropdown_mm59fkv9",
+    "Centre lat": "numeric_mm599nzp",
+    "Centre lng": "numeric_mm59q219",
+    "Description": "long_text_mm59e22c",
+    "Publication status": "color_mm59r6c",
+    "Publish trigger": "color_mm59804s",
+    "Sort order": "numeric_mm59thgh",
+    "SF Id": "text_mm59yz5x",
+    "Last published at": "date_mm59s0x8",
+    "Last publish log": "long_text_mm59rhg0"
+  },
+  "subitem_board_id": null,
+  "group_ids": {
+    "Jerusalem": "group_mm59v4st"
+  }
+}

@@ -2,3 +2,7 @@
 images/
 *.pdf
 .DS_Store
+
+# Cloudflare Worker local caches (contain auth artifacts)
+_cloudflare-worker/.wrangler/
+_cloudflare-worker/node_modules/

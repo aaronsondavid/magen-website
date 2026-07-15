@@ -1,0 +1,34 @@
+name: Deploy district data to SiteGround
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "data/districts/**"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Copy district data to SiteGround via SFTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          protocol: sftp
+          server: ssh.magen-israel.org
+          port: 18765
+          username: ${{ secrets.SITEGROUND_SFTP_USER }}
+          password: ${{ secrets.SITEGROUND_SFTP_PASSWORD }}
+          local-dir: ./data/districts/
+          server-dir: /home/${{ secrets.SITEGROUND_SFTP_USER }}/www/preview.magen-israel.org/public_html/data/districts/
+          exclude: "**/.DS_Store"
+
+      - name: Purge SiteGround dynamic cache
+        run: |
+          curl -sS -X POST \
+            "https://api.siteground.com/website/${{ secrets.SITEGROUND_SITE_ID }}/cache/purge" \
+            -H "Authorization: Bearer ${{ secrets.SITEGROUND_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{"path":"/data/districts/"}' || echo "Cache purge skipped (optional)"
