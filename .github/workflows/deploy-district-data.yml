@@ -13,22 +13,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Copy district data to SiteGround via SFTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      - name: SCP district data files to SiteGround
+        uses: appleboy/scp-action@v0.1.7
         with:
-          protocol: sftp
-          server: ssh.magen-israel.org
+          host: ssh.magen-israel.org
           port: 18765
-          username: ${{ secrets.SITEGROUND_SFTP_USER }}
-          password: ${{ secrets.SITEGROUND_SFTP_PASSWORD }}
-          local-dir: ./data/districts/
-          server-dir: /home/${{ secrets.SITEGROUND_SFTP_USER }}/www/preview.magen-israel.org/public_html/data/districts/
-          exclude: "**/.DS_Store"
+          username: u1214-6mgzp0hmri36
+          key: ${{ secrets.SITEGROUND_SSH_KEY }}
+          source: "data/districts/*.json,data/districts/*.geojson"
+          target: "www/preview.magen-israel.org/public_html/data/districts/"
+          strip_components: 2
 
-      - name: Purge SiteGround dynamic cache
-        run: |
-          curl -sS -X POST \
-            "https://api.siteground.com/website/${{ secrets.SITEGROUND_SITE_ID }}/cache/purge" \
-            -H "Authorization: Bearer ${{ secrets.SITEGROUND_API_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            -d '{"path":"/data/districts/"}' || echo "Cache purge skipped (optional)"
+      - name: Chmod and purge dynamic cache
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ssh.magen-israel.org
+          port: 18765
+          username: u1214-6mgzp0hmri36
+          key: ${{ secrets.SITEGROUND_SSH_KEY }}
+          script: |
+            cd ~/www/preview.magen-israel.org/public_html/data/districts/
+            chmod 644 *.json *.geojson 2>/dev/null || true
+            wp --path=$HOME/www/magen-israel.org/public_html sg purge 2>&1 | tail -3 || true

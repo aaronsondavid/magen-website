@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex,nofollow,noarchive" />
-  <title>Find Your District · Magen for Jewish Communities</title>
+  <title>Who do I go to to report? · Magen for Jewish Communities</title>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
@@ -51,23 +51,56 @@
     .page-hero h1 { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:2.8rem;
       line-height:1.05; letter-spacing:-0.01em; margin-bottom:10px; }
     .page-hero p { color:#C1C1D0; font-size:1.05rem; max-width:680px; line-height:1.5; }
-    .search-widget { display:flex; gap:8px; }
+
+    /* Search widget with typeahead */
+    .search-widget { position:relative; }
+    .search-widget-input-wrap { display:flex; gap:8px; }
     .search-widget input { padding:12px 16px; border:none; border-radius:6px; font-size:0.95rem;
-      font-family:'Open Sans',sans-serif; min-width:280px; background:rgba(255,255,255,0.95); }
+      font-family:'Open Sans',sans-serif; min-width:320px; background:rgba(255,255,255,0.95); }
     .search-widget input:focus { outline:2px solid var(--teal); }
     .search-widget button { padding:12px 20px; background:var(--teal); color:#fff; border:none;
       border-radius:6px; font-family:'Barlow Condensed',sans-serif; font-weight:800; letter-spacing:0.08em;
       text-transform:uppercase; font-size:0.85rem; cursor:pointer; transition:background 0.15s; }
     .search-widget button:hover { background:var(--teal-dk); }
+    .search-suggest { position:absolute; top:calc(100% + 4px); left:0; right:0; background:#fff;
+      border-radius:6px; box-shadow:0 8px 30px rgba(0,0,0,0.25); max-height:320px; overflow-y:auto;
+      z-index:1000; display:none; padding:4px 0; }
+    .search-suggest.open { display:block; }
+    .search-suggest-item { padding:10px 16px; cursor:pointer; font-size:0.9rem; color:var(--dark);
+      border-bottom:1px solid #F0F0F0; }
+    .search-suggest-item:last-child { border-bottom:none; }
+    .search-suggest-item:hover, .search-suggest-item.active { background:var(--light); }
+    .search-suggest-item .primary { font-weight:600; }
+    .search-suggest-item .secondary { color:var(--gray); font-size:0.82rem; margin-top:2px; }
+    .search-suggest-empty { padding:14px 16px; color:var(--gray); font-size:0.88rem; font-style:italic; }
+
+    /* Layer selector row */
+    .layer-bar { max-width:1200px; margin:0 auto; padding:18px 60px 0; display:flex; justify-content:space-between;
+      align-items:center; flex-wrap:wrap; gap:14px; }
+    .layer-bar-label { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.85rem;
+      color:var(--gray); letter-spacing:0.14em; text-transform:uppercase; }
+    .layer-tabs { display:flex; gap:0; background:#F0F0F5; border-radius:8px; padding:4px; }
+    .layer-tab { padding:8px 16px; background:transparent; border:none; cursor:pointer;
+      font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.85rem;
+      color:var(--gray); letter-spacing:0.06em; text-transform:uppercase; border-radius:6px;
+      transition:all 0.15s; display:flex; align-items:center; gap:8px; }
+    .layer-tab:hover:not(:disabled) { color:var(--dark); background:rgba(0,0,0,0.03); }
+    .layer-tab.active { background:#fff; color:var(--dark); box-shadow:0 1px 4px rgba(0,0,0,0.08); }
+    .layer-tab:disabled { color:#AAA; cursor:not-allowed; }
+    .layer-tab .soon { font-size:0.62rem; padding:2px 6px; background:#DDD; color:#666; border-radius:3px;
+      font-family:'Open Sans',sans-serif; letter-spacing:0.05em; font-weight:600; }
+    .layer-caption { font-size:0.85rem; color:var(--gray); }
+    .layer-caption strong { color:var(--dark); }
 
     /* Map layout */
-    .map-shell { display:grid; grid-template-columns:1fr 380px; height:min(76vh, 720px); position:relative; }
-    #map { width:100%; height:100%; background:#e8ecef; }
+    .map-shell { display:grid; grid-template-columns:1fr 380px; height:min(76vh, 720px); position:relative;
+      max-width:1400px; margin:20px auto 0; }
+    #map { width:100%; height:100%; background:#e8ecef; border-radius:8px 0 0 8px; }
     .leaflet-container { font-family:'Open Sans',sans-serif; }
 
     /* Panel */
     .panel { background:#fff; border-left:1px solid #E5E7EB; overflow-y:auto; position:relative;
-      display:flex; flex-direction:column; }
+      display:flex; flex-direction:column; border-radius:0 8px 8px 0; }
     .panel-empty { padding:40px 32px; text-align:center; color:var(--gray); }
     .panel-empty .icon { font-size:2.4rem; margin-bottom:16px; opacity:0.55; }
     .panel-empty h3 { font-family:'Barlow Condensed',sans-serif; font-weight:800; color:var(--dark);
@@ -83,26 +116,36 @@
     .panel-head .close { position:absolute; top:18px; right:20px; background:none; border:none;
       font-size:1.6rem; color:var(--gray); cursor:pointer; padding:4px 10px; border-radius:4px; line-height:1; }
     .panel-head .close:hover { background:var(--light); color:var(--dark); }
-    .panel-head .district-tag { display:inline-block; padding:4px 12px; border-radius:14px;
+    .panel-head .station-tag { display:inline-block; padding:4px 12px; border-radius:14px;
       font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase;
       font-weight:700; margin-bottom:10px; background:var(--teal); color:#fff; }
     .panel-head h2 { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.7rem;
       color:var(--dark); line-height:1.15; }
-    .panel-head .name-he { display:block; font-size:0.95rem; color:var(--gray); font-weight:600; margin-top:4px; }
+    .panel-head .name-he { display:block; font-size:0.95rem; color:var(--gray); font-weight:600; margin-top:4px; direction:rtl; }
+    .panel-head .merhav { display:inline-block; margin-top:8px; font-size:0.78rem; color:var(--gray);
+      background:var(--light); padding:3px 10px; border-radius:12px; }
     .panel-body { padding:20px 30px 30px; flex:1; overflow-y:auto; }
-    .svc { padding:18px 0; border-bottom:1px solid #F0F0F0; }
-    .svc:last-child { border-bottom:none; }
-    .svc-label { font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; letter-spacing:0.15em;
-      text-transform:uppercase; color:var(--purple); font-weight:700; margin-bottom:6px; }
-    .svc h4 { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.05rem;
-      color:var(--dark); margin-bottom:6px; line-height:1.2; }
-    .svc .row { display:flex; gap:8px; align-items:baseline; font-size:0.88rem; color:var(--gray); margin-bottom:3px; }
-    .svc .row strong { min-width:64px; color:var(--dark); font-weight:600; }
-    .svc .notes { font-size:0.85rem; color:var(--gray); margin-top:8px; font-style:italic; }
-    .svc .actions { margin-top:10px; display:flex; gap:8px; flex-wrap:wrap; }
-    .svc .action { padding:6px 12px; background:var(--light); color:var(--teal-dk); text-decoration:none;
-      border-radius:4px; font-size:0.8rem; font-weight:700; letter-spacing:0.02em; }
-    .svc .action:hover { background:var(--teal); color:#fff; }
+    .panel-section { padding:16px 0; border-bottom:1px solid #F0F0F0; }
+    .panel-section:last-child { border-bottom:none; }
+    .panel-section h4 { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:0.75rem;
+      color:var(--purple); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:8px; }
+    .panel-section .row { display:flex; gap:8px; align-items:baseline; font-size:0.9rem; color:var(--dark); margin-bottom:6px; }
+    .panel-section .row strong { min-width:64px; color:var(--gray); font-weight:600; }
+    .panel-section .row a { color:var(--teal-dk); }
+    .panel-section p { font-size:0.9rem; color:var(--dark); line-height:1.55; }
+    .panel-section .placeholder { color:var(--gray); font-style:italic; font-size:0.85rem; }
+    .addr-line { font-size:0.98rem; color:var(--dark); font-weight:600; line-height:1.4; margin-bottom:8px; }
+    .addr-actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:6px; }
+    .addr-btn { padding:6px 12px; background:var(--light); color:var(--teal-dk); text-decoration:none;
+      border-radius:4px; font-size:0.78rem; font-weight:700; letter-spacing:0.02em; }
+    .addr-btn:hover { background:var(--teal); color:#fff; }
+    .addr-btn.sm { padding:4px 10px; font-size:0.72rem; }
+    ul.sub-points { list-style:none; padding:0; margin:0; }
+    ul.sub-points li { padding:12px 0; border-bottom:1px dashed #E5E7EB; }
+    ul.sub-points li:last-child { border-bottom:none; }
+    ul.sub-points .sub-name { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:0.98rem;
+      color:var(--dark); margin-bottom:2px; }
+    ul.sub-points .sub-addr { font-size:0.85rem; color:var(--gray); line-height:1.35; }
 
     .panel-cta { padding:24px 30px; background:var(--light); border-top:1px solid #E5E7EB; }
     .panel-cta p { font-size:0.88rem; color:var(--gray); margin-bottom:12px; line-height:1.5; }
@@ -125,11 +168,11 @@
     .district-tile:hover { border-color:var(--teal); transform:translateY(-2px); }
     .district-tile .swatch { width:14px; height:14px; border-radius:3px; display:inline-block; margin-right:8px; vertical-align:middle; }
     .district-tile .en { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.1rem; color:var(--dark); display:inline-block; vertical-align:middle; }
-    .district-tile .he { display:block; font-size:0.82rem; color:var(--gray); margin-top:4px; margin-right:22px; }
+    .district-tile .he { display:block; font-size:0.82rem; color:var(--gray); margin-top:4px; margin-right:22px; direction:rtl; }
 
     /* Info bar under map */
     .info-strip { background:var(--dark); color:#fff; padding:18px 60px; font-size:0.85rem;
-      display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; }
+      display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; max-width:1400px; margin:0 auto; border-radius:0 0 8px 8px; }
     .info-strip .left { color:rgba(255,255,255,0.75); }
     .info-strip .left strong { color:var(--teal); }
     .info-strip a { color:var(--teal); text-decoration:none; font-weight:700; }
@@ -147,20 +190,27 @@
     .footer-col a { color:#C1C1D0; text-decoration:none; font-size:0.83rem; }
     .footer-bottom { max-width:1400px; margin:32px auto 0; padding-top:18px; border-top:1px solid rgba(255,255,255,0.1); display:flex; justify-content:space-between; font-size:0.75rem; color:#8888A0; }
 
+    /* Data source line */
+    .data-source { padding:16px 60px; text-align:center; font-size:0.78rem; color:var(--gray); background:#FAFAFA; }
+    .data-source a { color:var(--teal-dk); text-decoration:none; }
+    .data-source a:hover { text-decoration:underline; }
+
     @media (max-width:1024px) {
-      .map-shell { grid-template-columns:1fr; height:auto; }
-      #map { height:60vh; }
-      .panel { max-height:400px; border-left:none; border-top:1px solid #E5E7EB; }
+      .map-shell { grid-template-columns:1fr; height:auto; margin:20px 16px 0; }
+      #map { height:60vh; border-radius:8px 8px 0 0; }
+      .panel { max-height:400px; border-left:none; border-top:1px solid #E5E7EB; border-radius:0 0 8px 8px; }
       .page-hero-inner { grid-template-columns:1fr; }
       .search-widget input { min-width:200px; }
       .district-row { grid-template-columns:repeat(2, 1fr); }
+      .layer-bar { padding:14px 24px 0; }
+      .info-strip { margin:0 16px; border-radius:0 0 8px 8px; padding:14px 20px; }
     }
     @media (max-width:700px) {
       nav { padding:0 20px; } .nav-links > li:not(:last-child) { display:none; }
       .page-hero { padding:40px 24px 40px; } .page-hero h1 { font-size:2rem; }
       .below-map { padding:40px 24px; }
       .district-row { grid-template-columns:1fr; }
-      .info-strip { padding:14px 24px; }
+      .data-source { padding:16px 24px; }
       .footer-grid { grid-template-columns:1fr; }
       .footer-bottom { flex-direction:column; gap:8px; text-align:center; }
     }
@@ -168,7 +218,7 @@
 </head>
 <body>
 
-  <div class="draft-banner">DRAFT PREVIEW &middot; district boundaries approximate, service listings placeholder (Salesforce → Monday sync pending)</div>
+  <div class="draft-banner">DRAFT PREVIEW · police-jurisdiction boundaries from data.gov.il; station contact details being sourced</div>
 
   <div class="crisis-bar">
     <span class="crisis-dot"></span>
@@ -176,10 +226,10 @@
     <a href="tel:100">Israel: 100</a> &nbsp;|&nbsp;
     <a href="tel:911">US: 911</a> &nbsp;|&nbsp;
     <a href="tel:999">UK: 999</a>
-    &nbsp;&middot;&nbsp;
+    &nbsp;·&nbsp;
     <strong>Magen hotline:</strong>
     <a href="tel:*9781">*9781</a>
-    &nbsp;&middot;&nbsp; 24/6
+    &nbsp;·&nbsp; 24/6
   </div>
 
   <div class="nav-wrap">
@@ -198,34 +248,50 @@
     </nav>
   </div>
 
-  <!-- Page hero -->
   <section class="page-hero">
     <div class="page-hero-inner">
       <div>
         <div class="eyebrow">Find your district</div>
-        <h1>Jerusalem services, by community.</h1>
-        <p>Click any coloured region to see the welfare office, police station, community centre, and crisis references that serve that part of Jerusalem. Or type in an address to jump straight to your neighbourhood.</p>
+        <h1>Who do I go to to report?</h1>
+        <p>If you're deciding whether to file a report, or accompanying someone who is, the first practical question is: which police station covers your area. Start typing your address or a neighbourhood below, or click any region on the map. We'll show you the station and how Magen can go with you.</p>
       </div>
-      <form class="search-widget" onsubmit="event.preventDefault(); searchAddress(this.q.value);">
-        <input name="q" type="text" placeholder="Address in Jerusalem (e.g. Emek Refaim 6)" autocomplete="off">
-        <button type="submit">Find</button>
-      </form>
+      <div class="search-widget">
+        <form class="search-widget-input-wrap" onsubmit="event.preventDefault(); submitTopSuggestion();">
+          <input id="search-input" name="q" type="text"
+                 placeholder="Address or neighbourhood (English or Hebrew)"
+                 autocomplete="off" spellcheck="false"
+                 aria-controls="search-suggest" aria-autocomplete="list">
+          <button type="submit">Find</button>
+        </form>
+        <div id="search-suggest" class="search-suggest" role="listbox"></div>
+      </div>
     </div>
   </section>
+
+  <div class="layer-bar">
+    <div style="display:flex; align-items:center; gap:14px;">
+      <span class="layer-bar-label">Show</span>
+      <div class="layer-tabs" role="tablist">
+        <button class="layer-tab active" data-layer="police" role="tab" aria-selected="true">Police stations <span class="soon" style="background:var(--teal); color:#fff;">Live</span></button>
+        <button class="layer-tab" data-layer="welfare" role="tab" aria-selected="false" disabled>Welfare offices <span class="soon">Soon</span></button>
+        <button class="layer-tab" data-layer="community" role="tab" aria-selected="false" disabled>Community admins <span class="soon">Soon</span></button>
+      </div>
+    </div>
+    <div class="layer-caption" id="layer-caption"><strong>Who investigates?</strong> Each region is the jurisdiction of one police station.</div>
+  </div>
 
   <div class="map-shell">
     <div id="map"></div>
     <aside class="panel">
       <div class="panel-empty" id="panel-empty">
         <div class="icon">📍</div>
-        <h3>Pick a district to see its services.</h3>
-        <p>Click any colored region on the map, or search an address above.</p>
+        <h3>Pick a region to see the station that covers it.</h3>
+        <p>Click any coloured region on the map, or search an address above.</p>
         <ul>
-          <li>Welfare office (lishkat revacha) contact and hours</li>
-          <li>Local police station and non-emergency line</li>
-          <li>Community centre (matnas / minhelet)</li>
-          <li>Nearest Heder 4 for emergency care</li>
-          <li>Magen coordinator for that area</li>
+          <li>Station name and Merhav (sub-district)</li>
+          <li>Station address, phone, reception hours</li>
+          <li>What to expect when you report</li>
+          <li>How Magen can accompany you</li>
         </ul>
       </div>
       <div class="panel-detail" id="panel-detail"></div>
@@ -233,13 +299,17 @@
   </div>
 
   <div class="info-strip">
-    <div class="left"><strong>Not sure which one you're in?</strong> Use the address search above, or tap the coloured region closest to where you live.</div>
+    <div class="left"><strong>Not sure which region you're in?</strong> Use the search above, or tap the coloured region closest to where you live.</div>
     <a href="tel:*9781">Or call *9781 for immediate help →</a>
   </div>
 
+  <div class="data-source">
+    Jurisdiction boundaries: <a href="https://data.gov.il/dataset/israel-police/resource/98b01a9d-09d1-4c9a-aaef-5f78bae6a319" target="_blank" rel="noopener">Israel Police open data (data.gov.il)</a>, simplified for the web. Base map: OpenStreetMap.
+  </div>
+
   <section class="below-map">
-    <h3>Jump to a district</h3>
-    <p class="sub">Prefer to scan the list? Tap any district to bring it up on the map and load its services.</p>
+    <h3>Jump to a station</h3>
+    <p class="sub">Prefer to scan the list? Tap any station to bring its jurisdiction up on the map.</p>
     <div class="district-row" id="district-row"></div>
   </section>
 
@@ -276,190 +346,316 @@
     </div>
     <div class="footer-bottom">
       <span>&copy; 2026 Magen for Jewish Communities. Registered nonprofit. All rights reserved.</span>
-      <span><a href="#" style="color:#C1C1D0;">Privacy Policy</a> &middot; <a href="#" style="color:#C1C1D0;">Terms of Use</a></span>
+      <span><a href="#" style="color:#C1C1D0;">Privacy Policy</a> · <a href="#" style="color:#C1C1D0;">Terms of Use</a></span>
     </div>
   </footer>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
-    // Palette lookup for district colours
     const PALETTE = {
-      "teal":       "#00AEAC",
-      "teal-dk":    "#008F8D",
-      "teal-lt":    "#4FC7C5",
-      "purple":     "#6B4FA1",
-      "purple-dk":  "#4E3583",
-      "purple-lt":  "#8E75C0",
-      "pink":       "#E879A0",
-      "pink-dk":    "#C15A80",
+      "teal":"#00AEAC","teal-dk":"#008F8D","teal-lt":"#4FC7C5",
+      "purple":"#6B4FA1","purple-dk":"#4E3583","purple-lt":"#8E75C0",
+      "pink":"#E879A0","pink-dk":"#C15A80"
     };
 
-    // Init map — centre on Jerusalem
-    const map = L.map('map', { zoomControl: true, scrollWheelZoom: false }).setView([31.780, 35.213], 12);
-    map.on('click focus', () => map.scrollWheelZoom.enable());
-    map.on('mouseout', () => map.scrollWheelZoom.disable());
+    // Layer registry — each layer sources its polygons + services and
+    // owns its panel renderer. Adding welfare/community later = new entry.
+    const LAYERS = {
+      police: {
+        label:'Police stations',
+        question:'Who investigates?',
+        polyUrl:  'data/geo/jerusalem-police-jurisdictions.geojson',
+        servicesUrl:'data/districts/jerusalem-police-services.json',
+        renderPanel: renderPolicePanel,
+      },
+    };
 
-    // OSM base layer
+    const map = L.map('map', { zoomControl:true, scrollWheelZoom:false }).setView([31.780, 35.213], 11);
+    map.on('click focus', () => map.scrollWheelZoom.enable());
+    map.on('mouseout',    () => map.scrollWheelZoom.disable());
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      attribution: '© <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom:18,
+      attribution:'© <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
 
-    let districtLayer = null;
-    let districtData  = {}; // slug -> feature layer
-    let servicesData  = null;
-    let activeSlug    = null;
+    let activeLayerId = 'police';
+    let currentGeoLayer = null;
+    let currentServices = null;
+    let currentGeoJson  = null;
+    let activeSlug = null;
+    let addressMarker = null;
 
-    function styleFor(feature, isActive=false, isHover=false) {
-      const c = PALETTE[feature.properties.palette] || PALETTE["teal"];
+    function styleFor(feat, isActive=false, isHover=false) {
+      const c = PALETTE[feat.properties.palette] || PALETTE.teal;
       return {
-        color: c,
-        weight: isActive ? 3 : 2,
-        opacity: 0.85,
-        fillColor: c,
-        fillOpacity: isActive ? 0.55 : (isHover ? 0.35 : 0.18),
+        color:c, weight:isActive?3:2, opacity:0.85,
+        fillColor:c, fillOpacity: isActive?0.55:(isHover?0.35:0.22),
       };
     }
 
     function openPanel(slug) {
       activeSlug = slug;
-      const feat = districtLayer.getLayers().find(l => l.feature.properties.slug === slug);
-      if (feat) {
-        // reset all styles first
-        districtLayer.eachLayer(l => l.setStyle(styleFor(l.feature)));
-        feat.setStyle(styleFor(feat.feature, true));
-        try { map.fitBounds(feat.getBounds(), { padding:[30,30], maxZoom:14 }); } catch(e){}
-      }
-      const props = feat.feature.properties;
-      const svc = servicesData.districts[slug] || {};
-      const html = renderPanelDetail(props, svc);
-      document.getElementById('panel-empty').style.display = 'none';
+      const layer = currentGeoLayer.getLayers().find(l => l.feature.properties.slug === slug);
+      if (!layer) return;
+      currentGeoLayer.eachLayer(l => l.setStyle(styleFor(l.feature)));
+      layer.setStyle(styleFor(layer.feature, true));
+      try { map.fitBounds(layer.getBounds(), { padding:[30,30], maxZoom:13 }); } catch(e){}
+      const props = layer.feature.properties;
+      const svc = (currentServices && currentServices.stations && currentServices.stations[slug]) || {};
+      const html = LAYERS[activeLayerId].renderPanel(props, svc);
+      document.getElementById('panel-empty').style.display='none';
       const detail = document.getElementById('panel-detail');
       detail.innerHTML = html;
       detail.classList.add('open');
+      detail.scrollTop = 0;
     }
 
     function closePanel() {
       activeSlug = null;
-      districtLayer.eachLayer(l => l.setStyle(styleFor(l.feature)));
+      if (currentGeoLayer) currentGeoLayer.eachLayer(l => l.setStyle(styleFor(l.feature)));
       document.getElementById('panel-detail').classList.remove('open');
-      document.getElementById('panel-empty').style.display = 'block';
+      document.getElementById('panel-empty').style.display='block';
     }
 
-    function renderPanelDetail(props, svc) {
-      const c = PALETTE[props.palette] || PALETTE["teal"];
-      const svcCard = (label, name, rows, extra) => `
-        <div class="svc">
-          <div class="svc-label">${label}</div>
-          <h4>${name || '—'}</h4>
-          ${rows.map(([k,v]) => v ? `<div class="row"><strong>${k}</strong><span>${v}</span></div>` : '').join('')}
-          ${extra || ''}
-        </div>`;
-      const w = svc.welfare_office || {}, p = svc.police_station || {}, m = svc.community_centre || {},
-            cr = svc.crisis_reference || {}, mc = svc.magen_coordinator || {};
+    function renderPolicePanel(props, svc) {
+      const c = PALETTE[props.palette] || PALETTE.teal;
+      const gmapsLink = (lat, lng, label) =>
+        `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&destination_place_id=&travelmode=driving` +
+        (label ? `&query=${encodeURIComponent(label)}` : '');
+      const wazeLink = (lat, lng) => `https://waze.com/ul?ll=${lat},${lng}&navigate=yes`;
+
+      // Station address block
+      const addressBlock = svc.address ? `
+        <div class="addr-line" dir="rtl">${svc.address}</div>
+        ${(svc.lat && svc.lng) ? `<div class="addr-actions">
+          <a class="addr-btn" href="${gmapsLink(svc.lat, svc.lng, svc.address)}" target="_blank" rel="noopener">Google Maps →</a>
+          <a class="addr-btn" href="${wazeLink(svc.lat, svc.lng)}" target="_blank" rel="noopener">Waze →</a>
+        </div>` : ''}
+      ` : `<p class="placeholder">Station address is being sourced.</p>`;
+
+      // Sub-reception points ("נקודות") — auxiliary places you can also file
+      const subPoints = (svc.sub_points || []);
+      const subBlock = subPoints.length ? `
+        <div class="panel-section">
+          <h4>Also serves this jurisdiction</h4>
+          <p style="color:var(--gray); font-size:0.85rem; margin-bottom:10px;">Sub-reception points (נקודות) where you can also report.</p>
+          <ul class="sub-points">
+            ${subPoints.map(sp => `
+              <li>
+                <div class="sub-name" dir="rtl">${sp.name}</div>
+                ${sp.address ? `<div class="sub-addr" dir="rtl">${sp.address}</div>` : ''}
+                ${(sp.lat && sp.lng) ? `<div class="addr-actions">
+                  <a class="addr-btn sm" href="${gmapsLink(sp.lat, sp.lng, sp.address || sp.name)}" target="_blank" rel="noopener">Directions →</a>
+                </div>` : ''}
+              </li>`).join('')}
+          </ul>
+        </div>` : '';
+
+      // Optional notes about this specific jurisdiction
+      const notesBlock = svc.notes ? `
+        <div class="panel-section">
+          <h4>About this jurisdiction</h4>
+          <p>${svc.notes}</p>
+        </div>` : '';
+
+      const magenCoord = svc.magen_coordinator
+        ? `<div class="row"><strong>Coordinator</strong><span>${svc.magen_coordinator}</span></div>`
+        : `<p class="placeholder">A Magen advocate will be paired with you when you call *9781.</p>`;
+
       return `
         <div class="panel-head">
           <button class="close" onclick="closePanel()" aria-label="Close">×</button>
-          <span class="district-tag" style="background:${c};">District</span>
+          <span class="station-tag" style="background:${c};">Police station · ${props.mahoz_he}</span>
           <h2>${props.name_en}</h2>
           <span class="name-he">${props.name_he}</span>
+          ${props.merhav_he ? `<span class="merhav">Sub-district: ${props.merhav_he}</span>` : ''}
         </div>
         <div class="panel-body">
-          ${svcCard('Welfare office', w.name, [
-            ['Address', w.address],['Phone', w.phone ? `<a href="tel:${w.phone.replace(/[^0-9*+]/g,'')}">${w.phone}</a>` : ''],['Hours', w.hours],
-          ], w.notes ? `<div class="notes">${w.notes}</div>` : '')}
-          ${svcCard('Police station', p.name, [
-            ['Address', p.address],['Non-emerg.', p.phone ? `<a href="tel:${p.phone.replace(/[^0-9*+]/g,'')}">${p.phone}</a>` : ''],['Emergency', p.emergency ? `<a href="tel:${p.emergency}">${p.emergency}</a>` : ''],
-          ], p.sexual_crimes_unit ? `<div class="notes">${p.sexual_crimes_unit}</div>` : '')}
-          ${svcCard('Community centre', m.name, [
-            ['Address', m.address],['Phone', m.phone ? `<a href="tel:${m.phone.replace(/[^0-9*+]/g,'')}">${m.phone}</a>` : ''],
-          ], m.website ? `<div class="actions"><a class="action" href="${m.website}" target="_blank" rel="noopener">Visit site →</a></div>` : '')}
-          ${svcCard('Emergency / crisis', 'Nearest specialised care', [
-            ['Heder 4', cr.nearest_heder_4],['SACC', cr.national_sacc],
-          ], `<div class="actions"><a class="action" href="in-an-emergency.html">See all Heder 4 hospitals →</a></div>`)}
-          ${svcCard('Magen coordinator', mc.name, [
-            ['Phone', mc.phone ? `<a href="tel:${mc.phone.replace(/[^0-9*+]/g,'')}">${mc.phone}</a>` : ''],['Email', mc.email ? `<a href="mailto:${mc.email}">${mc.email}</a>` : ''],
-          ], '')}
+          <div class="panel-section">
+            <h4>Station address</h4>
+            ${addressBlock}
+            <p class="placeholder" style="margin-top:10px;">Phone and reception hours aren't published in the government's open-data feed — we're gathering them by hand. For now, call *9781 and Magen will confirm hours and route you.</p>
+          </div>
+          ${notesBlock}
+          ${subBlock}
+          <div class="panel-section">
+            <h4>What to expect when you report</h4>
+            <p>Under Israeli law, the police open a criminal file when a complaint is filed. An investigator (often specially trained for sexual-offence complaints) will interview you. You have the right to bring a support person — Magen can arrange one.</p>
+          </div>
+          <div class="panel-section">
+            <h4>How Magen can accompany you</h4>
+            ${magenCoord}
+            <p style="margin-top:10px;">We can prepare you for the interview, accompany you to the station, coordinate with the investigator, and connect you to a rape-crisis centre and trauma-informed care afterwards.</p>
+          </div>
         </div>
         <div class="panel-cta">
-          <p>Not sure whether this is the right district? Call our hotline and we'll direct you to the exact service you need.</p>
+          <p>Call before you go — Magen will pair you with an advocate for the specific station, and can meet you there.</p>
           <a href="tel:*9781">Call Magen · *9781</a>
           <a href="contact.html" class="ghost">Send a message instead</a>
         </div>`;
     }
 
-    // Load GeoJSON + services + wire the map
-    Promise.all([
-      fetch('data/districts/jerusalem-community-admins.geojson').then(r => r.json()),
-      fetch('data/districts/jerusalem-services.json').then(r => r.json()),
-    ]).then(([geo, svc]) => {
-      servicesData = svc;
-      districtLayer = L.geoJSON(geo, {
-        style: (feat) => styleFor(feat),
-        onEachFeature: (feat, layer) => {
-          layer.on('mouseover', () => { if (activeSlug !== feat.properties.slug) layer.setStyle(styleFor(feat, false, true)); });
-          layer.on('mouseout',  () => { if (activeSlug !== feat.properties.slug) layer.setStyle(styleFor(feat)); });
-          layer.on('click', () => openPanel(feat.properties.slug));
-          layer.bindTooltip(`<strong>${feat.properties.name_en}</strong><br><span dir="rtl">${feat.properties.name_he}</span>`, { sticky:true, className:'district-tooltip' });
-        }
-      }).addTo(map);
-      try { map.fitBounds(districtLayer.getBounds(), { padding:[20,20] }); } catch(e){}
-
-      // Build the district-tile list
-      const row = document.getElementById('district-row');
-      geo.features.forEach(f => {
-        const c = PALETTE[f.properties.palette];
-        const btn = document.createElement('button');
-        btn.className = 'district-tile';
-        btn.innerHTML = `<span class="swatch" style="background:${c};"></span><span class="en">${f.properties.name_en}</span><span class="he">${f.properties.name_he}</span>`;
-        btn.onclick = () => openPanel(f.properties.slug);
-        row.appendChild(btn);
-      });
-    }).catch(err => {
-      console.error(err);
-      document.getElementById('map').innerHTML = '<div style="padding:40px; text-align:center; color:#555;">Could not load district data. Refresh the page.</div>';
-    });
-
-    // Address geocode via Nominatim → find containing district
-    function pointInPolygon(pt, poly) {
+    function pointInPolygon(pt, ring) {
       let inside = false;
-      for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
-        const xi = poly[i][0], yi = poly[i][1], xj = poly[j][0], yj = poly[j][1];
-        const intersect = ((yi > pt[1]) !== (yj > pt[1])) &&
-                          (pt[0] < (xj - xi) * (pt[1] - yi) / (yj - yi) + xi);
-        if (intersect) inside = !inside;
+      for (let i=0, j=ring.length-1; i<ring.length; j=i++) {
+        const xi=ring[i][0], yi=ring[i][1], xj=ring[j][0], yj=ring[j][1];
+        const cross = ((yi>pt[1]) !== (yj>pt[1])) && (pt[0] < (xj-xi)*(pt[1]-yi)/(yj-yi)+xi);
+        if (cross) inside = !inside;
       }
       return inside;
     }
 
-    function findDistrictAt(lng, lat) {
+    function findFeatureAt(lng, lat) {
       let found = null;
-      districtLayer.eachLayer(layer => {
-        const geom = layer.feature.geometry;
+      currentGeoLayer.eachLayer(layer => {
         if (found) return;
-        const polys = geom.type === 'Polygon' ? [geom.coordinates] : geom.coordinates;
-        for (const poly of polys) {
-          if (pointInPolygon([lng, lat], poly[0])) { found = layer.feature.properties.slug; return; }
-        }
+        const g = layer.feature.geometry;
+        const polys = g.type === 'Polygon' ? [g.coordinates] : g.coordinates;
+        for (const poly of polys) if (pointInPolygon([lng, lat], poly[0])) { found = layer.feature.properties.slug; return; }
       });
       return found;
     }
 
-    function searchAddress(query) {
-      if (!query.trim()) return;
-      const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query + ', Jerusalem, Israel')}&limit=1`;
-      fetch(url, { headers: { 'Accept-Language': 'en,he' } })
-        .then(r => r.json())
-        .then(results => {
-          if (!results.length) { alert('Address not found. Try a landmark or intersection.'); return; }
-          const lat = parseFloat(results[0].lat), lng = parseFloat(results[0].lon);
-          L.marker([lat, lng]).addTo(map).bindPopup(`<strong>${query}</strong><br><small>${results[0].display_name}</small>`).openPopup();
-          map.setView([lat, lng], 14);
-          const slug = findDistrictAt(lng, lat);
-          if (slug) setTimeout(() => openPanel(slug), 400);
-          else alert('That address is outside our current district coverage. Call *9781 and we can still help.');
-        })
-        .catch(() => alert('Search unavailable right now. Please try again or call *9781.'));
+    async function loadLayer(id) {
+      activeLayerId = id;
+      const conf = LAYERS[id];
+      document.querySelectorAll('.layer-tab').forEach(t => t.classList.toggle('active', t.dataset.layer === id));
+      document.getElementById('layer-caption').innerHTML = `<strong>${conf.question}</strong> Each region is the jurisdiction of one ${conf.label.toLowerCase().replace(/s$/, '')}.`;
+      if (currentGeoLayer) { map.removeLayer(currentGeoLayer); currentGeoLayer = null; }
+      closePanel();
+
+      const [geo, svc] = await Promise.all([
+        fetch(conf.polyUrl).then(r => r.json()),
+        fetch(conf.servicesUrl).then(r => r.json()).catch(() => ({ stations:{} })),
+      ]);
+      currentGeoJson  = geo;
+      currentServices = svc;
+
+      currentGeoLayer = L.geoJSON(geo, {
+        style: f => styleFor(f),
+        onEachFeature: (f, layer) => {
+          layer.on('mouseover', () => { if (activeSlug !== f.properties.slug) layer.setStyle(styleFor(f, false, true)); });
+          layer.on('mouseout',  () => { if (activeSlug !== f.properties.slug) layer.setStyle(styleFor(f)); });
+          layer.on('click',     () => openPanel(f.properties.slug));
+          layer.bindTooltip(`<strong>${f.properties.name_en}</strong><br><span dir="rtl">${f.properties.name_he}</span>`, { sticky:true });
+        },
+      }).addTo(map);
+      try { map.fitBounds(currentGeoLayer.getBounds(), { padding:[20,20] }); } catch(e){}
+
+      const row = document.getElementById('district-row');
+      row.innerHTML = '';
+      geo.features
+        .slice()
+        .sort((a,b) => a.properties.name_en.localeCompare(b.properties.name_en))
+        .forEach(f => {
+          const c = PALETTE[f.properties.palette] || PALETTE.teal;
+          const btn = document.createElement('button');
+          btn.className = 'district-tile';
+          btn.innerHTML = `<span class="swatch" style="background:${c};"></span><span class="en">${f.properties.name_en}</span><span class="he">${f.properties.name_he}</span>`;
+          btn.onclick = () => openPanel(f.properties.slug);
+          row.appendChild(btn);
+        });
+    }
+
+    document.querySelectorAll('.layer-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        if (tab.disabled) return;
+        loadLayer(tab.dataset.layer);
+      });
+    });
+
+    loadLayer('police').catch(err => {
+      console.error(err);
+      document.getElementById('map').innerHTML = '<div style="padding:40px; text-align:center; color:#555;">Could not load district data. Refresh the page.</div>';
+    });
+
+    // ---------- Address typeahead (Nominatim, IL, he+en) ----------
+    const searchInput   = document.getElementById('search-input');
+    const searchSuggest = document.getElementById('search-suggest');
+    let suggestState = { results:[], activeIndex:-1, lastQuery:'', timer:null, abort:null };
+
+    function renderSuggestions() {
+      const { results, activeIndex } = suggestState;
+      if (!results.length) {
+        searchSuggest.innerHTML = `<div class="search-suggest-empty">No matches. Try a landmark or intersection.</div>`;
+        searchSuggest.classList.add('open');
+        return;
+      }
+      searchSuggest.innerHTML = results.map((r, i) => {
+        const parts = (r.display_name || '').split(',').map(s => s.trim());
+        const primary = parts.slice(0,2).join(', ');
+        const secondary = parts.slice(2).join(', ');
+        return `<div class="search-suggest-item ${i===activeIndex?'active':''}" data-i="${i}" role="option">
+          <div class="primary">${primary || r.display_name}</div>
+          ${secondary ? `<div class="secondary">${secondary}</div>` : ''}
+        </div>`;
+      }).join('');
+      searchSuggest.classList.add('open');
+      searchSuggest.querySelectorAll('.search-suggest-item').forEach(el => {
+        el.addEventListener('mousedown', ev => { ev.preventDefault(); pickSuggestion(parseInt(el.dataset.i, 10)); });
+      });
+    }
+
+    function closeSuggest() { searchSuggest.classList.remove('open'); }
+
+    async function runQuery(q) {
+      if (suggestState.abort) suggestState.abort.abort();
+      suggestState.abort = new AbortController();
+      const url = 'https://nominatim.openstreetmap.org/search'
+        + '?format=jsonv2&limit=6&addressdetails=1'
+        + '&countrycodes=il'
+        + '&accept-language=he,en'
+        + '&viewbox=34.9,32.0,35.7,31.5&bounded=0'
+        + '&q=' + encodeURIComponent(q);
+      try {
+        const res = await fetch(url, { signal: suggestState.abort.signal, headers:{ 'Accept':'application/json' } });
+        const data = await res.json();
+        suggestState.results = data;
+        suggestState.activeIndex = data.length ? 0 : -1;
+        renderSuggestions();
+      } catch (err) {
+        if (err.name !== 'AbortError') console.error(err);
+      }
+    }
+
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.trim();
+      clearTimeout(suggestState.timer);
+      if (q.length < 2) { closeSuggest(); return; }
+      if (q === suggestState.lastQuery) return;
+      suggestState.lastQuery = q;
+      suggestState.timer = setTimeout(() => runQuery(q), 280);
+    });
+    searchInput.addEventListener('focus', () => { if (suggestState.results.length) renderSuggestions(); });
+    searchInput.addEventListener('blur',  () => { setTimeout(closeSuggest, 150); });
+
+    searchInput.addEventListener('keydown', ev => {
+      const { results } = suggestState;
+      if (!results.length && ev.key !== 'Escape') return;
+      if (ev.key === 'ArrowDown') { ev.preventDefault(); suggestState.activeIndex = (suggestState.activeIndex+1) % results.length; renderSuggestions(); }
+      else if (ev.key === 'ArrowUp')   { ev.preventDefault(); suggestState.activeIndex = (suggestState.activeIndex-1+results.length) % results.length; renderSuggestions(); }
+      else if (ev.key === 'Enter')     { if (suggestState.activeIndex >= 0) { ev.preventDefault(); pickSuggestion(suggestState.activeIndex); } }
+      else if (ev.key === 'Escape')    { closeSuggest(); }
+    });
+
+    function submitTopSuggestion() {
+      if (suggestState.results.length) pickSuggestion(Math.max(0, suggestState.activeIndex));
+      else if (searchInput.value.trim().length >= 2) runQuery(searchInput.value.trim()).then(() => { if (suggestState.results.length) pickSuggestion(0); });
+    }
+
+    function pickSuggestion(i) {
+      const r = suggestState.results[i];
+      if (!r) return;
+      const lat = parseFloat(r.lat), lng = parseFloat(r.lon);
+      searchInput.value = (r.display_name || '').split(',').slice(0,2).join(', ');
+      closeSuggest();
+      if (addressMarker) map.removeLayer(addressMarker);
+      addressMarker = L.marker([lat, lng]).addTo(map)
+        .bindPopup(`<strong>${searchInput.value}</strong><br><small>${r.display_name || ''}</small>`).openPopup();
+      map.setView([lat, lng], 13);
+      const slug = findFeatureAt(lng, lat);
+      if (slug) setTimeout(() => openPanel(slug), 300);
+      else alert(`That address is outside our current ${LAYERS[activeLayerId].label.toLowerCase()} coverage. Call *9781 and we can still help.`);
     }
   </script>
 
