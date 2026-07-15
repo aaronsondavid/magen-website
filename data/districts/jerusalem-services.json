@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Jerusalem district service directory.",
-    "last_updated": "2026-07-15T16:02:02.162Z",
+    "last_updated": "2026-07-15T16:09:15.412Z",
     "source": "Monday boards 5100388371 + 5100388473 (published via Salesforce → Monday sync)",
     "district_count": 8,
     "service_count": 40
