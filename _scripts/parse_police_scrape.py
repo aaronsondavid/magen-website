@@ -19,32 +19,48 @@ OUT_JSON = ROOT / "data/districts/israel-police-services.json"
 
 # ---- Parser ------------------------------------------------------------------
 
+RANKS = ["ניצב", "תנ\"צ", "נצ\"מ", "סנ\"צ", "רפ\"ק", "רב נגד", "רס\"ר", "רס\"ב", "פקד",
+         "רב-רס\"ל", "רב פקד", "תנ\\\"צ", "רס\\\"ר", "מפקד", "מ\"מ", "רס\"ל"]
+
+def _extract_commander(lines):
+    """The commander line on gov.il looks like: 'שם משפחהרב-רסל שם משפחה' or 'שם משפחהסנצ שם משפחה'.
+    The name is repeated: first with no rank prefix, then with rank prefix glued.
+    Strategy: find a line before 'כתובת:' that contains a known rank marker, take the text after the rank."""
+    for l in lines:
+        if l.startswith(("כתובת:", "טלפון:", "פקס:", "אימייל:")): break
+        # Look for any rank keyword; commander name is what follows
+        for rank in RANKS:
+            idx = l.find(rank)
+            if idx >= 0:
+                after = l[idx + len(rank):].strip()
+                if after:
+                    return f"{rank} {after}"
+    return ""
+
 def parse_blocks(text: str):
     """Split by the '-\n' delimiter and parse each block."""
-    # Split on leading dash-only lines
     blocks = re.split(r'\n-\n', "\n" + text.strip() + "\n")
     parsed = []
     for b in blocks:
         b = b.strip()
         if not b: continue
-        # First few lines: name, address, phone (or blank), commander line
-        # Then structured lines: כתובת:..., טלפון:..., פקס:..., אימייל:...
         lines = [l.rstrip() for l in b.splitlines() if l.strip()]
         if len(lines) < 2: continue
         name = lines[0].strip()
-        # Pull structured fields
         addr = phone = fax = email = ""
         for l in lines:
             if l.startswith("כתובת:"): addr = l[len("כתובת:"):].strip()
             elif l.startswith("טלפון:"): phone = l[len("טלפון:"):].strip()
             elif l.startswith("פקס:"):   fax   = l[len("פקס:"):].strip()
             elif l.startswith("אימייל:"): email = l[len("אימייל:"):].strip()
+        commander = _extract_commander(lines)
         parsed.append({
-            "name_he": name,
-            "address": addr,
-            "phone":   phone,
-            "fax":     fax,
-            "email":   email,
+            "name_he":   name,
+            "address":   addr,
+            "phone":     phone,
+            "fax":       fax,
+            "email":     email,
+            "commander": commander,
         })
     return parsed
 
@@ -107,23 +123,23 @@ def main():
             s = candidates[0]
             row["phone"] = s["phone"]
             row["reception_hours"] = ""  # scrape didn't have hours per station
-            # Also stash a "richer" address from the scrape if we have one and the CSV's was terse
             if s["address"] and (not row["address"] or len(s["address"]) > len(row["address"])):
                 row["address"] = s["address"]
             row["email"] = s["email"]
             row["fax"] = s["fax"]
+            row["commander"] = s["commander"]
             matched += 1
     # Add columns if missing
-    if "email" not in rows[0]:
-        for r in rows: r.setdefault("email", "")
-    if "fax" not in rows[0]:
-        for r in rows: r.setdefault("fax", "")
+    for col in ("email", "fax", "commander"):
+        if col not in rows[0]:
+            for r in rows: r.setdefault(col, "")
 
     save_template(rows)
     print(f"matched {matched}/{len(rows)} template rows → wrote {TEMPLATE.relative_to(ROOT)}")
 
-    # Also assemble the final services JSON
-    services = []
+    # Also assemble the final services JSON — stations keyed by slug so the
+    # frontend can do currentServices.stations[slug] directly.
+    services = {}
     for r in rows:
         entry = {
             "slug":       r["slug"],
@@ -135,11 +151,12 @@ def main():
             "phone":      r.get("phone",""),
             "email":      r.get("email",""),
             "fax":        r.get("fax",""),
+            "commander":  r.get("commander",""),
             "lng":        r["lng"],
             "lat":        r["lat"],
             "community_policing": r["community_policing"] == "yes",
         }
-        services.append(entry)
+        services[r["slug"]] = entry
 
     OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
     OUT_JSON.write_text(json.dumps({
@@ -147,8 +164,8 @@ def main():
             "description": "Israel Police station directory (nationwide).",
             "source": "gov.il stations app (scraped) + data.gov.il police_receptions CSV + PoliceStationBoundaries GDB",
             "station_count": len(services),
-            "with_phone": sum(1 for s in services if s["phone"]),
-            "with_email": sum(1 for s in services if s["email"]),
+            "with_phone": sum(1 for s in services.values() if s["phone"]),
+            "with_email": sum(1 for s in services.values() if s["email"]),
         },
         "stations": services,
     }, ensure_ascii=False, indent=2), encoding="utf-8")

@@ -364,13 +364,14 @@
       police: {
         label:'Police stations',
         question:'Who investigates?',
-        polyUrl:  'data/geo/jerusalem-police-jurisdictions.geojson',
-        servicesUrl:'data/districts/jerusalem-police-services.json',
+        polyUrl:  'data/geo/israel-police-jurisdictions.geojson',
+        servicesUrl:'data/districts/israel-police-services.json',
         renderPanel: renderPolicePanel,
       },
     };
 
-    const map = L.map('map', { zoomControl:true, scrollWheelZoom:false }).setView([31.780, 35.213], 11);
+    // Default view: whole of Israel so the nationwide layer fits on load
+    const map = L.map('map', { zoomControl:true, scrollWheelZoom:false }).setView([31.60, 34.90], 8);
     map.on('click focus', () => map.scrollWheelZoom.enable());
     map.on('mouseout',    () => map.scrollWheelZoom.disable());
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -424,11 +425,15 @@
         (label ? `&query=${encodeURIComponent(label)}` : '');
       const wazeLink = (lat, lng) => `https://waze.com/ul?ll=${lat},${lng}&navigate=yes`;
 
-      // Station address, phone, hours
+      // Station contact fields
       const telHref = v => `<a href="tel:${String(v).replace(/[^0-9*+]/g,'')}">${v}</a>`;
+      const mailHref = v => `<a href="mailto:${v}">${v}</a>`;
       const contactRows = [
-        svc.phone && ['Phone', telHref(svc.phone)],
-        svc.hours && ['Hours', svc.hours],
+        svc.phone     && ['Phone',    telHref(svc.phone)],
+        svc.email     && ['Email',    mailHref(svc.email)],
+        svc.fax       && ['Fax',      svc.fax],
+        svc.commander && ['Commander (קצין)', svc.commander],
+        svc.hours     && ['Hours',    svc.hours],
       ].filter(Boolean);
       const addressBlock = svc.address ? `
         <div class="addr-line" dir="rtl">${svc.address}</div>
@@ -466,6 +471,11 @@
           <p>${svc.notes}</p>
         </div>` : '';
 
+      const communityBlock = svc.community_policing ? `
+        <div class="panel-section" style="background:#F0FDF4; border-left:3px solid var(--teal); padding-left:12px;">
+          <p style="margin:0;">👮 <strong>Community policing available</strong> at this station.</p>
+        </div>` : '';
+
       const magenCoord = svc.magen_coordinator
         ? `<div class="row"><strong>Coordinator</strong><span>${svc.magen_coordinator}</span></div>`
         : `<p class="placeholder">A Magen advocate will be paired with you when you call *9781.</p>`;
@@ -483,6 +493,7 @@
             <h4>Station contact</h4>
             ${addressBlock}
           </div>
+          ${communityBlock}
           ${notesBlock}
           ${subBlock}
           <div class="panel-section">

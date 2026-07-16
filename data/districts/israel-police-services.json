@@ -6,8 +6,8 @@
     "with_phone": 76,
     "with_email": 74
   },
-  "stations": [
-    {
+  "stations": {
+    "avm-al-pchm": {
       "slug": "avm-al-pchm",
       "name_he": "תחנת אום אל-פחם",
       "name_en": "",
@@ -17,11 +17,12 @@
       "phone": "04-8639500",
       "email": "",
       "fax": "",
+      "commander": "סנ\"צ יוסי בן-דוד",
       "lng": "35.15644",
       "lat": "32.532",
       "community_policing": false
     },
-    {
+    "avpkym": {
       "slug": "avpkym",
       "name_he": "תחנת אופקים",
       "name_en": "",
@@ -31,11 +32,12 @@
       "phone": "08-9928222",
       "email": "OFAKIM@POLICE.GOV.IL",
       "fax": "08-9928220",
+      "commander": "סנ\"צ משה בוהדנה",
       "lng": "34.61901",
       "lat": "31.32163",
       "community_policing": false
     },
-    {
+    "aryal": {
       "slug": "aryal",
       "name_he": "תחנת אריאל",
       "name_en": "",
@@ -45,11 +47,12 @@
       "phone": "",
       "email": "",
       "fax": "",
+      "commander": "סנ\"צ איטל אלמוג",
       "lng": "35.21028",
       "lat": "32.10279",
       "community_policing": true
     },
-    {
+    "ashdvd": {
       "slug": "ashdvd",
       "name_he": "תחנת אשדוד",
       "name_en": "",
@@ -59,11 +62,12 @@
       "phone": "08-6387222",
       "email": "ASHDOD@POLICE.GOV.IL",
       "fax": "08-6387295",
+      "commander": "סנ\"צ רונן עמרם",
       "lng": "34.65004",
       "lat": "31.77884",
       "community_policing": false
     },
-    {
+    "ashklvn": {
       "slug": "ashklvn",
       "name_he": "תחנת אשקלון",
       "name_en": "",
@@ -73,11 +77,12 @@
       "phone": "08-6771440",
       "email": "ASHKELON@POLICE.GOV.IL",
       "fax": "08-9781417",
+      "commander": "סנ\"צ אלדד אל-ישיב",
       "lng": "34.56224",
       "lat": "31.6665",
       "community_policing": false
     },
-    {
+    "bakh-al-grbyh": {
       "slug": "bakh-al-grbyh",
       "name_he": "תחנת באקה אל-גרביה",
       "name_en": "",
@@ -87,11 +92,12 @@
       "phone": "",
       "email": "",
       "fax": "",
+      "commander": "",
       "lng": "35.04165",
       "lat": "32.42015",
       "community_policing": true
     },
-    {
+    "bar-shb": {
       "slug": "bar-shb",
       "name_he": "תחנת באר שבע",
       "name_en": "",
@@ -101,11 +107,12 @@
       "phone": "08-6462744",
       "email": "BEER_SHEVA@POLICE.GOV.IL",
       "fax": "08-9781408",
+      "commander": "נצ\"מ כפיר סולומון",
       "lng": "34.78781",
       "lat": "31.24049",
       "community_policing": false
     },
-    {
+    "byt-shan": {
       "slug": "byt-shan",
       "name_he": "תחנת בית שאן",
       "name_en": "",
@@ -115,11 +122,12 @@
       "phone": "04-6067444",
       "email": "BEIT.SHEAN@POLICE.GOV.IL",
       "fax": "04-6067423",
+      "commander": "סנ\"צ הדר עמר",
       "lng": "35.49357",
       "lat": "32.50091",
       "community_policing": true
     },
-    {
+    "byt-shmsh": {
       "slug": "byt-shmsh",
       "name_he": "תחנת בית שמש",
       "name_en": "",
@@ -129,11 +137,12 @@
       "phone": "02-9902222",
       "email": "BEIT.SHEMESH@POLICE.GOV.IL",
       "fax": "02-5898927",
+      "commander": "סנ\"צ אלדד פרץ",
       "lng": "34.99441",
       "lat": "31.76163",
       "community_policing": false
     },
-    {
+    "bny-brk": {
       "slug": "bny-brk",
       "name_he": "תחנת בני ברק",
       "name_en": "",
@@ -143,11 +152,12 @@
       "phone": "03-6796444",
       "email": "BNEI-BRAK@POLICE.GOV.IL",
       "fax": "076-8601650",
+      "commander": "סנ\"צ יובל שביט",
       "lng": "34.83107",
       "lat": "32.09872",
       "community_policing": false
     },
-    {
+    "bnymyn": {
       "slug": "bnymyn",
       "name_he": "תחנת בנימין",
       "name_en": "",
@@ -157,11 +167,12 @@
       "phone": "02-9972221",
       "email": "BINYAMIN@POLICE.GOV.IL",
       "fax": "02-9706447",
+      "commander": "סנ\"צ שרית ברסקה",
       "lng": "35.26047",
       "lat": "31.86623",
       "community_policing": false
     },
-    {
+    "bt-ym": {
       "slug": "bt-ym",
       "name_he": "תחנת בת ים",
       "name_en": "",
@@ -171,11 +182,12 @@
       "phone": "03-5555222",
       "email": "BAT-YAM@POLICE.GOV.IL",
       "fax": "03-5555203",
+      "commander": "סנ\"צ עדי ברקוביץ",
       "lng": "34.75739",
       "lat": "32.01429",
       "community_policing": false
     },
-    {
+    "gsr-a-zrka": {
       "slug": "gsr-a-zrka",
       "name_he": "תחנת ג'סר א-זרקא",
       "name_en": "",
@@ -185,11 +197,12 @@
       "phone": "",
       "email": "",
       "fax": "",
+      "commander": "",
       "lng": "34.90521",
       "lat": "32.53669",
       "community_policing": false
     },
-    {
+    "gbtyym": {
       "slug": "gbtyym",
       "name_he": "תחנת גבעתיים",
       "name_en": "",
@@ -199,11 +212,12 @@
       "phone": "03-5724466",
       "email": "GIVATAYIM@POLICE.GOV.IL",
       "fax": "03-5724454",
+      "commander": "סנ\"צ שי תירם",
       "lng": "34.80827",
       "lat": "32.06701",
       "community_policing": true
     },
-    {
+    "gvln": {
       "slug": "gvln",
       "name_he": "תחנת גולן",
       "name_en": "",
@@ -213,11 +227,12 @@
       "phone": "04-6968222",
       "email": "GOLAN@POLICE.GOV.IL",
       "fax": "04-6458770",
+      "commander": "סנ\"צ ערן טביב",
       "lng": "35.6933",
       "lat": "32.99161",
       "community_policing": false
     },
-    {
+    "glyl-mrby": {
       "slug": "glyl-mrby",
       "name_he": "תחנת גליל מערבי",
       "name_en": "",
@@ -227,11 +242,12 @@
       "phone": "04-8185400",
       "email": "",
       "fax": "",
+      "commander": "סנ\"צ אלי אדרי",
       "lng": "35.16382",
       "lat": "32.94828",
       "community_policing": false
     },
-    {
+    "glylvt": {
       "slug": "glylvt",
       "name_he": "תחנת גלילות",
       "name_en": "",
@@ -241,11 +257,12 @@
       "phone": "09-9704444",
       "email": "GLILOT@POLICE.GOV.IL",
       "fax": "03-6803650",
+      "commander": "סנ\"צ ליאב מנשרוף",
       "lng": "34.81472",
       "lat": "32.16404",
       "community_policing": false
     },
-    {
+    "dymvnh": {
       "slug": "dymvnh",
       "name_he": "תחנת דימונה",
       "name_en": "",
@@ -255,11 +272,12 @@
       "phone": "08-6543444",
       "email": "DIMONA@POLICE.GOV.IL",
       "fax": "08-9781424",
+      "commander": "סנ\"צ משה שיטרית",
       "lng": "35.0341",
       "lat": "31.0676",
       "community_policing": true
     },
-    {
+    "hbkh": {
       "slug": "hbkh",
       "name_he": "תחנת הבקעה",
       "name_en": "",
@@ -269,11 +287,12 @@
       "phone": "",
       "email": "",
       "fax": "",
+      "commander": "",
       "lng": "35.49511",
       "lat": "32.09929",
       "community_policing": false
     },
-    {
+    "hyyrvt": {
       "slug": "hyyrvt",
       "name_he": "תחנת העיירות",
       "name_en": "",
@@ -283,11 +302,12 @@
       "phone": "08-6292444",
       "email": "AYAROT@POLICE.GOV.IL",
       "fax": "08-9781426",
+      "commander": "סנ\"צ יהב סימן",
       "lng": "34.89752",
       "lat": "31.3038",
       "community_policing": false
     },
-    {
+    "hral": {
       "slug": "hral",
       "name_he": "תחנת הראל",
       "name_en": "",
@@ -297,11 +317,12 @@
       "phone": "02-5339205",
       "email": "HAREL@POLICE.GOV.IL",
       "fax": "02-5339253",
+      "commander": "",
       "lng": "35.13941",
       "lat": "31.79009",
       "community_policing": false
     },
-    {
+    "zbvlvn": {
       "slug": "zbvlvn",
       "name_he": "תחנת זבולון",
       "name_en": "",
@@ -311,11 +332,12 @@
       "phone": "04-8464444",
       "email": "ZVULUN@POLICE.GOV.IL",
       "fax": "04-6458706",
+      "commander": "נצ\"מ יניב סויסה",
       "lng": "35.07335",
       "lat": "32.81536",
       "community_policing": false
     },
-    {
+    "zkrvn-ykb": {
       "slug": "zkrvn-ykb",
       "name_he": "תחנת זכרון יעקב",
       "name_en": "",
@@ -325,11 +347,12 @@
       "phone": "04-6299444",
       "email": "ZICHRON.YAAKOV@POLICE.GOV.IL",
       "fax": "04-6299410",
+      "commander": "סנ\"צ דוד אטיאס",
       "lng": "34.93917",
       "lat": "32.57324",
       "community_policing": false
     },
-    {
+    "chbrvn": {
       "slug": "chbrvn",
       "name_he": "תחנת חברון",
       "name_en": "",
@@ -339,11 +362,12 @@
       "phone": "02-9959555",
       "email": "YEHUDA@POLICE.GOV.IL",
       "fax": "02-9969413",
+      "commander": "נצ\"מ אלי זיתון",
       "lng": "35.11041",
       "lat": "31.53011",
       "community_policing": false
     },
-    {
+    "chdrh": {
       "slug": "chdrh",
       "name_he": "תחנת חדרה",
       "name_en": "",
@@ -353,11 +377,12 @@
       "phone": "04-6327444",
       "email": "HADERA@POLICE.GOV.IL",
       "fax": "04-6458718",
+      "commander": "סנ\"צ ארז-משה עמר",
       "lng": "34.91174",
       "lat": "32.43722",
       "community_policing": false
     },
-    {
+    "chvlvn": {
       "slug": "chvlvn",
       "name_he": "תחנת חולון",
       "name_en": "",
@@ -367,11 +392,12 @@
       "phone": "03-5027911",
       "email": "HOLON@POLICE.GOV.IL",
       "fax": "03-6803722",
+      "commander": "נצ\"מ אליעד אנקרי",
       "lng": "34.7749",
       "lat": "32.01453",
       "community_policing": false
     },
-    {
+    "chyph": {
       "slug": "chyph",
       "name_he": "תחנת חיפה",
       "name_en": "",
@@ -381,11 +407,12 @@
       "phone": "04-8648444",
       "email": "HAIFA@POLICE.GOV.IL",
       "fax": "04-6459048",
+      "commander": "",
       "lng": "35.01041",
       "lat": "32.80477",
       "community_policing": false
     },
-    {
+    "tbryh": {
       "slug": "tbryh",
       "name_he": "תחנת טבריה",
       "name_en": "",
@@ -395,11 +422,12 @@
       "phone": "04-6728444",
       "email": "TVERIA@POLICE.GOV.IL",
       "fax": "04-6728470",
+      "commander": "סנ\"צ תמיר ארד",
       "lng": "35.52572",
       "lat": "32.79481",
       "community_policing": true
     },
-    {
+    "tyybh": {
       "slug": "tyybh",
       "name_he": "תחנת טייבה",
       "name_en": "",
@@ -409,11 +437,12 @@
       "phone": "09-7612444",
       "email": "TAYBE@POLICE.GOV.IL",
       "fax": "09-7697853",
+      "commander": "סנ\"צ רתם גיל",
       "lng": "34.99341",
       "lat": "32.24937",
       "community_policing": true
     },
-    {
+    "tyrh": {
       "slug": "tyrh",
       "name_he": "תחנת טירה",
       "name_en": "",
@@ -423,11 +452,12 @@
       "phone": "09-7908613",
       "email": "TIRA@POLICE.GOV.IL",
       "fax": "09-7461514",
+      "commander": "סנ\"צ גלעד עוזר",
       "lng": "34.95453",
       "lat": "32.23113",
       "community_policing": false
     },
-    {
+    "tyrt-krml": {
       "slug": "tyrt-krml",
       "name_he": "תחנת טירת כרמל",
       "name_en": "",
@@ -437,11 +467,12 @@
       "phone": "04-8579000",
       "email": "TIRAT.CARMEL@POLICE.GOV.IL",
       "fax": "04-8579050",
+      "commander": "סנ\"צ אופיר ברקוביץ",
       "lng": "34.97479",
       "lat": "32.75911",
       "community_policing": false
     },
-    {
+    "tmrh": {
       "slug": "tmrh",
       "name_he": "תחנת טמרה",
       "name_en": "",
@@ -451,11 +482,12 @@
       "phone": "",
       "email": "",
       "fax": "",
+      "commander": "",
       "lng": "35.18194",
       "lat": "32.84989",
       "community_policing": false
     },
-    {
+    "ybnh": {
       "slug": "ybnh",
       "name_he": "תחנת יבנה",
       "name_en": "",
@@ -465,11 +497,12 @@
       "phone": "08-9325444",
       "email": "YAVNE_POLICE@POLICE.GOV.IL",
       "fax": "08-9770127",
+      "commander": "סנ\"צ תמיר הלל",
       "lng": "34.75107",
       "lat": "31.878",
       "community_policing": false
     },
-    {
+    "ypv": {
       "slug": "ypv",
       "name_he": "תחנת יפו",
       "name_en": "",
@@ -479,11 +512,12 @@
       "phone": "03-6802222",
       "email": "JAFFA@POLICE.GOV.IL",
       "fax": "09-7697897",
+      "commander": "סנ\"צ גיא אליהו",
       "lng": "34.76215",
       "lat": "32.05412",
       "community_policing": false
     },
-    {
+    "yrdn": {
       "slug": "yrdn",
       "name_he": "תחנת ירדן",
       "name_en": "",
@@ -493,11 +527,12 @@
       "phone": "04-6809444",
       "email": "YARDEN@POLICE.GOV.IL",
       "fax": "04-6809458",
+      "commander": "סנ\"צ אימן חסן",
       "lng": "35.54943",
       "lat": "32.96966",
       "community_policing": false
     },
-    {
+    "kpr-kna": {
       "slug": "kpr-kna",
       "name_he": "תחנת כפר כנא",
       "name_en": "",
@@ -507,11 +542,12 @@
       "phone": "04-6479300",
       "email": "KANA@POLICE.GOV.IL",
       "fax": "04-6479314",
+      "commander": "סנ\"צ תומר פינצי",
       "lng": "35.33442",
       "lat": "32.7568",
       "community_policing": false
     },
-    {
+    "kpr-sba": {
       "slug": "kpr-sba",
       "name_he": "תחנת כפר סבא",
       "name_en": "",
@@ -521,11 +557,12 @@
       "phone": "09-7473444",
       "email": "KFARSABA.POLICE@GMAIL.COM",
       "fax": "",
+      "commander": "סנ\"צ יורם כהן",
       "lng": "34.89261",
       "lat": "32.17543",
       "community_policing": false
     },
-    {
+    "kpr-kasm": {
       "slug": "kpr-kasm",
       "name_he": "תחנת כפר קאסם",
       "name_en": "",
@@ -535,11 +572,12 @@
       "phone": "03-9740600",
       "email": "KFARQASEM@POLICE.GOV.IL",
       "fax": "",
+      "commander": "סנ\"צ גיא בכר",
       "lng": "34.97592",
       "lat": "32.11386",
       "community_policing": false
     },
-    {
+    "krmyal": {
       "slug": "krmyal",
       "name_he": "תחנת כרמיאל",
       "name_en": "",
@@ -549,11 +587,12 @@
       "phone": "04-9901444",
       "email": "CARMIEL@POLICE.GOV.IL",
       "fax": "04-6458767",
+      "commander": "סנ\"צ יצחק אבוחצירה",
       "lng": "35.30401",
       "lat": "32.92248",
       "community_policing": true
     },
-    {
+    "lb-hbyrh": {
       "slug": "lb-hbyrh",
       "name_he": "תחנת לב הבירה",
       "name_en": "",
@@ -563,11 +602,12 @@
       "phone": "02-5391550",
       "email": "LEV.HABIRA@POLICE.GOV.IL",
       "fax": "02-5898919",
+      "commander": "נצ\"מ אנדריי קוטוזוב",
       "lng": "35.22172",
       "lat": "31.782",
       "community_policing": false
     },
-    {
+    "lb-tl-abyb": {
       "slug": "lb-tl-abyb",
       "name_he": "תחנת לב תל אביב",
       "name_en": "",
@@ -577,11 +617,12 @@
       "phone": "03-7416444",
       "email": "LEV.TELAVIV@POLICE.GOV.IL",
       "fax": "03-6803690",
+      "commander": "נצ\"מ רותם וסקר",
       "lng": "34.7972",
       "lat": "32.08212",
       "community_policing": false
     },
-    {
+    "lvd": {
       "slug": "lvd",
       "name_he": "תחנת לוד",
       "name_en": "",
@@ -591,11 +632,12 @@
       "phone": "08-9782444",
       "email": "LOD@POLICE.GOV.IL",
       "fax": "08-9770110",
+      "commander": "נצ\"מ מידד לביא",
       "lng": "34.89344",
       "lat": "31.95116",
       "community_policing": false
     },
-    {
+    "mgd-al-krvm": {
       "slug": "mgd-al-krvm",
       "name_he": "תחנת מג'ד אל-כרום",
       "name_en": "",
@@ -605,11 +647,12 @@
       "phone": "04-8832444",
       "email": "MAJDAL@POLICE.GOV.IL",
       "fax": "04-8832468",
+      "commander": "סנ\"צ אברהם אברהם",
       "lng": "35.24831",
       "lat": "32.91879",
       "community_policing": false
     },
-    {
+    "mgdl-hmk": {
       "slug": "mgdl-hmk",
       "name_he": "תחנת מגדל העמק",
       "name_en": "",
@@ -619,11 +662,12 @@
       "phone": "04-6447444",
       "email": "MIGDAL.HAEMEK@POLICE.GOV.IL",
       "fax": "04-6458727",
+      "commander": "סנ\"צ ערן מזוז",
       "lng": "35.24699",
       "lat": "32.67758",
       "community_policing": true
     },
-    {
+    "mvdyyn": {
       "slug": "mvdyyn",
       "name_he": "תחנת מודיעין",
       "name_en": "",
@@ -633,11 +677,12 @@
       "phone": "08-6769444",
       "email": "MODIIN@POLICE.GOV.IL",
       "fax": "08-9770109",
+      "commander": "סנ\"צ אורן טיבי",
       "lng": "35.00567",
       "lat": "31.90614",
       "community_policing": false
     },
-    {
+    "mvdyyn-ylyt": {
       "slug": "mvdyyn-ylyt",
       "name_he": "תחנת מודיעין עילית",
       "name_en": "",
@@ -647,11 +692,12 @@
       "phone": "08-6447200",
       "email": "MODIIN.ILLIT@POLICE.GOV.IL",
       "fax": "08-6213892",
+      "commander": "סנ\"צ שמואל גרבי",
       "lng": "35.03331",
       "lat": "31.94003",
       "community_policing": false
     },
-    {
+    "mvryh": {
       "slug": "mvryh",
       "name_he": "תחנת מוריה",
       "name_en": "",
@@ -661,11 +707,12 @@
       "phone": "02-5683200",
       "email": "MERHAVMORIA@POLICE.GOV.IL",
       "fax": "02-5683238",
+      "commander": "נצ\"מ יובל ראובן",
       "lng": "35.21369",
       "lat": "31.75065",
       "community_policing": false
     },
-    {
+    "mth-yhvdh": {
       "slug": "mth-yhvdh",
       "name_he": "תחנת מטה יהודה",
       "name_en": "",
@@ -675,11 +722,12 @@
       "phone": "02-9902210",
       "email": "MATE.YEHUDA@POLICE.GOV.IL",
       "fax": "02-9902383",
+      "commander": "סנ\"צ ראובן נאווי",
       "lng": "34.99402",
       "lat": "31.7613",
       "community_policing": false
     },
-    {
+    "msvbym": {
       "slug": "msvbym",
       "name_he": "תחנת מסובים",
       "name_en": "",
@@ -689,11 +737,12 @@
       "phone": "03-5384425",
       "email": "MESUBIM@POLICE.GOV.IL",
       "fax": "03-5384450",
+      "commander": "סנ\"צ מרדכי בלס",
       "lng": "34.8455",
       "lat": "32.03665",
       "community_policing": false
     },
-    {
+    "mlh-advmym": {
       "slug": "mlh-advmym",
       "name_he": "תחנת מעלה אדומים",
       "name_en": "",
@@ -703,11 +752,12 @@
       "phone": "02-5358444",
       "email": "MAALE.ADUMIM@POLICE.GOV.IL",
       "fax": "02-5358440",
+      "commander": "סנ\"צ אילן רחמים",
       "lng": "35.29215",
       "lat": "31.76832",
       "community_policing": false
     },
-    {
+    "mlvt-trshycha": {
       "slug": "mlvt-trshycha",
       "name_he": "תחנת מעלות תרשיחא",
       "name_en": "",
@@ -717,11 +767,12 @@
       "phone": "04-9578444",
       "email": "MAALOT.TARSHIHA@POLICE.GOV.IL",
       "fax": "04-9578410",
+      "commander": "",
       "lng": "35.26333",
       "lat": "33.01658",
       "community_policing": true
     },
-    {
+    "mshgb": {
       "slug": "mshgb",
       "name_he": "תחנת משגב",
       "name_en": "",
@@ -731,11 +782,12 @@
       "phone": "04-9904444",
       "email": "MISGAV@POLICE.GOV.IL",
       "fax": "04-9904410",
+      "commander": "סנ\"צ אנר יוסף",
       "lng": "35.26434",
       "lat": "32.8609",
       "community_policing": false
     },
-    {
+    "nhryh": {
       "slug": "nhryh",
       "name_he": "תחנת נהריה",
       "name_en": "",
@@ -745,11 +797,12 @@
       "phone": "04-9518444",
       "email": "NAHARIA@POLICE.GOV.IL",
       "fax": "04-6458726",
+      "commander": "סנ\"צ בסאם עליאן",
       "lng": "35.10092",
       "lat": "33.00596",
       "community_policing": false
     },
-    {
+    "nvf-hglyl": {
       "slug": "nvf-hglyl",
       "name_he": "תחנת נוף הגליל",
       "name_en": "",
@@ -759,11 +812,12 @@
       "phone": "04-6029444",
       "email": "NOF-HAGALIL@POLICE.GOV.IL",
       "fax": "04-6458925",
+      "commander": "סנ\"צ יעקב ביטון",
       "lng": "35.31374",
       "lat": "32.70171",
       "community_policing": true
     },
-    {
+    "ntsrt": {
       "slug": "ntsrt",
       "name_he": "תחנת נצרת",
       "name_en": "",
@@ -773,11 +827,12 @@
       "phone": "04-6028444",
       "email": "NAZARETH@POLICE.GOV.IL",
       "fax": "04-6028428",
+      "commander": "",
       "lng": "35.30017",
       "lat": "32.70629",
       "community_policing": false
     },
-    {
+    "nshr": {
       "slug": "nshr",
       "name_he": "תחנת נשר",
       "name_en": "",
@@ -787,11 +842,12 @@
       "phone": "",
       "email": "",
       "fax": "",
+      "commander": "",
       "lng": "35.05101",
       "lat": "32.76731",
       "community_policing": false
     },
-    {
+    "ntybvt": {
       "slug": "ntybvt",
       "name_he": "תחנת נתיבות",
       "name_en": "",
@@ -801,11 +857,12 @@
       "phone": "08-9937444",
       "email": "NETIVOT@POLICE.GOV.IL",
       "fax": "08-9937410",
+      "commander": "סנ\"צ אדי-מימ בוחבוט",
       "lng": "34.58854",
       "lat": "31.41452",
       "community_policing": true
     },
-    {
+    "ntnyh": {
       "slug": "ntnyh",
       "name_he": "תחנת נתניה",
       "name_en": "",
@@ -815,11 +872,12 @@
       "phone": "09-8864444",
       "email": "NETANYA@POLICE.GOV.IL",
       "fax": "09-8864420",
+      "commander": "נצ\"מ קובי אבוטבול",
       "lng": "34.85425",
       "lat": "32.29474",
       "community_policing": true
     },
-    {
+    "vz": {
       "slug": "vz",
       "name_he": "תחנת עוז",
       "name_en": "",
@@ -829,11 +887,12 @@
       "phone": "02-5685400",
       "email": "OZ@POLICE.GOV.IL",
       "fax": "02-5685410",
+      "commander": "סנ\"צ דניאל מזרחי",
       "lng": "35.24169",
       "lat": "31.75235",
       "community_policing": false
     },
-    {
+    "yrvn": {
       "slug": "yrvn",
       "name_he": "תחנת עירון",
       "name_en": "",
@@ -843,11 +902,12 @@
       "phone": "04-6158444",
       "email": "IRON@POLICE.GOV.IL",
       "fax": "04-6158430",
+      "commander": "סנ\"צ יצחק בן-חיים",
       "lng": "35.09791",
       "lat": "32.50687",
       "community_policing": false
     },
-    {
+    "kv": {
       "slug": "kv",
       "name_he": "תחנת עכו",
       "name_en": "",
@@ -857,11 +917,12 @@
       "phone": "04-9876808",
       "email": "AKO@POLICE.GOV.IL",
       "fax": "04-9876896",
+      "commander": "סנ\"צ דוד קלי",
       "lng": "35.07005",
       "lat": "32.92756",
       "community_policing": false
     },
-    {
+    "pvlh": {
       "slug": "pvlh",
       "name_he": "תחנת עפולה",
       "name_en": "",
@@ -871,11 +932,12 @@
       "phone": "04-6524444",
       "email": "AFULA@POLICE.GOV.IL",
       "fax": "04-6524465",
+      "commander": "סנ\"צ שגיב לוי מזרחי",
       "lng": "35.28993",
       "lat": "32.60953",
       "community_policing": true
     },
-    {
+    "tsyvn": {
       "slug": "tsyvn",
       "name_he": "תחנת עציון",
       "name_en": "",
@@ -885,11 +947,12 @@
       "phone": "02-6544444",
       "email": "ETZION@POLICE.GOV.IL",
       "fax": "02-6544466",
+      "commander": "סנ\"צ רפי וקנין",
       "lng": "35.12307",
       "lat": "31.70648",
       "community_policing": false
     },
-    {
+    "rd": {
       "slug": "rd",
       "name_he": "תחנת ערד",
       "name_en": "",
@@ -899,11 +962,12 @@
       "phone": "08-9551222",
       "email": "ARAD@POLICE.GOV.IL",
       "fax": "08-9551240",
+      "commander": "סנ\"צ סהר אליעזר שאול",
       "lng": "35.21236",
       "lat": "31.25647",
       "community_policing": false
     },
-    {
+    "rvr": {
       "slug": "rvr",
       "name_he": "תחנת ערוער",
       "name_en": "",
@@ -913,11 +977,12 @@
       "phone": "08-9517400",
       "email": "ARUER@POLICE.GOV.IL",
       "fax": "076-8602618",
+      "commander": "סנ\"צ ברוך הוניג",
       "lng": "35.0178",
       "lat": "31.15987",
       "community_policing": false
     },
-    {
+    "ptch-tkvvh": {
       "slug": "ptch-tkvvh",
       "name_he": "תחנת פתח תקווה",
       "name_en": "",
@@ -927,11 +992,12 @@
       "phone": "03-9393444",
       "email": "PETACH.TIKVA@POLICE.GOV.IL",
       "fax": "03-9398702",
+      "commander": "נצ\"מ אביעד כתפי",
       "lng": "34.88782",
       "lat": "32.09273",
       "community_policing": true
     },
-    {
+    "tspt": {
       "slug": "tspt",
       "name_he": "תחנת צפת",
       "name_en": "",
@@ -941,11 +1007,12 @@
       "phone": "04-6978444",
       "email": "ZEFAT@POLICE.GOV.IL",
       "fax": "04-6458773",
+      "commander": "סנ\"צ חיים ביטון",
       "lng": "35.50309",
       "lat": "32.97039",
       "community_policing": true
     },
-    {
+    "kryt-gt": {
       "slug": "kryt-gt",
       "name_he": "תחנת קרית גת",
       "name_en": "",
@@ -955,11 +1022,12 @@
       "phone": "08-6872222",
       "email": "KIRYAT_GAT@POLICE.GOV.IL",
       "fax": "08-9781420",
+      "commander": "סנ\"צ שלום שי אללי",
       "lng": "34.77493",
       "lat": "31.60481",
       "community_policing": true
     },
-    {
+    "kryt-mlaky": {
       "slug": "kryt-mlaky",
       "name_he": "תחנת קרית מלאכי",
       "name_en": "",
@@ -969,11 +1037,12 @@
       "phone": "08-8608444",
       "email": "KIRYAT_MALACHI@POLICE.GOV.IL",
       "fax": "08-6872280",
+      "commander": "סנ\"צ ליאור מצרפי",
       "lng": "34.74824",
       "lat": "31.7271",
       "community_policing": false
     },
-    {
+    "kryt-shmvnh": {
       "slug": "kryt-shmvnh",
       "name_he": "תחנת קרית שמונה",
       "name_en": "",
@@ -983,11 +1052,12 @@
       "phone": "04-6958444",
       "email": "KIRYAT.SHMONA@POLICE.GOV.IL",
       "fax": "04-6958410",
+      "commander": "",
       "lng": "35.56802",
       "lat": "33.21271",
       "community_policing": true
     },
-    {
+    "rash-hyn": {
       "slug": "rash-hyn",
       "name_he": "תחנת ראש העין",
       "name_en": "",
@@ -997,11 +1067,12 @@
       "phone": "03-9004444",
       "email": "ROSH.HAAYIN@POLICE.GOV.IL",
       "fax": "03-9004404",
+      "commander": "סנ\"צ יאיר חנונה",
       "lng": "34.94535",
       "lat": "32.09871",
       "community_policing": false
     },
-    {
+    "rashvn-ltsyvn": {
       "slug": "rashvn-ltsyvn",
       "name_he": "תחנת ראשון לציון",
       "name_en": "",
@@ -1011,11 +1082,12 @@
       "phone": "03-9609444",
       "email": "RISHON_LEZION@POLICE.GOV.IL",
       "fax": "03-6803801",
+      "commander": "נצ\"מ גיל אלחדד",
       "lng": "34.79709",
       "lat": "31.97456",
       "community_policing": false
     },
-    {
+    "rht": {
       "slug": "rht",
       "name_he": "תחנת רהט",
       "name_en": "",
@@ -1025,11 +1097,12 @@
       "phone": "08-9913888",
       "email": "RAHAT@POLICE.GOV.IL",
       "fax": "08-9917518",
+      "commander": "סנ\"צ יונה יצחק",
       "lng": "34.75525",
       "lat": "31.40307",
       "community_policing": false
     },
-    {
+    "rchvbvt": {
       "slug": "rchvbvt",
       "name_he": "תחנת רחובות",
       "name_en": "",
@@ -1039,11 +1112,12 @@
       "phone": "08-9371444",
       "email": "REHOVOT@POLICE.GOV.IL",
       "fax": "08-9770107",
+      "commander": "סנ\"צ רן כהן",
       "lng": "34.81045",
       "lat": "31.89983",
       "community_policing": false
     },
-    {
+    "rmlh": {
       "slug": "rmlh",
       "name_he": "תחנת רמלה",
       "name_en": "",
@@ -1053,11 +1127,12 @@
       "phone": "08-9279535",
       "email": "RAMLA@POLICE.GOV.IL",
       "fax": "08-9770108",
+      "commander": "סנ\"צ אפרים תשובה",
       "lng": "34.86946",
       "lat": "31.93009",
       "community_policing": true
     },
-    {
+    "shgb-shlvm": {
       "slug": "shgb-shlvm",
       "name_he": "תחנת שגב שלום",
       "name_en": "",
@@ -1067,11 +1142,12 @@
       "phone": "",
       "email": "",
       "fax": "",
+      "commander": "",
       "lng": "34.84235",
       "lat": "31.20842",
       "community_policing": false
     },
-    {
+    "shdvt": {
       "slug": "shdvt",
       "name_he": "תחנת שדות",
       "name_en": "",
@@ -1081,11 +1157,12 @@
       "phone": "09-9617201",
       "email": "SADOT@POLICE.GOV.IL",
       "fax": "09-7697879",
+      "commander": "סנ\"צ נדב סלמה",
       "lng": "34.90754",
       "lat": "32.2828",
       "community_policing": false
     },
-    {
+    "shdrvt": {
       "slug": "shdrvt",
       "name_he": "תחנת שדרות",
       "name_en": "",
@@ -1095,11 +1172,12 @@
       "phone": "08-6620444",
       "email": "SDEROT@POLICE.GOV.IL",
       "fax": "08-6620430",
+      "commander": "",
       "lng": "34.60115",
       "lat": "31.5133",
       "community_policing": false
     },
-    {
+    "shlm": {
       "slug": "shlm",
       "name_he": "תחנת שלם",
       "name_en": "",
@@ -1109,11 +1187,12 @@
       "phone": "02-6207444",
       "email": "SHALEM1@POLICE.GOV.IL",
       "fax": "02-6207428",
+      "commander": "סנ\"צ שלום כהן",
       "lng": "35.23375",
       "lat": "31.78357",
       "community_policing": false
     },
-    {
+    "shpt": {
       "slug": "shpt",
       "name_he": "תחנת שפט",
       "name_en": "",
@@ -1123,11 +1202,12 @@
       "phone": "02-5848222",
       "email": "SHAFAT@POLICE.GOV.IL",
       "fax": "02-5898948",
+      "commander": "סנ\"צ אמיר בן קיקי",
       "lng": "35.24059",
       "lat": "31.84211",
       "community_policing": false
     },
-    {
+    "shprm": {
       "slug": "shprm",
       "name_he": "תחנת שפרעם",
       "name_en": "",
@@ -1137,11 +1217,12 @@
       "phone": "04-9059444",
       "email": "SHFARAM@POLICE.GOV.IL",
       "fax": "04-6458904",
+      "commander": "סנ\"צ יואל נוביק",
       "lng": "35.1679",
       "lat": "32.81383",
       "community_policing": true
     },
-    {
+    "shrt": {
       "slug": "shrt",
       "name_he": "תחנת שרת",
       "name_en": "",
@@ -1151,11 +1232,12 @@
       "phone": "",
       "email": "",
       "fax": "",
+      "commander": "",
       "lng": "34.78492",
       "lat": "32.0611",
       "community_policing": false
     },
-    {
+    "tbvr": {
       "slug": "tbvr",
       "name_he": "תחנת תבור",
       "name_en": "",
@@ -1165,11 +1247,12 @@
       "phone": "",
       "email": "",
       "fax": "",
+      "commander": "",
       "lng": "35.29001",
       "lat": "32.60974",
       "community_policing": false
     },
-    {
+    "tl-abyb-drvm": {
       "slug": "tl-abyb-drvm",
       "name_he": "תחנת תל אביב דרום",
       "name_en": "",
@@ -1179,11 +1262,12 @@
       "phone": "08-6464444",
       "email": "MAHOZ.DAROM@POLICE.GOV.IL",
       "fax": "08-6464531",
+      "commander": "ניצב חיים בובליל",
       "lng": "34.79955",
       "lat": "32.04614",
       "community_policing": false
     },
-    {
+    "tl-abyb-tspvn": {
       "slug": "tl-abyb-tspvn",
       "name_he": "תחנת תל אביב צפון",
       "name_en": "",
@@ -1193,9 +1277,10 @@
       "phone": "03-7697444",
       "email": "TELAVIV.TZAFON@POLICE.GOV.IL",
       "fax": "03-6803678",
+      "commander": "סנ\"צ ליאור עוזר",
       "lng": "34.83574",
       "lat": "32.1083",
       "community_policing": false
     }
-  ]
+  }
 }
