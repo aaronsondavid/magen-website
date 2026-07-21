@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <title>Pattern Library — Magen Victim Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal:    #00AEAC;
+      --teal-dk: #008F8D;
+      --purple:  #6B4FA1;
+      --purple-dk: #5a3f8a;
+      --pink:    #E879A0;
+      --dark:    #1A1A2E;
+      --gray:    #555;
+      --gray-md: #888;
+      --gray-lt: #ddd;
+      --light:   #F7F7F7;
+      --amber:   #d97706;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      color: var(--dark);
+      background: #fafafa;
+      line-height: 1.6;
+    }
+
+    /* ── PATTERN LIB LAYOUT ── */
+    .pl-header {
+      background: var(--dark);
+      color: #fff;
+      padding: 40px 60px;
+      border-bottom: 3px solid var(--teal);
+    }
+    .pl-header h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 2.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .pl-header p {
+      color: rgba(255,255,255,0.7);
+      margin-top: 8px;
+      max-width: 720px;
+    }
+    .pl-header .warn {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 4px 10px;
+      background: rgba(232,121,160,0.2);
+      color: var(--pink);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 2px;
+    }
+    .pl-toc {
+      background: #fff;
+      padding: 24px 60px;
+      border-bottom: 1px solid var(--gray-lt);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .pl-toc ul { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 20px; }
+    .pl-toc a {
+      text-decoration: none;
+      color: var(--gray);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 2px;
+      transition: color .15s, background .15s;
+    }
+    .pl-toc a:hover { color: var(--teal); background: rgba(0,174,172,0.08); }
+
+    .pl-section {
+      padding: 56px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--gray-lt);
+    }
+    .pl-section h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--dark);
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--teal);
+      display: inline-block;
+    }
+    .pl-section h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-top: 32px;
+      margin-bottom: 12px;
+      letter-spacing: 0.08em;
+    }
+    .pl-section p.pl-note {
+      color: var(--gray);
+      font-size: 0.92rem;
+      margin-bottom: 24px;
+      max-width: 720px;
+    }
+    .pl-demo {
+      background: #fff;
+      border: 1px solid var(--gray-lt);
+      border-radius: 4px;
+      padding: 32px;
+      margin: 16px 0;
+      position: relative;
+    }
+    .pl-demo.pl-demo-full {
+      padding: 0;
+      overflow: hidden;
+    }
+    .pl-demo-label {
+      position: absolute;
+      top: -10px;
+      left: 16px;
+      background: var(--dark);
+      color: #fff;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 2px;
+      font-weight: 700;
+    }
+
+    /* ── EXISTING: CRISIS BAR ── */
+    .crisis-bar {
+      background: var(--dark);
+      color: #fff;
+      text-align: center;
+      padding: 10px 60px;
+      font-size: 0.82rem;
+      letter-spacing: 0.03em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+    .crisis-bar strong { color: var(--teal); font-weight: 700; }
+    .crisis-bar a {
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+    }
+    .crisis-bar a:hover { border-color: var(--teal); color: var(--teal); }
+    .crisis-dot {
+      width: 7px; height: 7px;
+      background: var(--teal);
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* ── NEW: QUICK-EXIT BUTTON ── */
+    .quick-exit {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      z-index: 500;
+      background: #b91c1c;
+      color: #fff;
+      border: none;
+      padding: 8px 14px 8px 12px;
+      border-radius: 4px;
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background .15s, transform .15s;
+    }
+    .quick-exit:hover { background: #7f1d1d; transform: translateY(-1px); }
+    .quick-exit:focus-visible { outline: 3px solid #fbbf24; outline-offset: 2px; }
+    .quick-exit .qx-icon { font-size: 1.1rem; line-height: 1; }
+    .quick-exit .qx-hint {
+      font-weight: 400;
+      opacity: 0.8;
+      margin-left: 6px;
+      padding-left: 8px;
+      border-left: 1px solid rgba(255,255,255,0.3);
+      font-size: 0.72rem;
+    }
+
+    /* ── NEW: PERSISTENT HOTLINE STRIP (on-page, e.g. inside a tool) ── */
+    .hotline-strip {
+      background: var(--teal);
+      color: #fff;
+      padding: 14px 24px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .hotline-strip-msg {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    .hotline-strip-numbers { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+    .hotline-strip-num {
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: 0.06em;
+      padding: 4px 12px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 3px;
+      transition: background .15s;
+    }
+    .hotline-strip-num:hover { background: rgba(255,255,255,0.28); }
+    .hotline-strip-num .label {
+      display: block;
+      font-size: 0.62rem;
+      font-weight: 400;
+      opacity: 0.85;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ── NEW: JOURNEY CARDS ── */
+    .journey-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .journey-card {
+      background: #fff;
+      border: 1px solid var(--gray-lt);
+      border-left: 4px solid var(--teal);
+      border-radius: 4px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow .15s, transform .15s, border-left-color .15s;
+      position: relative;
+    }
+    .journey-card:hover {
+      box-shadow: 0 8px 24px rgba(0,0,0,0.09);
+      transform: translateY(-2px);
+    }
+    .journey-card.urgent    { border-left-color: #b91c1c; }
+    .journey-card.recent    { border-left-color: var(--amber); }
+    .journey-card.past      { border-left-color: var(--teal); }
+    .journey-card.aftermath { border-left-color: var(--purple); }
+
+    .journey-badge {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 2px;
+      margin-bottom: 12px;
+      align-self: flex-start;
+    }
+    .journey-card.urgent .journey-badge    { background: #fee2e2; color: #b91c1c; }
+    .journey-card.recent .journey-badge    { background: #fef3c7; color: var(--amber); }
+    .journey-card.past .journey-badge      { background: rgba(0,174,172,0.14); color: var(--teal-dk); }
+    .journey-card.aftermath .journey-badge { background: rgba(107,79,161,0.14); color: var(--purple); }
+
+    .journey-card h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      line-height: 1.15;
+      text-transform: uppercase;
+      color: var(--dark);
+      margin-bottom: 10px;
+      letter-spacing: 0.01em;
+    }
+    .journey-card p {
+      color: var(--gray);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+    .journey-card-cta {
+      align-self: flex-start;
+      color: var(--teal-dk);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .journey-card:hover .journey-card-cta { color: var(--dark); }
+
+    /* ── NEW: REASSURANCE CALLOUT (tender voice patterns) ── */
+    .reassurance {
+      background: rgba(0,174,172,0.06);
+      border-left: 3px solid var(--teal);
+      padding: 20px 24px;
+      border-radius: 3px;
+      margin: 24px 0;
+    }
+    .reassurance p {
+      color: var(--dark);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    .reassurance p + p { margin-top: 10px; }
+    .reassurance em { color: var(--teal-dk); font-style: normal; font-weight: 700; }
+
+    /* ── NEW: ARTICLE LAYOUT ── */
+    .article-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 48px 56px;
+      border-radius: 4px;
+      border: 1px solid var(--gray-lt);
+    }
+    .article-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 12px;
+    }
+    .article-wrap h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 2.4rem;
+      line-height: 1.1;
+      color: var(--dark);
+      margin-bottom: 12px;
+      letter-spacing: 0.005em;
+    }
+    .article-meta {
+      color: var(--gray-md);
+      font-size: 0.85rem;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--gray-lt);
+      margin-bottom: 28px;
+    }
+    .article-meta span + span::before { content: " · "; margin: 0 6px; opacity: 0.5; }
+    .article-body p {
+      color: #333;
+      font-size: 1.02rem;
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+    .article-body h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.6rem;
+      text-transform: uppercase;
+      color: var(--dark);
+      margin-top: 40px;
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
+    }
+    .article-body ul, .article-body ol {
+      margin: 12px 0 24px 24px;
+      color: #333;
+      font-size: 1.02rem;
+      line-height: 1.75;
+    }
+    .article-body li { margin-bottom: 8px; }
+
+    /* ── NEW: GLOSSARY TOOLTIP (inline in article body) ── */
+    .gterm {
+      color: var(--teal-dk);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--teal);
+      cursor: help;
+      position: relative;
+    }
+    .gterm:hover { color: var(--dark); border-bottom-style: solid; }
+    .gterm-tooltip {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--dark);
+      color: #fff;
+      padding: 12px 16px;
+      border-radius: 4px;
+      width: 280px;
+      font-size: 0.85rem;
+      font-weight: 400;
+      font-family: 'Open Sans', sans-serif;
+      line-height: 1.55;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      z-index: 100;
+      white-space: normal;
+    }
+    .gterm-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: var(--dark);
+    }
+    .gterm-tooltip .gterm-tt-label {
+      display: block;
+      color: var(--teal);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .gterm-tooltip .gterm-tt-more {
+      display: inline-block;
+      margin-top: 10px;
+      color: var(--teal);
+      font-size: 0.78rem;
+      text-decoration: underline;
+    }
+    .gterm:hover .gterm-tooltip, .gterm:focus .gterm-tooltip { display: block; }
+
+    /* ── NEW: WHERE-NEXT CARDS (article/tool footers) ── */
+    .where-next {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 2px solid var(--dark);
+    }
+    .where-next-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--gray);
+      margin-bottom: 20px;
+    }
+    .where-next-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .where-next-card {
+      display: block;
+      padding: 16px 18px;
+      background: var(--light);
+      border-radius: 3px;
+      text-decoration: none;
+      color: var(--dark);
+      transition: background .15s, transform .15s;
+      border: 1px solid transparent;
+    }
+    .where-next-card:hover {
+      background: #fff;
+      border-color: var(--teal);
+      transform: translateY(-1px);
+    }
+    .where-next-tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal-dk);
+      margin-bottom: 6px;
+    }
+    .where-next-card h5 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      line-height: 1.25;
+      color: var(--dark);
+    }
+
+    /* ── NEW: TOOL WRAPPER (multi-step form) ── */
+    .tool-wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 6px;
+      border: 1px solid var(--gray-lt);
+      overflow: hidden;
+    }
+    .tool-header {
+      background: var(--dark);
+      color: #fff;
+      padding: 28px 36px;
+    }
+    .tool-header .tool-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+    .tool-header h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1.7rem;
+      line-height: 1.15;
+      margin-top: 6px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .tool-header p {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .tool-progress {
+      display: flex;
+      background: #22223b;
+      padding: 12px 36px;
+      gap: 8px;
+      align-items: center;
+    }
+    .tool-step-dot {
+      width: 8px; height: 8px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+    }
+    .tool-step-dot.done { background: var(--teal); }
+    .tool-step-dot.current {
+      background: var(--teal);
+      box-shadow: 0 0 0 3px rgba(0,174,172,0.25);
+    }
+    .tool-step-label {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.75rem;
+      margin-left: auto;
+      letter-spacing: 0.06em;
+    }
+
+    .tool-body {
+      padding: 36px;
+    }
+    .tool-q-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--teal-dk);
+      margin-bottom: 8px;
+    }
+    .tool-q-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      line-height: 1.25;
+      color: var(--dark);
+      margin-bottom: 24px;
+    }
+    .tool-q-help {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 24px;
+      line-height: 1.65;
+    }
+    .tool-options {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .tool-option {
+      display: block;
+      padding: 16px 20px;
+      background: var(--light);
+      border: 2px solid transparent;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background .15s, border-color .15s;
+      text-align: left;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 1rem;
+      color: var(--dark);
+    }
+    .tool-option:hover { background: #ebebeb; border-color: var(--gray-lt); }
+    .tool-option.selected { border-color: var(--teal); background: rgba(0,174,172,0.06); }
+    .tool-option small {
+      display: block;
+      color: var(--gray);
+      font-size: 0.82rem;
+      margin-top: 2px;
+    }
+
+    .tool-nav {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 36px;
+      background: var(--light);
+      border-top: 1px solid var(--gray-lt);
+    }
+    .tool-btn-back {
+      background: none;
+      border: none;
+      color: var(--gray);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      padding: 8px 12px;
+    }
+    .tool-btn-back:hover { color: var(--dark); }
+    .tool-btn-next {
+      background: var(--purple);
+      color: #fff;
+      border: none;
+      padding: 10px 28px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .tool-btn-next:hover { background: var(--purple-dk); }
+    .tool-btn-next:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* Tool RESULT screen */
+    .tool-result {
+      padding: 36px;
+    }
+    .tool-result-verdict {
+      background: rgba(0,174,172,0.08);
+      border: 1px solid rgba(0,174,172,0.25);
+      border-radius: 4px;
+      padding: 24px 28px;
+      margin-bottom: 24px;
+    }
+    .tool-result-verdict .verdict-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--teal-dk);
+      margin-bottom: 8px;
+    }
+    .tool-result-verdict .verdict-headline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.55rem;
+      line-height: 1.2;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+    .tool-result-verdict .verdict-body {
+      color: #333;
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+    .tool-result-disclaimer {
+      font-size: 0.85rem;
+      color: var(--gray);
+      font-style: italic;
+      margin-bottom: 24px;
+      padding: 12px 16px;
+      background: #f4f4f4;
+      border-radius: 3px;
+    }
+
+    /* ── NEW: GLOSSARY INDEX CARDS ── */
+    .glossary-index {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+    }
+    .gloss-card {
+      display: block;
+      background: #fff;
+      padding: 20px 22px;
+      border: 1px solid var(--gray-lt);
+      border-radius: 4px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color .15s, transform .15s, box-shadow .15s;
+    }
+    .gloss-card:hover {
+      border-color: var(--teal);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    }
+    .gloss-card .gloss-term {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--dark);
+      letter-spacing: 0.01em;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .gloss-card .gloss-term-he {
+      color: var(--gray-md);
+      font-size: 0.85rem;
+      margin-bottom: 8px;
+      direction: rtl;
+      text-align: left;
+    }
+    .gloss-card .gloss-preview {
+      color: var(--gray);
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+    .gloss-card .gloss-cat {
+      display: inline-block;
+      margin-top: 10px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 2px;
+      background: rgba(107,79,161,0.1);
+      color: var(--purple);
+    }
+
+    /* ── NEW: GLOSSARY TERM PAGE ── */
+    .gterm-page {
+      max-width: 720px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 40px 48px;
+      border-radius: 4px;
+      border: 1px solid var(--gray-lt);
+    }
+    .gterm-page .gterm-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+    .gterm-page h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 2.4rem;
+      line-height: 1.1;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+    .gterm-page .gterm-hebrew {
+      color: var(--gray);
+      font-size: 1.15rem;
+      direction: rtl;
+      text-align: left;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--gray-lt);
+    }
+    .gterm-page .gterm-def {
+      font-size: 1.08rem;
+      line-height: 1.75;
+      color: #333;
+      margin-bottom: 32px;
+    }
+    .gterm-related {
+      margin-top: 28px;
+    }
+    .gterm-related-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 12px;
+    }
+    .gterm-related-terms {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .gterm-related-pill {
+      display: inline-block;
+      background: rgba(0,174,172,0.08);
+      color: var(--teal-dk);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.88rem;
+      text-decoration: none;
+      transition: background .15s;
+    }
+    .gterm-related-pill:hover { background: rgba(0,174,172,0.2); }
+
+    /* ── Utility: side-by-side voice examples ── */
+    .voice-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .voice-do, .voice-dont {
+      padding: 18px 20px;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .voice-do { background: rgba(0,174,172,0.08); border-left: 3px solid var(--teal); }
+    .voice-dont { background: rgba(232,121,160,0.08); border-left: 3px solid var(--pink); }
+    .voice-do .label, .voice-dont .label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .voice-do .label { color: var(--teal-dk); }
+    .voice-dont .label { color: var(--pink); }
+
+    /* ── Color chip row ── */
+    .swatches { display: flex; gap: 12px; flex-wrap: wrap; }
+    .swatch {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border: 1px solid var(--gray-lt);
+      border-radius: 3px;
+      font-size: 0.82rem;
+      color: var(--gray);
+      font-family: 'Courier New', monospace;
+      background: #fff;
+    }
+    .swatch-dot { width: 24px; height: 24px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.08); }
+
+    /* Toast for Esc-pressed */
+    .qx-toast {
+      position: fixed;
+      top: 70px; right: 12px;
+      background: var(--dark);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 3px;
+      font-size: 0.85rem;
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s;
+    }
+    .qx-toast.show { opacity: 1; }
+
+    @media (max-width: 720px) {
+      .pl-section, .pl-header, .pl-toc { padding-left: 24px; padding-right: 24px; }
+      .article-wrap { padding: 32px 24px; }
+      .voice-compare { grid-template-columns: 1fr; }
+      .quick-exit .qx-hint { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- QUICK-EXIT (always visible, live in this demo) -->
+  <button class="quick-exit" id="quickExit" title="Press Esc to exit quickly">
+    <span class="qx-icon" aria-hidden="true">×</span>
+    <span>Quick exit</span>
+    <span class="qx-hint">Esc</span>
+  </button>
+  <div class="qx-toast" id="qxToast">Quick-exit triggered — in production this would clear history + redirect.</div>
+
+  <div class="pl-header">
+    <h1>Magen Victim Guide — Pattern Library</h1>
+    <p>Living document of the components we're using to build survivor-facing content across Safety &amp; Healing + Advocacy &amp; Investigations. Existing site tokens on top; new components below.</p>
+    <span class="warn">Phase 0 — not for public preview</span>
+  </div>
+
+  <nav class="pl-toc">
+    <ul>
+      <li><a href="#tokens">Design Tokens</a></li>
+      <li><a href="#voice">Voice &amp; Tone</a></li>
+      <li><a href="#safety">Safety Mechanics</a></li>
+      <li><a href="#hotline-strip">Hotline Strip</a></li>
+      <li><a href="#reassurance">Reassurance Callout</a></li>
+      <li><a href="#journey">Journey Cards</a></li>
+      <li><a href="#article">Article Layout</a></li>
+      <li><a href="#glossary-tt">Glossary Tooltip</a></li>
+      <li><a href="#where-next">Where-Next Cards</a></li>
+      <li><a href="#tool">Interactive Tool</a></li>
+      <li><a href="#tool-result">Tool Result</a></li>
+      <li><a href="#glossary-index">Glossary Index</a></li>
+      <li><a href="#glossary-page">Glossary Term Page</a></li>
+    </ul>
+  </nav>
+
+  <!-- ─────────── TOKENS ─────────── -->
+  <section class="pl-section" id="tokens">
+    <h2>1. Design Tokens (inherited)</h2>
+    <p class="pl-note">Existing tokens from <code>safety-and-healing.html</code>. New content uses these — no new brand colors.</p>
+
+    <h3>Colors</h3>
+    <div class="swatches">
+      <div class="swatch"><div class="swatch-dot" style="background:#00AEAC"></div>--teal #00AEAC</div>
+      <div class="swatch"><div class="swatch-dot" style="background:#008F8D"></div>--teal-dk #008F8D</div>
+      <div class="swatch"><div class="swatch-dot" style="background:#6B4FA1"></div>--purple #6B4FA1</div>
+      <div class="swatch"><div class="swatch-dot" style="background:#E879A0"></div>--pink #E879A0</div>
+      <div class="swatch"><div class="swatch-dot" style="background:#1A1A2E"></div>--dark #1A1A2E</div>
+      <div class="swatch"><div class="swatch-dot" style="background:#F7F7F7"></div>--light #F7F7F7</div>
+      <div class="swatch"><div class="swatch-dot" style="background:#d97706"></div>--amber #d97706 <span style="font-size:.68rem;opacity:.6">(new: recent-crisis)</span></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#b91c1c"></div>--red #b91c1c <span style="font-size:.68rem;opacity:.6">(new: quick-exit / urgent)</span></div>
+    </div>
+
+    <h3>Typography</h3>
+    <p class="pl-note"><strong>Barlow Condensed</strong> — all headings, buttons, eyebrows, labels (uppercase, tight tracking, black weight for h1/h2). <strong>Open Sans</strong> — all body copy, tooltips, form inputs.</p>
+  </section>
+
+  <!-- ─────────── VOICE ─────────── -->
+  <section class="pl-section" id="voice">
+    <h2>2. Voice &amp; Tone</h2>
+    <p class="pl-note">The Hebrew source is <em>tender, agency-preserving</em>. English translation must preserve this. Voice is a standard, not a style — enforce it in review.</p>
+
+    <div class="voice-compare">
+      <div class="voice-do">
+        <span class="label">Do</span>
+        The choice remains yours — you can file days or years later, or not at all.
+      </div>
+      <div class="voice-dont">
+        <span class="label">Don't</span>
+        You must decide whether to file a police complaint.
+      </div>
+      <div class="voice-do">
+        <span class="label">Do</span>
+        Whatever you are feeling right now is a natural reaction to a situation that is not natural.
+      </div>
+      <div class="voice-dont">
+        <span class="label">Don't</span>
+        Don't panic. Try to stay calm.
+      </div>
+      <div class="voice-do">
+        <span class="label">Do</span>
+        Based on what you told us, you may still be within the window. Talk to us to confirm.
+      </div>
+      <div class="voice-dont">
+        <span class="label">Don't</span>
+        You have 15 years to file. Go now.
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── SAFETY MECHANICS ─────────── -->
+  <section class="pl-section" id="safety">
+    <h2>3. Safety Mechanics</h2>
+    <p class="pl-note">Non-negotiable, always on. Quick-exit is visible in the top-right of this page right now — click it or press <kbd>Esc</kbd>.</p>
+
+    <h3>Quick-Exit Behavior</h3>
+    <p class="pl-note">On click or Esc press: (a) replace current history entry so back-button won't return, (b) clear any tool-in-progress local state, (c) redirect to <code>https://www.google.com</code>.</p>
+    <p class="pl-note">This demo shows a toast instead of actually navigating away, so you can test the trigger.</p>
+  </section>
+
+  <!-- ─────────── HOTLINE STRIP ─────────── -->
+  <section class="pl-section" id="hotline-strip">
+    <h2>4. Hotline Strip</h2>
+    <p class="pl-note">Persistent on-page component, placed inside every tool result and every article's key sections. Complements the top crisis-bar; this one has visual weight and is meant to be tapped.</p>
+
+    <div class="pl-demo">
+      <span class="pl-demo-label">Default</span>
+      <div class="hotline-strip">
+        <div class="hotline-strip-msg">You don't have to figure this out alone. Talk to someone now.</div>
+        <div class="hotline-strip-numbers">
+          <a href="tel:*9781" class="hotline-strip-num"><span class="label">Magen · 24/6</span>*9781</a>
+          <a href="tel:1202" class="hotline-strip-num"><span class="label">ARCCI Women</span>1202</a>
+          <a href="tel:1203" class="hotline-strip-num"><span class="label">ARCCI Men</span>1203</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── REASSURANCE ─────────── -->
+  <section class="pl-section" id="reassurance">
+    <h2>5. Reassurance Callout</h2>
+    <p class="pl-note">Above-the-fold on every hub page + at emotional pivot points inside articles. Meets people where they are.</p>
+
+    <div class="pl-demo">
+      <span class="pl-demo-label">In-context</span>
+      <div class="reassurance">
+        <p><em>Coming here took courage.</em> Whatever brought you to this page — a hard question, someone else's story, or your own — you are not alone.</p>
+        <p>The choice about what to do next is <em>yours</em>. We're here to help you understand your options at your own pace.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── JOURNEY CARDS ─────────── -->
+  <section class="pl-section" id="journey">
+    <h2>6. Journey Cards</h2>
+    <p class="pl-note">Entry points into the three primary survivor journeys (A/B/C). Live at the top of each pillar page, above the fold. Border color signals urgency, not the whole card — so the pillar's palette isn't shouted over.</p>
+
+    <div class="pl-demo">
+      <span class="pl-demo-label">Safety &amp; Healing pillar top</span>
+      <div class="journey-grid">
+        <a href="#" class="journey-card urgent">
+          <span class="journey-badge">Right Now</span>
+          <h4>Something Just Happened</h4>
+          <p>Whether it was today, yesterday, or this week — start here. We'll walk through what you can do in the next hours and days.</p>
+          <span class="journey-card-cta">Start here →</span>
+        </a>
+        <a href="#" class="journey-card past">
+          <span class="journey-badge">Past Assault</span>
+          <h4>It Happened a While Ago</h4>
+          <p>You're wondering whether it's too late, whether it still counts, whether to tell anyone. It's not too late to check. It still counts.</p>
+          <span class="journey-card-cta">Explore your options →</span>
+        </a>
+        <a href="#" class="journey-card aftermath">
+          <span class="journey-badge">After the Process</span>
+          <h4>My Case Was Closed</h4>
+          <p>A closed case does not mean you weren't believed. You know what happened. Here's what closure means and what paths remain.</p>
+          <span class="journey-card-cta">Understand what's next →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── ARTICLE ─────────── -->
+  <section class="pl-section" id="article">
+    <h2>7. Article Layout</h2>
+    <p class="pl-note">Standard long-form container. 720px max width for readability. Every legal term first-mention is a glossary tooltip. Hotline strip embedded at emotional pivot points, "Where next" cards at the bottom.</p>
+
+    <div class="pl-demo pl-demo-full">
+      <span class="pl-demo-label" style="left:16px;top:6px">Example</span>
+      <div style="padding:40px 0; background:#fafafa;">
+        <div class="article-wrap">
+          <p class="article-eyebrow">If Your Case Was Closed</p>
+          <h1>A closed case does not mean you weren't believed.</h1>
+          <div class="article-meta">
+            <span>Understanding the process</span>
+            <span>7 minute read</span>
+            <span>Updated July 2026</span>
+          </div>
+
+          <div class="article-body">
+            <p>In 2022, <strong>71% of sexual-offense cases in Israel closed without an indictment.</strong> If your case was one of them, the pain of that letter is real — and you are far from alone in receiving it.</p>
+
+            <p>The most common reason a case closes is <a href="#" class="gterm" tabindex="0">lack of evidence<span class="gterm-tooltip"><span class="gterm-tt-label">Glossary</span>The most common reason for a case to close (~65% of suspects). It means the evidence gathered was not strong enough to meet the very high standard required for a criminal conviction — <em>not</em> that you were disbelieved.<span class="gterm-tt-more">Read the full definition →</span></span></a>. This is about what a court needs to convict, not about whether the prosecutor believed you happened. The legal standard — <a href="#" class="gterm" tabindex="0">beyond a reasonable doubt<span class="gterm-tooltip"><span class="gterm-tt-label">Glossary</span>The highest standard of proof in Israeli law, required for a criminal conviction. Civil cases use a much lower standard (balance of probabilities).<span class="gterm-tt-more">Read the full definition →</span></span></a> — is deliberately very high, and most sex-crime evidence does not clear it.</p>
+
+            <div class="reassurance" style="margin: 28px 0;">
+              <p>You know what happened. A closed case does not diminish that truth, or the courage it took to come forward.</p>
+            </div>
+
+            <h2>Your rights right now</h2>
+            <p>You have the right to know the exact reason the case was closed. If the letter doesn't say, you can request that information from any police station or through the <a href="#" class="gterm" tabindex="0">MENA system<span class="gterm-tooltip"><span class="gterm-tt-label">Glossary</span>The Crime Victim Information System — a portal where you can track your case status. You receive a code and password when you file a complaint.<span class="gterm-tt-more">Read the full definition →</span></span></a>.</p>
+
+            <p>You also have the right to <strong>appeal</strong> the closure within <strong>60 days</strong> of receiving the notice. Appeals succeed rarely — but they do succeed, especially when new evidence emerges. Legal aid can help you write one.</p>
+          </div>
+
+          <!-- Embedded hotline strip -->
+          <div style="margin-top: 32px;">
+            <div class="hotline-strip">
+              <div class="hotline-strip-msg">Feeling the closure right now? Talk to someone.</div>
+              <div class="hotline-strip-numbers">
+                <a href="tel:*9781" class="hotline-strip-num"><span class="label">Magen · 24/6</span>*9781</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Where next -->
+          <div class="where-next">
+            <div class="where-next-label">Where to go next</div>
+            <div class="where-next-grid">
+              <a href="#" class="where-next-card">
+                <div class="where-next-tag">Tool</div>
+                <h5>Which path? Criminal vs Civil</h5>
+              </a>
+              <a href="#" class="where-next-card">
+                <div class="where-next-tag">Article</div>
+                <h5>How to appeal a closure</h5>
+              </a>
+              <a href="#" class="where-next-card">
+                <div class="where-next-tag">Service</div>
+                <h5>Free legal aid — how to apply</h5>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── GLOSSARY TOOLTIP ─────────── -->
+  <section class="pl-section" id="glossary-tt">
+    <h2>8. Glossary Tooltip (inline)</h2>
+    <p class="pl-note">First mention of any legal term in a body-copy paragraph. Dotted underline signals "hover for definition." Second and subsequent mentions in the same article are plain text (no tooltip noise).</p>
+    <div class="pl-demo">
+      <span class="pl-demo-label">Inline usage</span>
+      <p style="font-size:1.02rem; line-height:1.75; color:#333;">
+        In most sex-crime cases, staff at the police station will hand you an <a href="#" class="gterm" tabindex="0">ishur hagashat tluna<span class="gterm-tooltip"><span class="gterm-tt-label">Glossary</span>A critical document confirming you filed a complaint, including the date and case number. Required for civil claims, insurance, and government support.<span class="gterm-tt-more">Read the full definition →</span></span></a> before you leave. Do not leave without it — it's essential later.
+      </p>
+    </div>
+  </section>
+
+  <!-- ─────────── WHERE-NEXT ─────────── -->
+  <section class="pl-section" id="where-next">
+    <h2>9. Where-Next Cards</h2>
+    <p class="pl-note">The last thing on every article and every tool result. Never dead-end. 2-4 cards; tag identifies whether it's a <em>Tool</em>, <em>Article</em>, <em>Service</em>, or <em>Downloadable</em>.</p>
+
+    <div class="pl-demo">
+      <span class="pl-demo-label">Grid</span>
+      <div class="where-next">
+        <div class="where-next-label">Where to go next</div>
+        <div class="where-next-grid">
+          <a href="#" class="where-next-card">
+            <div class="where-next-tag">Tool</div>
+            <h5>Statute of limitations checker</h5>
+          </a>
+          <a href="#" class="where-next-card">
+            <div class="where-next-tag">Article</div>
+            <h5>The criminal process step by step</h5>
+          </a>
+          <a href="#" class="where-next-card">
+            <div class="where-next-tag">Downloadable</div>
+            <h5>Acute Room pocket card (PDF)</h5>
+          </a>
+          <a href="#" class="where-next-card">
+            <div class="where-next-tag">Service</div>
+            <h5>Regional support centers</h5>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── TOOL WRAPPER ─────────── -->
+  <section class="pl-section" id="tool">
+    <h2>10. Interactive Tool — question step</h2>
+    <p class="pl-note">Multi-step form wrapper used by SoL Checker, What Now?, Which Path?. Big tap targets, one question per screen, back button always visible, progress dots at top.</p>
+
+    <div class="pl-demo pl-demo-full">
+      <span class="pl-demo-label" style="left:16px;top:6px">Question 2 of 4</span>
+      <div style="padding: 40px 0; background: #fafafa;">
+        <div class="tool-wrap">
+          <div class="tool-header">
+            <div class="tool-eyebrow">Statute of Limitations Checker</div>
+            <h2>Let's see if it's still possible</h2>
+            <p>A few short questions. No account. No records saved. This is not legal advice — the goal is to give you a direction.</p>
+          </div>
+          <div class="tool-progress">
+            <span class="tool-step-dot done"></span>
+            <span class="tool-step-dot current"></span>
+            <span class="tool-step-dot"></span>
+            <span class="tool-step-dot"></span>
+            <span class="tool-step-label">Step 2 of 4</span>
+          </div>
+          <div class="tool-body">
+            <div class="tool-q-label">About the assault</div>
+            <div class="tool-q-text">How old were you when it happened?</div>
+            <p class="tool-q-help">If it happened more than once, use the earliest age. If you're not sure, choose your best estimate.</p>
+            <div class="tool-options">
+              <button class="tool-option">Under 14</button>
+              <button class="tool-option selected">Between 14 and 17
+                <small>Also select this if you're not sure and it happened before you were 18.</small>
+              </button>
+              <button class="tool-option">18 or older</button>
+              <button class="tool-option">I'd rather not say
+                <small>You can still get an answer — we'll ask a follow-up.</small>
+              </button>
+            </div>
+          </div>
+          <div class="tool-nav">
+            <button class="tool-btn-back">← Back</button>
+            <button class="tool-btn-next">Continue →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── TOOL RESULT ─────────── -->
+  <section class="pl-section" id="tool-result">
+    <h2>11. Interactive Tool — result screen</h2>
+    <p class="pl-note">Always hedged. Always routes to a human. Always shows a "where next" grid. Never dead-ends, even in the "window closed" case.</p>
+
+    <div class="pl-demo pl-demo-full">
+      <span class="pl-demo-label" style="left:16px;top:6px">Positive-direction result</span>
+      <div style="padding: 40px 0; background: #fafafa;">
+        <div class="tool-wrap">
+          <div class="tool-header">
+            <div class="tool-eyebrow">Statute of Limitations Checker</div>
+            <h2>Here's what we can tell you</h2>
+          </div>
+          <div class="tool-result">
+            <div class="tool-result-verdict">
+              <div class="verdict-label">Based on your answers</div>
+              <div class="verdict-headline">You may still be within the window to file.</div>
+              <p class="verdict-body">Because the assault happened before you turned 18, and it involved a family member or authority figure, the statute of limitations clock likely began ticking only when you became an adult — and can extend up to your late 40s in certain cases.</p>
+            </div>
+            <div class="tool-result-disclaimer">
+              This is a guide, not legal advice. Every case has details a checker can't capture. Please talk to us or to legal aid to confirm what applies to you.
+            </div>
+            <div class="hotline-strip">
+              <div class="hotline-strip-msg">Let's confirm together. It's free and confidential.</div>
+              <div class="hotline-strip-numbers">
+                <a href="tel:*9781" class="hotline-strip-num"><span class="label">Magen · 24/6</span>*9781</a>
+              </div>
+            </div>
+            <div class="where-next">
+              <div class="where-next-label">Where to go next</div>
+              <div class="where-next-grid">
+                <a href="#" class="where-next-card">
+                  <div class="where-next-tag">Article</div>
+                  <h5>The criminal process, explained</h5>
+                </a>
+                <a href="#" class="where-next-card">
+                  <div class="where-next-tag">Tool</div>
+                  <h5>Criminal vs civil — which path?</h5>
+                </a>
+                <a href="#" class="where-next-card">
+                  <div class="where-next-tag">Service</div>
+                  <h5>Free legal aid (Ministry of Justice)</h5>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── GLOSSARY INDEX ─────────── -->
+  <section class="pl-section" id="glossary-index">
+    <h2>12. Glossary Index Cards</h2>
+    <p class="pl-note">The <code>/glossary</code> index page. Category tag on each card. A-Z jump-nav + full-text search live at the top (not shown here). 72 cards total in v1.</p>
+
+    <div class="pl-demo">
+      <span class="pl-demo-label">Card grid</span>
+      <div class="glossary-index">
+        <a href="#" class="gloss-card">
+          <span class="gloss-term">Ishur Hagashat Tluna</span>
+          <span class="gloss-term-he">אישור הגשת תלונה</span>
+          <span class="gloss-preview">A critical document confirming you filed a complaint, including date and case number. Required for civil claims and insurance.</span>
+          <span class="gloss-cat">Process</span>
+        </a>
+        <a href="#" class="gloss-card">
+          <span class="gloss-term">MENA System</span>
+          <span class="gloss-term-he">מערכת מנ"ע</span>
+          <span class="gloss-preview">The Crime Victim Information System — a portal where you can track your case status from complaint to sentencing.</span>
+          <span class="gloss-cat">Systems</span>
+        </a>
+        <a href="#" class="gloss-card">
+          <span class="gloss-term">Beyond Reasonable Doubt</span>
+          <span class="gloss-term-he">מעבר לכל ספק סביר</span>
+          <span class="gloss-preview">The highest standard of proof, required for a criminal conviction. Civil cases use a much lower standard.</span>
+          <span class="gloss-cat">Rights</span>
+        </a>
+        <a href="#" class="gloss-card">
+          <span class="gloss-term">Va'adat Ptor</span>
+          <span class="gloss-term-he">ועדת פטור</span>
+          <span class="gloss-preview">The Exemption Committee — allows professionals to request exemption from mandatory reporting in complex family cases.</span>
+          <span class="gloss-cat">Systems</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── GLOSSARY TERM PAGE ─────────── -->
+  <section class="pl-section" id="glossary-page">
+    <h2>13. Glossary Term Page</h2>
+    <p class="pl-note">One page per term. SEO-anchored on the English + Hebrew phrase. Related terms + "where this comes up" links create the connective tissue between glossary and articles/tools.</p>
+
+    <div class="pl-demo pl-demo-full">
+      <span class="pl-demo-label" style="left:16px;top:6px">/glossary/mena-system</span>
+      <div style="padding: 40px 0; background: #fafafa;">
+        <div class="gterm-page">
+          <p class="gterm-eyebrow">Glossary · Systems</p>
+          <h1>MENA System</h1>
+          <div class="gterm-hebrew">מערכת מידע לנפגעי עבירה (מנ"ע)</div>
+
+          <p class="gterm-def">The MENA System (מערכת מנ"ע — <em>Ma'arechet Meida Le-Nifgei Aveira</em>, "Crime Victim Information System") is a computerized portal where you can track the progress of your case from the moment you file a complaint through to the sentencing of the accused.</p>
+
+          <p class="gterm-def">You receive an access code and personal password when you file the complaint at the police station. You can also request them by phone at 02-5017030.</p>
+
+          <div class="gterm-related">
+            <div class="gterm-related-label">Related terms</div>
+            <div class="gterm-related-terms">
+              <a href="#" class="gterm-related-pill">Case number (מספר תיק)</a>
+              <a href="#" class="gterm-related-pill">Ishur hagashat tluna</a>
+              <a href="#" class="gterm-related-pill">Investigation (חקירה)</a>
+              <a href="#" class="gterm-related-pill">File closure</a>
+            </div>
+          </div>
+
+          <div class="where-next" style="margin-top: 40px;">
+            <div class="where-next-label">Where this comes up</div>
+            <div class="where-next-grid">
+              <a href="#" class="where-next-card">
+                <div class="where-next-tag">Article</div>
+                <h5>Tracking your case status</h5>
+              </a>
+              <a href="#" class="where-next-card">
+                <div class="where-next-tag">Article</div>
+                <h5>If your case is closed</h5>
+              </a>
+              <a href="#" class="where-next-card">
+                <div class="where-next-tag">Downloadable</div>
+                <h5>MENA how-to (PDF w/ screenshots)</h5>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // ── QUICK-EXIT: Esc key + button click ──
+    (function() {
+      const btn = document.getElementById('quickExit');
+      const toast = document.getElementById('qxToast');
+
+      function trigger(source) {
+        // In production:
+        //   1. Wipe any in-progress tool state:
+        //        sessionStorage.clear(); localStorage.removeItem('magen-tool-progress');
+        //   2. Replace history so back-button doesn't return:
+        //        history.replaceState(null, '', 'https://www.google.com');
+        //   3. Redirect:
+        //        window.location.replace('https://www.google.com');
+        //
+        // In this pattern-library demo we just show a toast so testers can see it fired.
+        toast.textContent = 'Quick-exit triggered (' + source + '). In production: history cleared → redirect to google.com.';
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2400);
+      }
+
+      btn.addEventListener('click', () => trigger('click'));
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') trigger('Esc key');
+      });
+    })();
+
+    // ── Tool option selection (visual only) ──
+    document.querySelectorAll('.tool-options').forEach(group => {
+      group.addEventListener('click', (e) => {
+        const btn = e.target.closest('.tool-option');
+        if (!btn) return;
+        group.querySelectorAll('.tool-option').forEach(o => o.classList.remove('selected'));
+        btn.classList.add('selected');
+      });
+    });
+  </script>
+
+</body>
+</html>

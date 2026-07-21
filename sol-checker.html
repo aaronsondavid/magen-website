@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <title>Statute of Limitations Checker · Magen for Jewish Communities</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --teal:    #00AEAC;
+      --teal-dk: #008F8D;
+      --purple:  #6B4FA1;
+      --purple-dk: #5a3f8a;
+      --pink:    #E879A0;
+      --dark:    #1A1A2E;
+      --gray:    #555;
+      --gray-md: #888;
+      --gray-lt: #ddd;
+      --light:   #F7F7F7;
+      --amber:   #d97706;
+      --red:     #b91c1c;
+    }
+    body {
+      font-family: 'Open Sans', sans-serif;
+      color: var(--dark);
+      background: #fafafa;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── CRISIS BAR ── */
+    .crisis-bar {
+      background: var(--dark);
+      color: #fff;
+      text-align: center;
+      padding: 10px 60px;
+      font-size: 0.82rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .crisis-bar strong { color: var(--teal); font-weight: 700; }
+    .crisis-bar a {
+      color: #fff;
+      font-weight: 700;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+    }
+    .crisis-bar a:hover { border-color: var(--teal); color: var(--teal); }
+    .crisis-dot {
+      width: 7px; height: 7px;
+      background: var(--teal);
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+    /* ── QUICK-EXIT ── */
+    .quick-exit {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      z-index: 500;
+      background: var(--red);
+      color: #fff;
+      border: none;
+      padding: 8px 14px 8px 12px;
+      border-radius: 4px;
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .quick-exit:hover { background: #7f1d1d; }
+    .quick-exit:focus-visible { outline: 3px solid #fbbf24; outline-offset: 2px; }
+    .quick-exit .qx-icon { font-size: 1.1rem; line-height: 1; }
+    .quick-exit .qx-hint {
+      font-weight: 400;
+      opacity: 0.8;
+      margin-left: 6px;
+      padding-left: 8px;
+      border-left: 1px solid rgba(255,255,255,0.3);
+      font-size: 0.72rem;
+    }
+
+    /* ── SIMPLE NAV (back to pillars) ── */
+    .simple-nav {
+      background: #fff;
+      border-bottom: 1px solid var(--gray-lt);
+      padding: 14px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-logo {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      line-height: 1;
+    }
+    .nav-logo .brand {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: var(--teal);
+      letter-spacing: 0.08em;
+    }
+    .nav-logo .sub {
+      font-size: 0.6rem;
+      color: var(--gray);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+    .nav-back {
+      text-decoration: none;
+      color: var(--gray);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .nav-back:hover { color: var(--teal); }
+
+    /* ── PAGE INTRO ── */
+    .intro {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 60px 24px 20px 24px;
+      text-align: center;
+    }
+    .intro .eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 14px;
+    }
+    .intro h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 2.6rem;
+      line-height: 1.1;
+      color: var(--dark);
+      margin-bottom: 16px;
+    }
+    .intro h1 em { font-style: normal; color: var(--teal); }
+    .intro .lede {
+      font-size: 1.06rem;
+      color: var(--gray);
+      line-height: 1.7;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    /* ── TOOL WRAPPER ── */
+    .tool-wrap {
+      max-width: 640px;
+      margin: 32px auto 60px auto;
+      background: #fff;
+      border-radius: 6px;
+      border: 1px solid var(--gray-lt);
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+    }
+    .tool-header {
+      background: var(--dark);
+      color: #fff;
+      padding: 26px 32px;
+    }
+    .tool-header .tool-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+    .tool-header h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1.55rem;
+      line-height: 1.2;
+      margin-top: 6px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .tool-header p {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+
+    .tool-progress {
+      display: flex;
+      background: #22223b;
+      padding: 12px 32px;
+      gap: 8px;
+      align-items: center;
+    }
+    .tool-step-dot {
+      width: 8px; height: 8px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      transition: background .2s, box-shadow .2s;
+    }
+    .tool-step-dot.done { background: var(--teal); }
+    .tool-step-dot.current {
+      background: var(--teal);
+      box-shadow: 0 0 0 3px rgba(0,174,172,0.25);
+    }
+    .tool-step-label {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.75rem;
+      margin-left: auto;
+      letter-spacing: 0.06em;
+    }
+
+    .tool-body { padding: 32px; }
+
+    .tool-q-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--teal-dk);
+      margin-bottom: 8px;
+    }
+    .tool-q-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      line-height: 1.25;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+    .tool-q-help {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .tool-options {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .tool-option {
+      display: block;
+      padding: 14px 18px;
+      background: var(--light);
+      border: 2px solid transparent;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background .15s, border-color .15s, transform .1s;
+      text-align: left;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 1rem;
+      color: var(--dark);
+      width: 100%;
+    }
+    .tool-option:hover { background: #ebebeb; border-color: var(--gray-lt); }
+    .tool-option:active { transform: scale(0.99); }
+    .tool-option.selected { border-color: var(--teal); background: rgba(0,174,172,0.06); }
+    .tool-option .opt-note {
+      display: block;
+      color: var(--gray);
+      font-size: 0.82rem;
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+
+    .tool-nav {
+      display: flex;
+      justify-content: space-between;
+      padding: 18px 32px;
+      background: var(--light);
+      border-top: 1px solid var(--gray-lt);
+    }
+    .tool-btn-back {
+      background: none;
+      border: none;
+      color: var(--gray);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      padding: 8px 12px;
+    }
+    .tool-btn-back:hover { color: var(--dark); }
+    .tool-btn-back:disabled { opacity: 0.35; cursor: not-allowed; }
+    .tool-btn-next {
+      background: var(--purple);
+      color: #fff;
+      border: none;
+      padding: 10px 28px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .tool-btn-next:hover { background: var(--purple-dk); }
+    .tool-btn-next:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    /* ── RESULT SCREEN ── */
+    .tool-result { padding: 32px; }
+
+    .verdict-card {
+      padding: 24px 26px;
+      border-radius: 4px;
+      margin-bottom: 24px;
+      border-left: 4px solid var(--teal);
+      background: rgba(0,174,172,0.07);
+    }
+    .verdict-card.getting_close {
+      border-left-color: var(--amber);
+      background: rgba(217,119,6,0.07);
+    }
+    .verdict-card.possibly_closed_criminal {
+      border-left-color: var(--purple);
+      background: rgba(107,79,161,0.06);
+    }
+    .verdict-card.needs_human {
+      border-left-color: var(--dark);
+      background: #f3f3f3;
+    }
+    .verdict-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--teal-dk);
+      margin-bottom: 6px;
+    }
+    .verdict-card.getting_close .verdict-label { color: var(--amber); }
+    .verdict-card.possibly_closed_criminal .verdict-label { color: var(--purple); }
+    .verdict-card.needs_human .verdict-label { color: var(--dark); }
+
+    .verdict-headline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      line-height: 1.25;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+    .verdict-body {
+      color: #333;
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+
+    .result-disclaimer {
+      font-size: 0.85rem;
+      color: var(--gray);
+      font-style: italic;
+      margin-bottom: 20px;
+      padding: 12px 16px;
+      background: #f4f4f4;
+      border-radius: 3px;
+      line-height: 1.55;
+    }
+
+    /* ── HOTLINE STRIP ── */
+    .hotline-strip {
+      background: var(--teal);
+      color: #fff;
+      padding: 14px 22px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .hotline-strip-msg {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    .hotline-strip-num {
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: 0.06em;
+      padding: 4px 12px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 3px;
+    }
+    .hotline-strip-num:hover { background: rgba(255,255,255,0.3); }
+    .hotline-strip-num .label {
+      display: block;
+      font-size: 0.62rem;
+      font-weight: 400;
+      opacity: 0.85;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ── WHERE-NEXT ── */
+    .where-next {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 2px solid var(--dark);
+    }
+    .where-next-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--gray);
+      margin-bottom: 14px;
+    }
+    .where-next-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+    }
+    .where-next-card {
+      display: block;
+      padding: 14px 16px;
+      background: var(--light);
+      border-radius: 3px;
+      text-decoration: none;
+      color: var(--dark);
+      border: 1px solid transparent;
+      transition: background .15s, border-color .15s, transform .1s;
+    }
+    .where-next-card:hover {
+      background: #fff;
+      border-color: var(--teal);
+      transform: translateY(-1px);
+    }
+    .where-next-tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal-dk);
+      margin-bottom: 4px;
+    }
+    .where-next-card h5 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      line-height: 1.25;
+      color: var(--dark);
+    }
+
+    /* ── RESTART BUTTON ── */
+    .restart-row {
+      padding: 16px 32px;
+      background: var(--light);
+      border-top: 1px solid var(--gray-lt);
+      display: flex;
+      justify-content: center;
+    }
+    .restart-btn {
+      background: none;
+      border: 1px solid var(--gray-lt);
+      color: var(--gray);
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 8px 20px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    .restart-btn:hover { background: #fff; color: var(--dark); }
+
+    /* ── FOOTER LINE ── */
+    .footer-note {
+      max-width: 640px;
+      margin: 0 auto 40px auto;
+      padding: 0 24px;
+      color: var(--gray-md);
+      font-size: 0.8rem;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* ── ERROR / LOADING ── */
+    .tool-status {
+      padding: 40px 32px;
+      text-align: center;
+      color: var(--gray);
+    }
+
+    /* ── QX TOAST ── */
+    .qx-toast {
+      position: fixed;
+      top: 70px; right: 12px;
+      background: var(--dark);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 3px;
+      font-size: 0.85rem;
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s;
+      max-width: 320px;
+    }
+    .qx-toast.show { opacity: 1; }
+
+    @media (max-width: 720px) {
+      .crisis-bar, .simple-nav, .intro { padding-left: 20px; padding-right: 20px; }
+      .intro { padding-top: 40px; }
+      .intro h1 { font-size: 2.1rem; }
+      .tool-wrap { margin: 24px 12px 40px 12px; border-radius: 4px; }
+      .tool-header, .tool-progress, .tool-body, .tool-nav, .tool-result, .restart-row { padding-left: 20px; padding-right: 20px; }
+      .quick-exit .qx-hint { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- QUICK-EXIT -->
+  <button class="quick-exit" id="quickExit" title="Press Esc to exit quickly">
+    <span class="qx-icon" aria-hidden="true">×</span>
+    <span>Quick exit</span>
+    <span class="qx-hint">Esc</span>
+  </button>
+  <div class="qx-toast" id="qxToast"></div>
+
+  <!-- CRISIS BAR -->
+  <div class="crisis-bar">
+    <span class="crisis-dot"></span>
+    If you or someone is in immediate danger, call emergency services now:
+    <a href="tel:100">Israel: 100</a>&nbsp;·&nbsp;
+    <a href="tel:911">US: 911</a>&nbsp;·&nbsp;
+    <a href="tel:999">UK: 999</a>
+    &nbsp;&nbsp;·&nbsp;&nbsp;
+    <strong>Magen hotline:</strong>
+    <a href="tel:*9781">*9781</a>&nbsp;·&nbsp;24/6
+  </div>
+
+  <!-- SIMPLE NAV -->
+  <div class="simple-nav">
+    <a href="index.html" class="nav-logo">
+      <span class="brand">MAGEN</span>
+      <span class="sub">for Jewish Communities</span>
+    </a>
+    <a href="advocacy-and-investigations.html" class="nav-back">← Advocacy &amp; Investigations</a>
+  </div>
+
+  <!-- INTRO -->
+  <section class="intro">
+    <p class="eyebrow">Statute of Limitations Checker</p>
+    <h1>Let's see if it's still <em>possible</em>.</h1>
+    <p class="lede">
+      Time may not be what you fear. Israeli law about the statute of limitations for sexual offenses is complex, and often more forgiving than people expect, especially for cases that happened in childhood or involved a family member or authority figure. Four short questions. Nothing saved. This is a guide, not legal advice.
+    </p>
+  </section>
+
+  <!-- TOOL -->
+  <main class="tool-wrap" id="tool" aria-live="polite">
+    <div class="tool-header">
+      <div class="tool-eyebrow">Statute of Limitations Checker</div>
+      <h2 id="toolTitle">Four short questions</h2>
+      <p id="toolSubtitle">No account, no records saved. This is a direction, not legal advice.</p>
+    </div>
+    <div class="tool-progress" id="toolProgress" hidden></div>
+    <div class="tool-body" id="toolBody">
+      <div class="tool-status" id="toolStatus">Loading…</div>
+    </div>
+    <div class="tool-nav" id="toolNav" hidden>
+      <button class="tool-btn-back" id="btnBack">← Back</button>
+      <button class="tool-btn-next" id="btnNext" disabled>Continue →</button>
+    </div>
+  </main>
+
+  <p class="footer-note">
+    Sources: Israeli Penal Code (sections 345&ndash;352, 428) and the general Statute of Limitations Law. Rules simplified for guidance. For your specific situation, please talk to Magen or to free legal aid.
+    <br><br>
+    <a href="data/sol-rules.json" style="color:var(--gray-md);text-decoration:underline;" target="_blank" rel="noopener">View the underlying decision tree (JSON) →</a>
+  </p>
+
+<script>
+(function() {
+  'use strict';
+
+  const RULES_URL = 'data/sol-rules.json';
+
+  // ── QUICK-EXIT (Esc + button) ────────────────────────────────
+  const btnExit = document.getElementById('quickExit');
+  const toast = document.getElementById('qxToast');
+  function quickExit(source) {
+    // In production:
+    //   sessionStorage.clear();
+    //   history.replaceState(null,'','https://www.google.com');
+    //   window.location.replace('https://www.google.com');
+    // On preview.magen-israel.org (noindex) we redirect for real.
+    if (location.hostname === 'preview.magen-israel.org' || location.hostname === 'magen-israel.org') {
+      window.location.replace('https://www.google.com');
+      return;
+    }
+    // Local file:// or dev — just toast so you can see it fired.
+    toast.textContent = 'Quick-exit triggered (' + source + '). In production this redirects to google.com.';
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2400);
+  }
+  btnExit.addEventListener('click', () => quickExit('click'));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') quickExit('Esc key'); });
+
+  // ── STATE ────────────────────────────────────────────────────
+  let CFG = null;             // parsed sol-rules.json
+  let stepIdx = 0;            // current question index
+  const answers = {};         // { question_id: option_value }
+  let onResult = false;       // are we on the result screen?
+
+  // ── ELEMENTS ─────────────────────────────────────────────────
+  const el = {
+    tool:       document.getElementById('tool'),
+    title:      document.getElementById('toolTitle'),
+    subtitle:   document.getElementById('toolSubtitle'),
+    progress:   document.getElementById('toolProgress'),
+    body:       document.getElementById('toolBody'),
+    status:     document.getElementById('toolStatus'),
+    nav:        document.getElementById('toolNav'),
+    btnBack:    document.getElementById('btnBack'),
+    btnNext:    document.getElementById('btnNext'),
+  };
+
+  el.btnBack.addEventListener('click', () => {
+    if (onResult) { onResult = false; render(); return; }
+    if (stepIdx > 0) { stepIdx--; render(); }
+  });
+  el.btnNext.addEventListener('click', () => {
+    if (stepIdx < CFG.questions.length - 1) {
+      stepIdx++;
+      render();
+    } else {
+      onResult = true;
+      render();
+    }
+  });
+
+  // ── LOAD ─────────────────────────────────────────────────────
+  fetch(RULES_URL, { cache: 'no-store' })
+    .then(r => {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(cfg => {
+      CFG = cfg;
+      el.progress.hidden = false;
+      el.nav.hidden = false;
+      render();
+    })
+    .catch(err => {
+      el.status.innerHTML = 'Could not load the checker rules. Please refresh, or <a href="contact.html" style="color:var(--teal-dk);">talk to us directly</a>.<br><br><small style="opacity:.6">' + String(err).replace(/</g,'&lt;') + '</small>';
+    });
+
+  // ── RENDER ───────────────────────────────────────────────────
+  function render() {
+    if (!CFG) return;
+    if (onResult) return renderResult();
+    renderQuestion();
+  }
+
+  function renderQuestion() {
+    const q = CFG.questions[stepIdx];
+    const total = CFG.questions.length;
+
+    // Progress dots
+    let dots = '';
+    for (let i = 0; i < total; i++) {
+      let cls = '';
+      if (i < stepIdx) cls = 'done';
+      else if (i === stepIdx) cls = 'current';
+      dots += `<span class="tool-step-dot ${cls}"></span>`;
+    }
+    el.progress.innerHTML = dots + `<span class="tool-step-label">Step ${stepIdx+1} of ${total}</span>`;
+
+    // Question body
+    const selected = answers[q.id];
+    const optsHtml = q.options.map(opt => {
+      const isSel = opt.value === selected;
+      const noteHtml = opt.note ? `<span class="opt-note">${escape(opt.note)}</span>` : '';
+      return `<button class="tool-option${isSel ? ' selected' : ''}" data-value="${escape(opt.value)}">${escape(opt.label)}${noteHtml}</button>`;
+    }).join('');
+
+    el.body.innerHTML = `
+      <div class="tool-q-label">Question ${stepIdx+1}</div>
+      <div class="tool-q-text">${escape(q.prompt)}</div>
+      ${q.help ? `<p class="tool-q-help">${escape(q.help)}</p>` : ''}
+      <div class="tool-options" role="radiogroup">${optsHtml}</div>
+    `;
+
+    // Wire options
+    el.body.querySelectorAll('.tool-option').forEach(btn => {
+      btn.addEventListener('click', () => {
+        answers[q.id] = btn.dataset.value;
+        // Re-render to reflect selection
+        el.body.querySelectorAll('.tool-option').forEach(b => b.classList.toggle('selected', b === btn));
+        el.btnNext.disabled = false;
+      });
+    });
+
+    // Nav state
+    el.btnBack.disabled = (stepIdx === 0);
+    el.btnNext.disabled = !answers[q.id];
+    el.btnNext.textContent = (stepIdx === total - 1) ? 'See the result →' : 'Continue →';
+  }
+
+  function renderResult() {
+    const verdict = computeVerdict(answers);
+
+    el.progress.hidden = true;
+    el.nav.hidden = true;
+    el.title.textContent = 'Here\'s what we can tell you';
+    el.subtitle.textContent = 'Based on your four answers. Please read the disclaimer.';
+
+    const w = CFG.always_show;
+    const cardsHtml = (w.where_next || []).map(c =>
+      `<a href="${escape(c.href)}" class="where-next-card"><div class="where-next-tag">${escape(c.tag)}</div><h5>${escape(c.title)}</h5></a>`
+    ).join('');
+
+    el.body.innerHTML = `
+      <div class="tool-result">
+        <div class="verdict-card ${escape(verdict.verdict)}">
+          <div class="verdict-label">Based on your answers</div>
+          <div class="verdict-headline">${escape(verdict.headline)}</div>
+          <p class="verdict-body">${escape(verdict.body)}</p>
+        </div>
+        <p class="result-disclaimer">${escape(w.disclaimer)}</p>
+        <div class="hotline-strip">
+          <div class="hotline-strip-msg">${escape(w.hotline.label)}</div>
+          <a href="tel:${escape(w.hotline.number_dial)}" class="hotline-strip-num"><span class="label">${escape(w.hotline.sublabel)}</span>${escape(w.hotline.number_display)}</a>
+        </div>
+        <div class="where-next">
+          <div class="where-next-label">Where to go next</div>
+          <div class="where-next-grid">${cardsHtml}</div>
+        </div>
+      </div>
+      <div class="restart-row">
+        <button class="restart-btn" id="restartBtn">Start over</button>
+      </div>
+    `;
+    document.getElementById('restartBtn').addEventListener('click', () => {
+      for (const k in answers) delete answers[k];
+      stepIdx = 0;
+      onResult = false;
+      el.progress.hidden = false;
+      el.nav.hidden = false;
+      el.title.textContent = 'Four short questions';
+      el.subtitle.textContent = 'No account, no records saved. This is a direction, not legal advice.';
+      render();
+    });
+  }
+
+  // ── RULE ENGINE ──────────────────────────────────────────────
+  // Matches:
+  //   { field: value }              equality
+  //   { field: [v1, v2] }           any-of
+  //   { any: [ ... ] }              logical OR
+  //   { all: [ ... ] }              logical AND
+  function matches(match, a) {
+    if (match.any) return match.any.some(m => matches(m, a));
+    if (match.all) return match.all.every(m => matches(m, a));
+    // else, {field: value | [values]}
+    for (const k in match) {
+      const want = match[k];
+      const got = a[k];
+      if (Array.isArray(want)) {
+        if (!want.includes(got)) return false;
+      } else {
+        if (got !== want) return false;
+      }
+    }
+    return true;
+  }
+
+  function computeVerdict(a) {
+    for (const rule of CFG.rules) {
+      if (!matches(rule.match, a)) continue;
+
+      // Base outcome
+      let out = { verdict: rule.verdict, headline: rule.headline, body: rule.body };
+
+      // Age-based hedge (keyed by current_age bucket)
+      if (rule.hedge_by_age && rule.hedge_by_age[a.current_age]) {
+        const h = rule.hedge_by_age[a.current_age];
+        out = { verdict: h.verdict, headline: h.headline, body: h.body };
+      }
+
+      // Elapsed-based hedge (keyed by a nested match object)
+      if (rule.hedge_by_elapsed) {
+        for (const key in rule.hedge_by_elapsed) {
+          const h = rule.hedge_by_elapsed[key];
+          if (matches({ all: h.match }, a)) {
+            out = { verdict: h.verdict, headline: h.headline, body: h.body };
+            break;
+          }
+        }
+      }
+
+      return out;
+    }
+    // Fallback: no rule matched → route to human
+    return {
+      verdict: 'needs_human',
+      headline: 'Your situation has details we can\'t answer with a checker.',
+      body: 'Please talk to us. It\'s free, confidential, and we\'ll walk through it with you.'
+    };
+  }
+
+  // ── UTILS ────────────────────────────────────────────────────
+  function escape(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;')
+      .replace(/'/g,'&#39;');
+  }
+})();
+</script>
+
+</body>
+</html>

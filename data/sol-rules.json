@@ -1,0 +1,273 @@
+{
+  "meta": {
+    "version": "2026-07-21",
+    "notes": "Israeli statute-of-limitations rules for sexual offenses, simplified for guidance only. Source: מושגים חשובים.docx and עבירות מין + התיישנות.docx in the 2026-07-20 content haul. This tool NEVER gives legal advice — it returns a direction and always routes to a human. To update: edit the questions or rules blocks below, no code changes needed.",
+    "legal_disclaimer": "This is a guide, not legal advice. Every case has details a checker can't capture. The rules below are simplified from the Israeli Penal Code (sections 345-352, 428, and the general Statute of Limitations Law). For your specific situation, please talk to Magen or to free legal aid.",
+    "last_reviewed_by": "PENDING — needs legal-aid partner review before public launch"
+  },
+
+  "questions": [
+    {
+      "id": "current_age",
+      "prompt": "How old are you now?",
+      "help": "Choose the range that fits. This helps us estimate the time that has passed.",
+      "options": [
+        { "value": "18_24", "label": "18 to 24" },
+        { "value": "25_34", "label": "25 to 34" },
+        { "value": "35_44", "label": "35 to 44" },
+        { "value": "45_54", "label": "45 to 54" },
+        { "value": "55_plus", "label": "55 or older" },
+        { "value": "under_18", "label": "I'm under 18", "note": "Different rules apply for minors — you'll be routed to a person." }
+      ]
+    },
+    {
+      "id": "age_at_incident",
+      "prompt": "How old were you when it happened?",
+      "help": "If it happened more than once, use the earliest age. If you're not sure, choose your best estimate.",
+      "options": [
+        { "value": "under_14", "label": "Under 14" },
+        { "value": "14_17", "label": "Between 14 and 17" },
+        { "value": "18_24", "label": "Between 18 and 24" },
+        { "value": "25_plus", "label": "25 or older" },
+        { "value": "prefer_not", "label": "I'd rather not say", "note": "You can still get a direction — we'll route to a person." }
+      ]
+    },
+    {
+      "id": "relationship",
+      "prompt": "What was your relationship to the person who hurt you?",
+      "help": "Israeli law is stricter (and more forgiving on time) when the person had power or family closeness over you.",
+      "options": [
+        { "value": "family", "label": "A family member (parent, sibling, grandparent, uncle/aunt, in-law, step-family, cousin who was 15 or older)" },
+        { "value": "authority", "label": "An authority figure (teacher, therapist, doctor, religious figure, boss, coach, madrich/a)" },
+        { "value": "peer_or_stranger", "label": "A peer, acquaintance, or someone I didn't know" },
+        { "value": "prefer_not", "label": "I'd rather explain in a conversation" }
+      ]
+    },
+    {
+      "id": "act_type",
+      "prompt": "What best describes what happened?",
+      "help": "There is no wrong answer, and nothing you pick binds you in any way. If you're not sure, pick 'I'd rather explain'.",
+      "options": [
+        {
+          "value": "penetration",
+          "label": "Penetration or attempted penetration",
+          "note": "In Israeli law this includes rape (אינוס) and unlawful penetration (חדירה אסורה)."
+        },
+        {
+          "value": "severe_indecent",
+          "label": "A sexual act with force, threats, or serious aggravating circumstances (but without penetration)",
+          "note": "In Israeli law this is a severe indecent act (מעשה מגונה בנסיבות מחמירות)."
+        },
+        {
+          "value": "indecent",
+          "label": "A non-penetrating sexual act (touching, exposure, or coerced acts)",
+          "note": "In Israeli law this is an indecent act (מעשה מגונה)."
+        },
+        {
+          "value": "harassment",
+          "label": "Repeated unwanted comments, propositions, or exposure to sexual content",
+          "note": "In Israeli law this is sexual harassment (הטרדה מינית)."
+        },
+        {
+          "value": "prefer_not",
+          "label": "I'd rather explain in a conversation"
+        }
+      ]
+    }
+  ],
+
+  "rules": [
+    {
+      "id": "route_to_human_immediate",
+      "match": {
+        "any": [
+          { "current_age": "under_18" },
+          { "age_at_incident": "prefer_not" },
+          { "relationship": "prefer_not" },
+          { "act_type": "prefer_not" }
+        ]
+      },
+      "verdict": "needs_human",
+      "headline": "This is a situation only a person can answer well.",
+      "body": "Some parts of your answers, or your age right now, mean the rules aren't well captured by a checker. Please talk to us — it's free and confidential, and we'll walk through it with you."
+    },
+
+    {
+      "id": "minor_family_authority",
+      "match": {
+        "all": [
+          { "age_at_incident": ["under_14", "14_17"] },
+          { "relationship": ["family", "authority"] }
+        ]
+      },
+      "verdict": "likely_open",
+      "headline": "The window is likely still open for you.",
+      "body": "When the incident happened before you were 18, and the person had family closeness or authority, the statute of limitations clock typically doesn't begin ticking until you become an adult, and it can run well into your 40s. In some cases it extends to age 49. This is one of the most protective corners of the law for exactly this reason.",
+      "hedge_by_age": {
+        "45_54": {
+          "verdict": "getting_close",
+          "headline": "You may be near the edge of the window — please talk to us soon.",
+          "body": "For this kind of case, the window can extend into the mid to late 40s, but the exact limit depends on the specific offense, your specific age, and other details. Please reach out sooner rather than later so we can look at your case with you."
+        },
+        "55_plus": {
+          "verdict": "possibly_closed_criminal",
+          "headline": "The general window may have passed for a criminal complaint, but other paths remain.",
+          "body": "For most sexual offenses committed against a minor by a family member or authority figure, the criminal window extends into the 40s — meaning the general limit may have passed. That said, there are exceptional cases where the law allows a later window, and a civil claim (which has different, often longer rules) may still be available to you. Please talk to us."
+        }
+      }
+    },
+
+    {
+      "id": "minor_peer_penetration",
+      "match": {
+        "all": [
+          { "age_at_incident": ["under_14", "14_17"] },
+          { "relationship": "peer_or_stranger" },
+          { "act_type": ["penetration", "severe_indecent"] }
+        ]
+      },
+      "verdict": "likely_open",
+      "headline": "The window is likely still open for you.",
+      "body": "When the incident happened before you were 18 and involved penetration or a severe act, the statute of limitations clock typically starts ticking only when you become an adult, and can extend to around age 38. Please talk to us so we can look at your specific case.",
+      "hedge_by_age": {
+        "35_44": {
+          "verdict": "getting_close",
+          "headline": "You may be near the edge of the window — please talk to us soon.",
+          "body": "For this kind of case the criminal window can extend into your late 30s, but the exact limit depends on the specific offense and other details. Reach out sooner rather than later so we can look at it with you."
+        },
+        "45_54": {
+          "verdict": "possibly_closed_criminal",
+          "headline": "The general window may have passed for a criminal complaint, but other paths remain.",
+          "body": "For most non-family/authority cases against a minor, the criminal window typically closes around your late 30s. That said, there are exceptions, and a civil claim (with different, often longer rules) may still be available. Please talk to us."
+        },
+        "55_plus": {
+          "verdict": "possibly_closed_criminal",
+          "headline": "The general window may have passed for a criminal complaint, but other paths remain.",
+          "body": "For most non-family/authority cases against a minor, the criminal window typically closes around your late 30s. That said, there are exceptions, and a civil claim may still be available. Please talk to us."
+        }
+      }
+    },
+
+    {
+      "id": "minor_peer_indecent_or_harassment",
+      "match": {
+        "all": [
+          { "age_at_incident": ["under_14", "14_17"] },
+          { "relationship": "peer_or_stranger" },
+          { "act_type": ["indecent", "harassment"] }
+        ]
+      },
+      "verdict": "likely_open",
+      "headline": "The window may still be open for you.",
+      "body": "When the incident happened before you were 18, the clock typically starts ticking only when you become an adult, and for non-penetrating acts the criminal window often runs to around age 28. Please talk to us so we can look at your specific case.",
+      "hedge_by_age": {
+        "25_34": {
+          "verdict": "getting_close",
+          "headline": "You may be near the edge of the window — please talk to us soon.",
+          "body": "The typical window for this kind of case runs into your late 20s. Reach out sooner rather than later so we can look at it with you."
+        },
+        "35_44": {
+          "verdict": "possibly_closed_criminal",
+          "headline": "The general window may have passed for a criminal complaint, but other paths remain.",
+          "body": "The typical criminal window for this kind of case closes around your late 20s. That said, exceptions exist, and a civil claim may still be available. Please talk to us."
+        },
+        "45_54": {
+          "verdict": "possibly_closed_criminal",
+          "headline": "The general window may have passed for a criminal complaint, but other paths remain.",
+          "body": "The typical criminal window for this kind of case closes around your late 20s. That said, exceptions exist, and a civil claim may still be available. Please talk to us."
+        },
+        "55_plus": {
+          "verdict": "possibly_closed_criminal",
+          "headline": "The general window may have passed for a criminal complaint, but other paths remain.",
+          "body": "The typical criminal window for this kind of case closes around your late 20s. Exceptions exist, and a civil claim may still be available. Please talk to us."
+        }
+      }
+    },
+
+    {
+      "id": "adult_penetration",
+      "match": {
+        "all": [
+          { "age_at_incident": ["18_24", "25_plus"] },
+          { "act_type": ["penetration", "severe_indecent"] }
+        ]
+      },
+      "verdict": "likely_open",
+      "headline": "The window is likely still open for you.",
+      "body": "For adult victims, the criminal window for penetration or severe acts is typically about 15 years from when it happened. Please talk to us so we can look at your specific timing.",
+      "hedge_by_elapsed": {
+        "possibly_closed_if_incident_18_24_and_current_45_plus": {
+          "match": [
+            { "age_at_incident": "18_24" },
+            { "current_age": ["45_54", "55_plus"] }
+          ],
+          "verdict": "possibly_closed_criminal",
+          "headline": "The general window may have passed for a criminal complaint, but other paths remain.",
+          "body": "For adult victims of penetration or severe acts, the criminal window is typically 15 years. Given the time that has passed, that window may have closed. That said, a civil claim may still be available and has different, often longer rules. Please talk to us."
+        },
+        "possibly_closed_if_incident_25_plus_and_current_45_plus": {
+          "match": [
+            { "age_at_incident": "25_plus" },
+            { "current_age": ["45_54", "55_plus"] }
+          ],
+          "verdict": "getting_close",
+          "headline": "You may be near the edge of the criminal window — please talk to us soon.",
+          "body": "The typical criminal window is about 15 years. Depending on exactly when it happened, you may be near the edge. Please reach out soon so we can look at it with you."
+        }
+      }
+    },
+
+    {
+      "id": "adult_indecent_or_harassment",
+      "match": {
+        "all": [
+          { "age_at_incident": ["18_24", "25_plus"] },
+          { "act_type": ["indecent", "harassment"] }
+        ]
+      },
+      "verdict": "likely_open",
+      "headline": "The window may still be open for you.",
+      "body": "For adult victims of non-penetrating acts or sexual harassment, the criminal window is typically 5 years (sometimes 10). Please talk to us so we can look at your specific timing.",
+      "hedge_by_elapsed": {
+        "possibly_closed_if_current_35_plus": {
+          "match": [{ "current_age": ["35_44", "45_54", "55_plus"] }],
+          "verdict": "possibly_closed_criminal",
+          "headline": "The general window may have passed for a criminal complaint, but other paths remain.",
+          "body": "For adult victims of non-penetrating acts or sexual harassment, the criminal window is typically 5 years, sometimes up to 10. Given the time that has passed, that window may have closed. That said, a civil claim may still be available and has different, often longer rules. Please talk to us."
+        }
+      }
+    }
+  ],
+
+  "always_show": {
+    "disclaimer": "This is a guide, not legal advice. Every case has details a checker can't capture. Please talk to us to confirm what applies to you.",
+    "hotline": {
+      "label": "Talk to Magen — free and confidential",
+      "sublabel": "24/6",
+      "number_display": "*9781",
+      "number_dial": "*9781"
+    },
+    "where_next": [
+      {
+        "tag": "Article",
+        "title": "The criminal process, explained",
+        "href": "/the-criminal-process.html"
+      },
+      {
+        "tag": "Tool",
+        "title": "Criminal vs civil — which path is right for me?",
+        "href": "/which-path.html"
+      },
+      {
+        "tag": "Service",
+        "title": "Free legal aid (Ministry of Justice)",
+        "href": "/legal-aid.html"
+      },
+      {
+        "tag": "Article",
+        "title": "If it happened in the past",
+        "href": "/if-it-happened-in-the-past.html"
+      }
+    ]
+  }
+}
